@@ -49,33 +49,32 @@
         .btn-order-nav { padding: 0.7rem 2rem; background: var(--espresso); color: var(--cream-light) !important; border-radius: 0; transition: all 0.4s ease; }
         .btn-order-nav:hover { background: var(--rose-gold); }
 
-        /* ====== HERO: FULL-BLEED CINEMATIC ====== */
-        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--cream); }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: right center; }
-        /* Soft cream fade LEFT so text is crisp — cake is FULLY visible on the right half */
-        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(250,246,243,1) 0%, rgba(250,246,243,1) 35%, rgba(250,246,243,0.75) 50%, rgba(250,246,243,0.1) 68%, transparent 85%); }
-        .hero-left { position: relative; z-index: 2; max-width: 520px; padding: 10rem 0 6rem 5%; animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
+        /* ====== HERO: Classic grid layout (desktop) ====== */
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 5fr 6fr; padding: 10rem 5% 4rem; gap: 6rem; align-items: center; position: relative; }
+        .hero-bg { display: none; } /* cinematic bg hidden on desktop, shown only mobile */
+        .hero-mobile-img { display: none; } /* mobile arch image hidden on desktop */
+        .hero-left { animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
         .hero-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 2rem; display: block; font-weight: 500; }
         .hero-title { font-family: var(--font-serif); font-size: clamp(3.5rem, 6.5vw, 6rem); line-height: 1.05; color: var(--espresso); font-weight: 300; margin-bottom: 2.5rem; letter-spacing: -0.02em; }
         .hero-title em { font-style: italic; color: var(--rose-gold); font-weight: 400; }
         .hero-desc { font-size: 1.05rem; color: var(--espresso-light); font-weight: 300; max-width: 90%; margin-bottom: 3.5rem; line-height: 1.9; }
         .hero-actions { display: flex; gap: 1.5rem; }
-        /* .hero-right is kept in HTML for mobile fallback but hidden on desktop */
-        .hero-right { display: none; }
+        .hero-right { position: relative; height: 82vh; overflow: hidden; border-radius: 200px 200px 0 0; animation: slideInRight 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 
         .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 1.1rem 2.8rem; background: var(--espresso); color: var(--cream-light); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); position: relative; overflow: hidden; border: 1px solid var(--espresso); cursor: pointer; }
         .btn-primary:hover { border-color: var(--rose-gold); background: var(--rose-gold); transform: translateY(-2px); }
         .btn-outline { display: inline-flex; align-items: center; justify-content: center; padding: 1.1rem 2.8rem; border: 1px solid rgba(26, 19, 17, 0.2); color: var(--espresso); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s ease; }
         .btn-outline:hover { border-color: var(--espresso); }
 
-        /* ====== HOMEMADE: FULL-BLEED CINEMATIC ====== */
-        .section-homemade { position: relative; min-height: 80vh; display: flex; align-items: center; overflow: hidden; background: #1a1311; }
-        .homemade-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-        .homemade-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.85; }
-        /* Opaque espresso on RIGHT for text — image visible on LEFT */
-        .homemade-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 0%, rgba(26,19,17,0.2) 35%, rgba(26,19,17,0.92) 60%, rgba(26,19,17,1) 100%); }
-        .homemade-content { position: relative; z-index: 2; margin-left: auto; max-width: 500px; padding: 8rem 8% 8rem 2rem; display: flex; flex-direction: column; justify-content: center; }
+        /* ====== HOMEMADE: Classic split grid (desktop) ====== */
+        .section-homemade { display: grid; grid-template-columns: 1fr 1fr; background: var(--espresso); color: var(--cream); }
+        .homemade-bg { display: none; } /* cinematic bg hidden on desktop */
+        .homemade-mobile-img { display: none; } /* mobile image hidden on desktop */
+        .homemade-image { position: relative; min-height: 80vh; overflow: hidden; }
+        .homemade-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .section-homemade:hover .homemade-image img { transform: scale(1.03); }
+        .homemade-content { padding: 8rem 5rem; display: flex; flex-direction: column; justify-content: center; position: static; margin: 0; max-width: 100%; }
         .homemade-content .sect-eyebrow { color: var(--rose-gold); }
         .homemade-content .sect-title { color: var(--cream); font-size: 3.5rem; margin-bottom: 2.5rem; }
         .homemade-content .sect-title em { color: var(--rose-gold); }
@@ -251,11 +250,11 @@
 
     <!-- Hero -->
     <section class="hero">
-        <!-- Desktop: Full-bleed background image -->
+        <!-- Desktop: Full-bleed background image (hidden on desktop, activated on mobile) -->
         <div class="hero-bg">
             <img src="assets/hero_cake_final.png" alt="Exquisite Floral Wedding Tier Cake" fetchpriority="high">
         </div>
-        <!-- Text overlaid via z-index -->
+        <!-- Text column -->
         <div class="hero-left">
             <span class="hero-subtitle">The Pinnacle of Patisserie</span>
             <h1 class="hero-title">Elegance in Every <br><em>Exquisite Detail</em></h1>
@@ -265,7 +264,11 @@
                 <a href="#enquiry" class="btn-outline">Custom Enquiry &darr;</a>
             </div>
         </div>
-        <!-- Mobile only: standalone arch image card, hidden on desktop -->
+        <!-- Desktop: arch image column -->
+        <div class="hero-right">
+            <img src="assets/hero_cake_final.png" alt="Exquisite luxury wedding cake">
+        </div>
+        <!-- Mobile only: standalone arch image card -->
         <div class="hero-mobile-img" style="display:none;">
             <img src="assets/hero_cake_final.png" alt="Exquisite luxury wedding cake">
         </div>
@@ -273,15 +276,19 @@
 
     <!-- Homemade Trust Section -->
     <section class="section-homemade" id="homemade">
-        <!-- Desktop: Full-bleed background image -->
+        <!-- Desktop: image left column -->
+        <div class="homemade-image">
+            <img src="assets/homemade_artisan.png" alt="Artisan baker crafting a cake">
+        </div>
+        <!-- Desktop cinematic bg (hidden on desktop, activated on mobile) -->
         <div class="homemade-bg">
             <img src="assets/homemade_artisan.png" alt="Artisan baker crafting a cake">
         </div>
-        <!-- Mobile only: flat image block at top of section, hidden on desktop -->
+        <!-- Mobile only: flat image at top -->
         <div class="homemade-mobile-img" style="display:none;">
             <img src="assets/homemade_artisan.png" alt="Artisan baker crafting a cake">
         </div>
-        <!-- Text overlaid on right via z-index -->
+        <!-- Text right column -->
         <div class="homemade-content reveal-wrap">
             <div class="reveal">
                 <span class="sect-eyebrow">The Artisan Touch</span>
