@@ -87,7 +87,8 @@
         .cake-name { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--ivory); margin-bottom: 0.3rem; }
         .cake-desc { font-size: 0.85rem; color: var(--ivory-dim); max-width: 320px; font-weight: 300; margin-bottom: 0.5rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
         .tag-badge { display: inline-block; padding: 0.2rem 0.8rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; background: rgba(253, 251, 249, 0.05); color: var(--ivory); border: 1px solid rgba(253, 251, 249, 0.1); }
-        .price-td { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--ivory); }
+        .price-td { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 300; color: var(--ivory); letter-spacing: -0.02em; line-height: 1; }
+        .price-td em { font-family: var(--font-sans); font-style: normal; font-weight: 200; color: var(--rose-gold); font-size: 0.85rem; margin-right: 0.3rem; vertical-align: super; }
         
         .action-btn { background: none; border: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; color: var(--ivory-dim); margin-right: 1.5rem; transition: color 0.4s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
         .action-btn:hover { color: var(--ivory); border-bottom-color: var(--ivory); }
@@ -448,8 +449,8 @@
             el('statTotal').textContent = MasterCakes.length.toString().padStart(2,'0');
             if(MasterCakes.length>0) {
                 const prices=MasterCakes.map(c=>c.price);
-                el('statLow').innerHTML=`<em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>${Math.min(...prices)}`;
-                el('statHigh').innerHTML=`<em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>${Math.max(...prices)}`;
+                el('statLow').innerHTML=`<em style="font-style:normal;font-size:1.1rem;font-weight:200;color:var(--rose-gold);margin-right:4px;vertical-align:super;">₹</em>${Math.min(...prices)}`;
+                el('statHigh').innerHTML=`<em style="font-style:normal;font-size:1.1rem;font-weight:200;color:var(--rose-gold);margin-right:4px;vertical-align:super;">₹</em>${Math.max(...prices)}`;
             } else { el('statLow').innerHTML=`<em>₹</em>0`; el('statHigh').innerHTML=`<em>₹</em>0`; }
         }
     </script>
