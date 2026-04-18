@@ -278,7 +278,7 @@
             <div class="about-enquiry reveal" style="transition-delay: 0.2s;">
                 <h3>Why Enquire?</h3>
                 <p>Every celebration is entirely unique, and so is your boundless imagination. Send us a direct enquiry to fully customize your cake’s structural design, flavor profile, and aesthetic. Whether you desire a highly specific floral arrangement or a bespoke sculpted masterpiece, we work intimately with you to bring your dream to life.</p>
-                <a href="#enquiry" class="btn-primary">Enquire Custom Design</a>
+                <a href="#enquiry" class="btn-primary">Scroll to Enquiry Form &darr;</a>
             </div>
         </div>
     </section>
@@ -390,7 +390,7 @@
         function renderGrid(data) {
             const grid = document.getElementById('cakeGrid');
             grid.innerHTML = data.map((c, i) => {
-                const isValidUrl = c.image && c.image.startsWith('http');
+                const isValidUrl = c.image && (c.image.startsWith('http') || c.image.startsWith('assets/'));
                 const safeName = escapeHtml(c.name || '');
                 const safeDesc = escapeHtml(c.desc || '');
                 const safePrice = escapeHtml(c.price || 0);
