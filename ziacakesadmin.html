@@ -433,11 +433,15 @@
              el('delTxt').style.display='none'; el('delLoader').style.display='block';
              try {
                 // FIX 2: DELETE IMAGE FROM FIREBASE STORAGE
-                if (cakeToDelete.image && cakeToDelete.image.includes('firebase')) {
+                if (cakeToDelete.image && cakeToDelete.image.includes('firebasestorage')) {
                     try {
-                        const fileRef = ref(storage, cakeToDelete.image);
+                        const imageUrl = new URL(cakeToDelete.image);
+                        const storagePath = decodeURIComponent(imageUrl.pathname.split('/o/')[1].split('?')[0]);
+                        const fileRef = ref(storage, storagePath);
                         await deleteObject(fileRef);
-                    } catch(err) { console.warn("Failed to delete image from storage: ", err); }
+                    } catch(err) {
+                        console.warn("Image delete from storage failed:", err);
+                    }
                 }
 
                 await deleteDoc(doc(db, "cakes", cakeToDelete.id));
