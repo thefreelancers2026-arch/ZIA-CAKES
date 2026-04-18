@@ -31,6 +31,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
         body { font-family: var(--font-sans); background-color: var(--cream); color: var(--espresso); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--cream); }
@@ -138,10 +139,14 @@
         .reveal-wrap.visible .reveal { opacity: 1; transform: translateY(0); }
 
         /* FIX 3: MOBILE NAV CSS */
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .hamburger span { display: block; width: 24px; height: 2px; background-color: var(--espresso); transition: all 0.3s; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { display: block; width: 24px; height: 2px; background-color: var(--espresso); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         
-        .nav-links.mobile-active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 0; border-top: 1px solid rgba(26,19,17,0.05); }
+        .nav-links.mobile-active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250, 246, 243, 0.98); backdrop-filter: blur(20px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 0; border-top: 1px solid rgba(26,19,17,0.05); animation: slideDown 0.4s ease forwards; transform-origin: top; }
+        @keyframes slideDown { from { opacity: 0; transform: scaleY(0.9); } to { opacity: 1; transform: scaleY(1); } }
         .nav-links.mobile-active li { width: 100%; border-bottom: 1px solid rgba(26,19,17,0.05); }
         .nav-links.mobile-active a { display: block; padding: 1.5rem 5%; }
         
@@ -180,12 +185,29 @@
             .homemade-content { padding: 5rem 5%; text-align: center; }
             .homemade-content .sect-line { margin: 0 auto 3rem auto; }
             .homemade-image { min-height: 50vh; }
-            .nav-links { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 4rem; }
             .about-info { padding-right: 0; text-align: center; }
             .about-info .sect-title, .about-info .sect-eyebrow { text-align: center; }
             .about-info .sect-line { margin: 0 auto 3.5rem auto; }
             .about-enquiry { padding: 4rem 2rem; text-align: center; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: clamp(2.5rem, 10vw, 3.5rem); margin-bottom: 1.5rem; }
+            .hero-right { height: 50vh; }
+            .hero-actions { flex-direction: column; gap: 1rem; width: 100%; }
+            .hero-actions a { width: 100%; border-radius: 0; }
+            
+            .section-editorial, .section-about, .section-enquiry, .homemade-content { padding: 4rem 5%; }
+            .about-enquiry { padding: 3rem 1.5rem; }
+            .sect-title { font-size: clamp(2.2rem, 8vw, 3rem); }
+            
+            .menu-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .menu-name { font-size: 1.8rem; }
+            .menu-price { font-size: 2.5rem; }
+            
+            footer { padding: 4rem 5% 2rem; }
+            .footer-links { flex-direction: column; gap: 1.5rem; }
         }
     </style>
 </head>
@@ -464,9 +486,15 @@
         const hamburger = document.getElementById('hamburgerMenu');
         const navLinks = document.getElementById('navLinks');
         if(hamburger && navLinks) {
-            hamburger.addEventListener('click', () => { navLinks.classList.toggle('mobile-active'); });
+            hamburger.addEventListener('click', () => { 
+                hamburger.classList.toggle('open');
+                navLinks.classList.toggle('mobile-active'); 
+            });
             document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => { navLinks.classList.remove('mobile-active'); });
+                link.addEventListener('click', () => { 
+                    hamburger.classList.remove('open');
+                    navLinks.classList.remove('mobile-active'); 
+                });
             });
         }
 
