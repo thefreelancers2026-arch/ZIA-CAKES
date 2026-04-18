@@ -342,9 +342,9 @@
                         <div class="error-message">Please provide a design idea</div>
                     </div>
                     <div class="form-group">
-                        <label>Preferred Date</label>
-                        <input type="date" id="enqDate" class="enq-input" required>
-                        <div class="error-message">Please select a date</div>
+                        <label>Preferred Delivery/Pickup Date</label>
+                        <input type="text" id="enqDate" class="enq-input" placeholder="e.g. 24th October, or Towards the end of the month" required>
+                        <div class="error-message">Please let us know your preferred date or timeframe</div>
                     </div>
                     <div class="form-group">
                         <label>Message (Optional)</label>
@@ -500,10 +500,6 @@
 
         // FIX 2: ENQUIRY DATE INIT & VALIDATION
         const dateInput = document.getElementById('enqDate');
-        if(dateInput) {
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.setAttribute('min', today);
-        }
 
         const enquiryForm = document.getElementById('enquiryForm');
         if(enquiryForm) {
@@ -524,11 +520,11 @@
                 if(!d.value.trim()) { d.nextElementSibling.style.display='block'; isValid=false; } else d.nextElementSibling.style.display='none';
                 
                 const dt = document.getElementById('enqDate');
-                if(!dt.value) { dt.nextElementSibling.style.display='block'; isValid=false; } else dt.nextElementSibling.style.display='none';
+                if(!dt.value.trim()) { dt.nextElementSibling.style.display='block'; isValid=false; } else dt.nextElementSibling.style.display='none';
 
                 if(isValid) {
                     const msg = document.getElementById('enqMessage').value.trim();
-                    const waText = `Hello Zia Cakes! 🎂\nI'd like to enquire about a custom cake.\n\n👤 Name: ${n.value.trim()}\n📞 Phone: ${p.value.trim()}\n🎉 Occasion: ${o.value}\n🎂 Cake Type: ${d.value.trim()}\n📅 Preferred Date: ${dt.value}\n💬 Message: ${msg ? msg : 'None'}\n\nLooking forward to hearing from you!`;
+                    const waText = `Hello Zia Cakes,\nI would love to enquire about a custom cake.\n\nName: ${n.value.trim()}\nPhone: ${p.value.trim()}\nOccasion: ${o.value}\nCake Type: ${d.value.trim()}\nPreferred Date: ${dt.value.trim()}\nMessage: ${msg ? msg : 'None'}\n\nLooking forward to hearing from you!`;
                     window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(waText)}`, '_blank');
                     this.reset();
                 }
