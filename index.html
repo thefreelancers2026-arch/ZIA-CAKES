@@ -184,25 +184,34 @@
             .section-homemade { grid-template-columns: 1fr; }
             .homemade-content { padding: 5rem 5%; text-align: center; }
             .homemade-content .sect-line { margin: 0 auto 3rem auto; }
-            .homemade-image { min-height: 50vh; }
+            .homemade-image { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 4rem; }
             .about-info { padding-right: 0; text-align: center; }
             .about-info .sect-title, .about-info .sect-eyebrow { text-align: center; }
             .about-info .sect-line { margin: 0 auto 3.5rem auto; }
-            .about-enquiry { padding: 4rem 2rem; text-align: center; }
+            .about-enquiry { display: none; }
         }
         
         @media (max-width: 768px) {
-            .hero-title { font-size: clamp(2.5rem, 10vw, 3.5rem); margin-bottom: 1.5rem; }
-            .hero-right { height: 50vh; }
+            .hero { position: relative; padding: 14rem 5% 5rem; min-height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; }
+            .hero-left { position: relative; z-index: 2; color: var(--cream); }
+            .hero-title { font-size: clamp(2.8rem, 12vw, 3.8rem); margin-bottom: 1.5rem; color: var(--cream); text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+            .hero-subtitle { color: var(--blush); text-shadow: 0 2px 4px rgba(0,0,0,0.8); font-weight: 500; }
+            .hero-desc { color: rgba(250, 246, 243, 0.95); text-shadow: 0 2px 5px rgba(0,0,0,0.6); font-weight: 400; }
+            .hero-right { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; margin: 0; z-index: 1; }
+            .hero-right img { width: 100%; height: 100%; object-fit: cover; }
+            .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,19,17,0.1) 0%, rgba(26,19,17,0.85) 100%); z-index: 1; }
+            
             .hero-actions { flex-direction: column; gap: 1rem; width: 100%; }
             .hero-actions a { width: 100%; border-radius: 0; }
+            .hero-actions .btn-outline { border-color: rgba(250,246,243,0.4); color: var(--cream); }
             
             .section-editorial, .section-about, .section-enquiry, .homemade-content { padding: 4rem 5%; }
-            .about-enquiry { padding: 3rem 1.5rem; }
             .sect-title { font-size: clamp(2.2rem, 8vw, 3rem); }
             
-            .menu-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .menu-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.5rem; padding-bottom: 2rem; -webkit-overflow-scrolling: touch; scroll-padding: 5%; scrollbar-width: none; }
+            .menu-grid::-webkit-scrollbar { display: none; }
+            .menu-card { flex: 0 0 85%; scroll-snap-align: center; }
             .menu-name { font-size: 1.8rem; }
             .menu-price { font-size: 2.5rem; }
             
@@ -247,16 +256,13 @@
         </div>
     </section>
 
-    <!-- Homemade Split Layout -->
-    <section class="section-homemade" id="homemade">
-        <div class="homemade-image reveal-wrap">
-            <img src="assets/processing.png" alt="Artisan baker crafting a cake" class="reveal">
-        </div>
-        <div class="homemade-content reveal-wrap">
+    <!-- Homemade Typography Break -->
+    <section class="section-homemade" id="homemade" style="display: flex; justify-content: center; align-items: center; border-bottom: 1px solid rgba(184, 138, 117, 0.15);">
+        <div class="homemade-content reveal-wrap" style="text-align: center; max-width: 860px; margin: 0 auto;">
             <div class="reveal">
                 <span class="sect-eyebrow">The Artisan Touch</span>
                 <h2 class="sect-title">100% <em>Homemade</em></h2>
-                <div class="sect-line"></div>
+                <div class="sect-line" style="margin: 0 auto 3rem auto;"></div>
                 <p class="homemade-desc">Every layer, from the delicate chiffon sponge to the hand-whipped buttercream, is crafted entirely from scratch inside our home atelier. We refuse to compromise with commercial mixes—ensuring your celebration tastes exactly as authentic, rich, and pure as the love poured into it.</p>
             </div>
         </div>
@@ -274,34 +280,6 @@
         
         <div class="menu-grid" id="cakeGrid">
             <div class="loading-state">Syncing Atelier Collection...</div>
-        </div>
-    </section>
-
-    <!-- About & Enquiry -->
-    <section class="section-about" id="about-us">
-        <div class="about-grid reveal-wrap">
-            <div class="about-info reveal">
-                <span class="sect-eyebrow">Visit & Connect</span>
-                <h2 class="sect-title">The <em>Atelier</em></h2>
-                <div class="sect-line"></div>
-                
-                <div class="info-block">
-                    <h4>Hours of Operation</h4>
-                    <p>Monday – Saturday: 9:00 AM – 8:00 PM<br>Sunday: 10:00 AM – 4:00 PM</p>
-                </div>
-                
-                <div class="info-block">
-                    <h4>Reach Out Directly</h4>
-                    <a href="https://wa.me/919884111974" class="info-link" target="_blank">WhatsApp: +91 98841 11974</a>
-                    <a href="https://instagram.com" class="info-link" target="_blank">Instagram: @ziacakes</a>
-                </div>
-            </div>
-            
-            <div class="about-enquiry reveal" style="transition-delay: 0.2s;">
-                <h3>Why Enquire?</h3>
-                <p>Every celebration is entirely unique, and so is your boundless imagination. Send us a direct enquiry to fully customize your cake’s structural design, flavor profile, and aesthetic. Whether you desire a highly specific floral arrangement or a bespoke sculpted masterpiece, we work intimately with you to bring your dream to life.</p>
-                <a href="#enquiry" class="btn-primary">Scroll to Enquiry Form &darr;</a>
-            </div>
         </div>
     </section>
 
@@ -355,6 +333,29 @@
                         Send Enquiry via WhatsApp
                     </button>
                 </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About & Connect -->
+    <section class="section-about" id="about-us" style="background: var(--cream-light); border-top: 1px solid rgba(184, 138, 117, 0.15);">
+        <div class="about-grid reveal-wrap" style="grid-template-columns: 1fr; text-align: center; max-width: 800px; margin: 0 auto; gap: 2rem;">
+            <div class="about-info reveal" style="padding-right: 0;">
+                <span class="sect-eyebrow">Visit & Connect</span>
+                <h2 class="sect-title" style="text-align: center;">The <em>Atelier</em></h2>
+                <div class="sect-line" style="margin: 0 auto 3.5rem auto;"></div>
+                
+                <div class="info-block" style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; text-align: left;">
+                    <div>
+                        <h4>Hours of Operation</h4>
+                        <p style="font-size: 1.05rem; color: var(--espresso-light); line-height: 1.9; font-weight: 300;">Monday – Saturday: 9:00 AM – 8:00 PM<br>Sunday: 10:00 AM – 4:00 PM</p>
+                    </div>
+                    <div>
+                        <h4>Reach Out Directly</h4>
+                        <a href="https://wa.me/919884111974" class="info-link" target="_blank" style="display: block; margin-bottom: 0.5rem;">WhatsApp: +91 98841 11974</a>
+                        <a href="https://instagram.com" class="info-link" target="_blank" style="display: block;">Instagram: @ziacakes</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
