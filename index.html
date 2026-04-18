@@ -50,11 +50,11 @@
         .btn-order-nav:hover { background: var(--rose-gold); }
 
         /* ====== HERO: FULL-BLEED CINEMATIC ====== */
-        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: #1a1311; }
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--cream); }
         .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center right; opacity: 0.9; }
-        /* Cream zone on LEFT for text, cake image visible on RIGHT */
-        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(250,246,243,1) 0%, rgba(250,246,243,1) 38%, rgba(250,246,243,0.7) 52%, transparent 75%); }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+        /* Soft cream fade LEFT so text is crisp — cake is FULLY visible on the right half */
+        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(250,246,243,1) 0%, rgba(250,246,243,1) 35%, rgba(250,246,243,0.75) 50%, rgba(250,246,243,0.1) 68%, transparent 85%); }
         .hero-left { position: relative; z-index: 2; max-width: 520px; padding: 10rem 0 6rem 5%; animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
         .hero-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 2rem; display: block; font-weight: 500; }
         .hero-title { font-family: var(--font-serif); font-size: clamp(3.5rem, 6.5vw, 6rem); line-height: 1.05; color: var(--espresso); font-weight: 300; margin-bottom: 2.5rem; letter-spacing: -0.02em; }
@@ -255,7 +255,7 @@
     <section class="hero">
         <!-- Full-bleed background image -->
         <div class="hero-bg">
-            <img src="assets/hero_cake_dark.png" alt="Exquisite Floral Wedding Tier Cake" fetchpriority="high">
+            <img src="assets/hero_cake_final.png" alt="Exquisite Floral Wedding Tier Cake" fetchpriority="high">
         </div>
         <!-- Text overlaid via z-index -->
         <div class="hero-left">
