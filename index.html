@@ -182,9 +182,9 @@
             .hero-actions { justify-content: center; }
             .hero-right { height: 60vh; border-radius: 120px 120px 0 0; }
             .section-homemade { grid-template-columns: 1fr; }
-            .homemade-content { padding: 5rem 5%; text-align: center; }
+            .homemade-content { padding: 5rem 5%; text-align: center; border-left: none; }
             .homemade-content .sect-line { margin: 0 auto 3rem auto; }
-            .homemade-image { display: none; }
+            .homemade-image { min-height: 50vh; display: block; }
             .about-grid { grid-template-columns: 1fr; gap: 4rem; }
             .about-info { padding-right: 0; text-align: center; }
             .about-info .sect-title, .about-info .sect-eyebrow { text-align: center; }
@@ -193,22 +193,25 @@
         }
         
         @media (max-width: 768px) {
-            .hero { position: relative; padding: 14rem 5% 5rem; min-height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; }
-            .hero-left { position: relative; z-index: 2; color: var(--cream); }
-            .hero-title { font-size: clamp(2.8rem, 12vw, 3.8rem); margin-bottom: 1.5rem; color: var(--cream); text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-            .hero-subtitle { color: var(--blush); text-shadow: 0 2px 4px rgba(0,0,0,0.8); font-weight: 500; }
-            .hero-desc { color: rgba(250, 246, 243, 0.95); text-shadow: 0 2px 5px rgba(0,0,0,0.6); font-weight: 400; }
-            .hero-right { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; margin: 0; z-index: 1; }
+            .hero { position: relative; padding: 10rem 5% 0; min-height: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 2rem; }
+            .hero-left { position: relative; z-index: 2; color: var(--espresso); }
+            .hero-title { font-size: clamp(2.8rem, 12vw, 3.8rem); margin-bottom: 1.5rem; color: var(--espresso); text-shadow: none; }
+            .hero-subtitle { color: var(--blush); text-shadow: none; font-weight: 500; }
+            .hero-desc { color: var(--espresso-light); text-shadow: none; font-weight: 300; }
+            .hero-right { position: relative; width: 100%; height: 50vh; border-radius: 120px 120px 0 0; margin: 0; z-index: 1; overflow: hidden; inset: auto; }
             .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-            .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,19,17,0.1) 0%, rgba(26,19,17,0.85) 100%); z-index: 1; }
+            .hero-right::after { display: none; }
             
             .hero-actions { flex-direction: column; gap: 1rem; width: 100%; }
             .hero-actions a { width: 100%; border-radius: 0; }
-            .hero-actions .btn-outline { border-color: rgba(250,246,243,0.4); color: var(--cream); }
+            .hero-actions .btn-outline { border-color: rgba(26,19,17,0.3); color: var(--espresso); }
             
             .section-editorial, .section-about, .section-enquiry, .homemade-content { padding: 4rem 5%; }
             .sect-title { font-size: clamp(2.2rem, 8vw, 3rem); }
             
+            .swipe-hint { display: block !important; text-align: right; color: var(--espresso-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; animation: pulse 2s infinite; }
+            @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 0.9; } 100% { opacity: 0.4; } }
+
             .menu-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.5rem; padding-bottom: 2rem; -webkit-overflow-scrolling: touch; scroll-padding: 5%; scrollbar-width: none; }
             .menu-grid::-webkit-scrollbar { display: none; }
             .menu-card { flex: 0 0 85%; scroll-snap-align: center; }
@@ -252,17 +255,20 @@
             </div>
         </div>
         <div class="hero-right">
-            <img src="assets/hero_cake.png" alt="Exquisite Floral Wedding Tier Cake" fetchpriority="high">
+            <img src="assets/hero_hook.png" alt="Exquisite Floral Wedding Tier Cake" fetchpriority="high">
         </div>
     </section>
 
-    <!-- Homemade Typography Break -->
-    <section class="section-homemade" id="homemade" style="display: flex; justify-content: center; align-items: center; border-bottom: 1px solid rgba(184, 138, 117, 0.15);">
-        <div class="homemade-content reveal-wrap" style="text-align: center; max-width: 860px; margin: 0 auto;">
+    <!-- Homemade Trust Section -->
+    <section class="section-homemade" id="homemade">
+        <div class="homemade-image reveal-wrap">
+            <img src="assets/artisan_trust.png" alt="Artisan baker crafting a cake" class="reveal">
+        </div>
+        <div class="homemade-content reveal-wrap">
             <div class="reveal">
                 <span class="sect-eyebrow">The Artisan Touch</span>
                 <h2 class="sect-title">100% <em>Homemade</em></h2>
-                <div class="sect-line" style="margin: 0 auto 3rem auto;"></div>
+                <div class="sect-line"></div>
                 <p class="homemade-desc">Every layer, from the delicate chiffon sponge to the hand-whipped buttercream, is crafted entirely from scratch inside our home atelier. We refuse to compromise with commercial mixes—ensuring your celebration tastes exactly as authentic, rich, and pure as the love poured into it.</p>
             </div>
         </div>
@@ -275,6 +281,7 @@
                 <span class="sect-eyebrow">Signature Masterpieces</span>
                 <h2 class="sect-title">Our <em>Collection</em></h2>
                 <div class="sect-line"></div>
+                <div class="swipe-hint" style="display: none;">Swipe to explore &rarr;</div>
             </div>
         </div>
         
