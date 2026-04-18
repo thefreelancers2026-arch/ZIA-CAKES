@@ -193,7 +193,7 @@
         /* === MOBILE: 768px — Elegantly integrated background layouts === */
         @media (max-width: 768px) {
             /* HERO: Full screen layout with a subtle text readability overlay on mobile */
-            .hero { align-items: flex-start; padding: 8rem 6% 6rem; background: linear-gradient(to bottom, rgba(250,246,243,0.95) 0%, rgba(250,246,243,0.85) 45%, rgba(250,246,243,0) 85%), url('assets/hero_bg.png') center/cover no-repeat; margin-bottom: 2rem; min-height: 100svh; }
+            .hero { align-items: flex-start; padding: 8rem 6% 6rem; background: linear-gradient(to bottom, rgba(250,246,243,0.95) 0%, rgba(250,246,243,0.85) 45%, rgba(250,246,243,0) 85%), url('assets/hero_bg.png') center/cover no-repeat; margin-bottom: 0px; min-height: 100svh; }
             .hero-left { width: 100%; margin: 0; padding: 0; }
             .hero-title { font-size: clamp(2.6rem, 10vw, 3.4rem); margin-bottom: 1.2rem; }
             .hero-desc { max-width: 100%; margin: 0 auto 2.5rem; font-size: 1rem; color: var(--espresso); font-weight: 400; }
@@ -201,8 +201,11 @@
             .hero-actions a { width: 100%; text-align: center; }
             .hero-actions .btn-outline { background: rgba(250, 246, 243, 0.85); backdrop-filter: blur(5px); border-color: rgba(26, 19, 17, 0.15); font-weight: 500; }
 
+            /* Premium Separator Mobile Tweaks */
+            .premium-divider { padding: 1.2rem 6%; }
+
             /* HOMEMADE: Stacked layout with background */
-            .section-homemade { background: linear-gradient(rgba(26,19,17,0.75), rgba(26,19,17,0.95)), url('assets/homemade_artisan.png') center/cover no-repeat; margin-bottom: 2rem; }
+            .section-homemade { background: linear-gradient(rgba(26,19,17,0.75), rgba(26,19,17,0.95)), url('assets/homemade_artisan.png') center/cover no-repeat; margin-bottom: 0; }
             .homemade-content { padding: 5rem 6%; margin: 0; width: 100%; }
             .homemade-content .sect-title { font-size: clamp(2.4rem, 9vw, 3rem); margin-bottom: 2rem; }
             .homemade-content .sect-line { margin: 0 auto 2.5rem; }
