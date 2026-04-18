@@ -155,21 +155,25 @@
         .image-placeholder span { font-family: var(--font-serif); font-style: italic; color: var(--espresso); font-size: 1.2rem; margin-top: 1rem; }
 
         /* FIX 2: ENQUIRY FORM CSS */
-        .section-enquiry { padding: 8rem 5%; background: var(--espresso); color: var(--cream-light); }
-        .enquiry-container { max-width: 680px; margin: 0 auto; text-align: center; }
-        .enquiry-container .sect-title { color: var(--cream-light); margin-bottom: 2rem; }
-        .form-grid { display: flex; flex-direction: column; gap: 2rem; text-align: left; margin-top: 3rem; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group label { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--rose-gold); margin-bottom: 0.5rem; }
-        .enq-input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); color: var(--cream-light); font-family: var(--font-sans); font-weight: 300; font-size: 1rem; padding: 0.8rem 0; width: 100%; transition: border-color 0.4s; }
-        .enq-input:focus { outline: none; border-bottom-color: var(--rose-gold); }
-        .enq-input::placeholder { color: rgba(255,255,255,0.3); }
-        .error-message { color: #e46d6d; font-size: 0.75rem; margin-top: 0.4rem; display: none; }
+        .section-enquiry { padding: 10rem 5%; background: var(--espresso); color: var(--cream-light); position: relative; }
+        .enquiry-container { max-width: 850px; margin: 0 auto; text-align: center; }
+        .enquiry-container .sect-eyebrow { color: rgba(250,246,243,0.5); font-weight: 400; }
+        .enquiry-container .sect-title { color: var(--cream-light); margin-bottom: 2rem; font-size: clamp(3rem, 5vw, 4rem); }
+        .enquiry-container .sect-line { background: rgba(250,246,243,0.15); margin-bottom: 4rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 4rem; text-align: left; }
+        .form-group { display: flex; flex-direction: column; position: relative; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-group label { font-family: var(--font-sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--rose-gold); margin-bottom: 1rem; font-weight: 500; }
+        .enq-input { background: transparent; border: none; border-bottom: 1px solid rgba(250,246,243,0.15); color: var(--cream-light); font-family: var(--font-serif); font-weight: 300; font-size: 1.25rem; padding: 0.8rem 0; width: 100%; transition: all 0.5s ease; border-radius: 0; }
+        .enq-input:focus { outline: none; border-bottom-color: var(--rose-gold); background: rgba(250,246,243,0.02); padding-left: 1rem; }
+        .enq-input::placeholder { color: rgba(250,246,243,0.15); font-style: italic; font-size: 1.1rem; }
+        .error-message { color: #e46d6d; font-size: 0.75rem; margin-top: 0.5rem; display: none; margin-left: 0.5rem; }
         
-        .btn-submit-enquiry { width: 100%; margin-top: 1rem; background: var(--espresso); border: 1px solid var(--rose-gold); color: var(--cream-light); padding: 1.2rem; font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; transition: all 0.4s; display: flex; justify-content: center; align-items: center; gap: 0.8rem; }
-        .btn-submit-enquiry:hover { background: var(--rose-gold); }
-        .btn-submit-enquiry svg { width: 18px; height: 18px; fill: currentColor; }
-        .enq-input option { background: var(--espresso); color: var(--cream-light); }
+        .btn-submit-enquiry { grid-column: 1 / -1; margin-top: 2rem; background: transparent; border: 1px solid rgba(250,246,243,0.25); color: var(--cream-light); padding: 1.4rem; font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.3em; cursor: pointer; transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; justify-content: center; align-items: center; gap: 1rem; }
+        .btn-submit-enquiry:hover { border-color: var(--rose-gold); background: var(--rose-gold); color: var(--espresso); transform: translateY(-2px); }
+        .btn-submit-enquiry svg { width: 18px; height: 18px; fill: currentColor; transition: transform 0.4s; }
+        .btn-submit-enquiry:hover svg { transform: translateX(5px); }
+        .enq-input option { background: var(--espresso); color: var(--cream-light); font-family: var(--font-sans); font-size: 0.9rem; }
 
         
         /* === TABLET: 1024px === */
@@ -211,7 +215,8 @@
             .homemade-content .sect-line { margin: 0 auto 2.5rem; }
 
             /* COLLECTION / SECTIONS */
-            .section-editorial, .section-about, .section-enquiry { padding: 4rem 5%; }
+            .section-editorial, .section-about, .section-enquiry { padding: 5rem 5%; }
+            .form-grid { grid-template-columns: 1fr; gap: 3rem; }
             .sect-title { font-size: clamp(2.2rem, 8vw, 3rem); }
             .swipe-hint { display: block !important; text-align: right; color: var(--espresso-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; animation: pulse 2s infinite; }
             @keyframes pulse { 0%{opacity:0.4;} 50%{opacity:0.9;} 100%{opacity:0.4;} }
@@ -324,23 +329,23 @@
                         </select>
                         <div class="error-message">Please select an occasion</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label>Cake Type / Design Idea</label>
                         <input type="text" id="enqDesign" class="enq-input" placeholder="e.g. Floral Tier, Chocolate Truffle..." required>
                         <div class="error-message">Please provide a design idea</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label>Preferred Delivery/Pickup Date</label>
                         <input type="text" id="enqDate" class="enq-input" placeholder="e.g. 24th October, or Towards the end of the month" required>
                         <div class="error-message">Please let us know your preferred date or timeframe</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label>Message (Optional)</label>
-                        <textarea id="enqMessage" class="enq-input" rows="4" placeholder="Any special requests or references..."></textarea>
+                        <textarea id="enqMessage" class="enq-input" rows="3" placeholder="Any special requests, aesthetics, or references..."></textarea>
                     </div>
                     <button type="submit" class="btn-submit-enquiry">
                         <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.183-.573c.978.582 1.894.869 3.145.871 3.181 0 5.768-2.585 5.768-5.766 0-3.181-2.587-5.767-5.768-5.767"></path><path d="M14.946 11.727c-.151-.076-.893-.441-1.033-.49-.139-.05-.24-.076-.341.076-.101.151-.392.49-.481.59-.09.1-.18.113-.331.038-.151-.075-.637-.235-1.214-.75-.448-.4-.75-.892-.84-1.043-.09-.151-.01-.232.066-.307.068-.068.151-.176.226-.264.075-.088.101-.151.151-.252.05-.101.025-.188-.013-.264-.038-.076-.341-.823-.467-1.127-.124-.298-.249-.257-.341-.262-.09-.004-.19-.005-.291-.005-.101 0-.263.038-.401.189-.138.151-.527.516-.527 1.258s.54 1.46.616 1.561c.075.101 1.064 1.625 2.576 2.276.36.155.64.247.859.316.361.115.69.099.948.06.29-.043.893-.365 1.019-.718.125-.353.125-.656.088-.719-.038-.063-.139-.088-.291-.164z"></path></svg>
-                        Send Enquiry via WhatsApp
+                        Initiate WhatsApp Connect
                     </button>
                 </form>
             </div>
