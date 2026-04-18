@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zia Cakes – Artisan Patisserie</title>
+    <meta name="description" content="Zia Cakes – Premium custom cakes designed with elegance and passion.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF6F3;
+            --cream-light: #FFFFFF;
+            --blush: #E8D3C8;
+            --rose-gold: #B88A75;
+            --rose-gold-dark: #966f5c;
+            --espresso: #1A1311;
+            --espresso-light: #2A1D16;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Jost', sans-serif;
+            --shadow-subtle: 0 10px 40px rgba(26, 19, 17, 0.05);
+            --shadow-hover: 0 30px 60px rgba(26, 19, 17, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { font-family: var(--font-sans); background-color: var(--cream); color: var(--espresso); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--espresso); border-radius: 0; }
+
+        /* Nav */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; padding: 1.8rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(250, 246, 243, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(26, 19, 17, 0.08); transition: all 0.4s ease; }
+        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 1rem; }
+        .logo-hook { font-family: var(--font-serif); font-size: 2.8rem; font-style: italic; font-weight: 300; color: var(--espresso); line-height: 1; padding-right: 1.2rem; border-right: 1px solid rgba(184, 138, 117, 0.3); }
+        .brand-text { font-family: var(--font-sans); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--espresso); font-weight: 400; margin-top: 5px; }
+
+        .nav-links { display: flex; gap: 3.5rem; list-style: none; }
+        .nav-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: var(--espresso-light); font-weight: 400; transition: color 0.4s ease; }
+        .nav-links a:hover { color: var(--rose-gold); }
+        .btn-order-nav { padding: 0.7rem 2rem; background: var(--espresso); color: var(--cream-light) !important; border-radius: 0; transition: all 0.4s ease; }
+        .btn-order-nav:hover { background: var(--rose-gold); }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 5fr 6fr; padding: 10rem 5% 4rem; gap: 6rem; align-items: center; position: relative; }
+        .hero-left { animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
+        .hero-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 2rem; display: block; font-weight: 500; }
+        .hero-title { font-family: var(--font-serif); font-size: clamp(3.5rem, 6.5vw, 6rem); line-height: 1.05; color: var(--espresso); font-weight: 300; margin-bottom: 2.5rem; letter-spacing: -0.02em; }
+        .hero-title em { font-style: italic; color: var(--rose-gold); font-weight: 400; }
+        .hero-desc { font-size: 1.05rem; color: var(--espresso-light); font-weight: 300; max-width: 90%; margin-bottom: 3.5rem; line-height: 1.9; }
+        .hero-actions { display: flex; gap: 1.5rem; }
+
+        .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 1.1rem 2.8rem; background: var(--espresso); color: var(--cream-light); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); position: relative; overflow: hidden; border: 1px solid var(--espresso); cursor: pointer; }
+        .btn-primary:hover { border-color: var(--rose-gold); background: var(--rose-gold); transform: translateY(-2px); }
+        .btn-outline { display: inline-flex; align-items: center; justify-content: center; padding: 1.1rem 2.8rem; border: 1px solid rgba(26, 19, 17, 0.2); color: var(--espresso); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s ease; }
+        .btn-outline:hover { border-color: var(--espresso); }
+
+        .hero-right { position: relative; height: 82vh; overflow: hidden; border-radius: 200px 200px 0 0; animation: slideInRight 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+        /* Split Homemade Highlight Section */
+        .section-homemade { display: grid; grid-template-columns: 1fr 1fr; background: var(--espresso); color: var(--cream); }
+        .homemade-image { position: relative; min-height: 80vh; overflow: hidden; }
+        .homemade-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .section-homemade:hover .homemade-image img { transform: scale(1.03); }
+        .homemade-content { padding: 8rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+        .homemade-content .sect-eyebrow { color: var(--rose-gold); }
+        .homemade-content .sect-title { color: var(--cream); font-size: 3.5rem; margin-bottom: 2.5rem; }
+        .homemade-content .sect-title em { color: var(--rose-gold); }
+        .homemade-content .sect-line { background: rgba(250, 246, 243, 0.15); margin: 0 0 3rem 0; width: 60px; }
+        .homemade-desc { font-size: 1.15rem; line-height: 2; font-weight: 300; color: rgba(250, 246, 243, 0.7); font-family: var(--font-serif); font-style: italic; }
+
+        /* Generic Section Specs */
+        .section-editorial { padding: 8rem 5%; background: var(--cream-light); text-align: center; }
+        .sect-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 1.2rem; display: block; font-weight: 500; }
+        .sect-title { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 300; color: var(--espresso); line-height: 1.1; margin-bottom: 1.5rem; }
+        .sect-title em { color: var(--rose-gold); font-style: italic; }
+        .sect-line { width: 60px; height: 1px; background: var(--rose-gold); margin: 0 auto 5rem; }
+
+        /* Menu Grid */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; max-width: 1400px; margin: 0 auto; position: relative; min-height: 300px; }
+        .menu-card { background: var(--cream-light); position: relative; overflow: hidden; transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .menu-card:hover { transform: translateY(-15px); }
+        .menu-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--blush); }
+        .menu-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .menu-card:hover .menu-img-wrap img { transform: scale(1.05); }
+        .menu-tag { position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(26, 19, 17, 0.9); color: var(--cream-light); padding: 0.3rem 1.2rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; backdrop-filter: blur(4px); }
+        .menu-info { padding: 3rem 1rem 1rem; text-align: center; }
+        .menu-name { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; color: var(--espresso); margin-bottom: 1rem; line-height: 1.1; }
+        .menu-desc { font-size: 0.9rem; color: var(--espresso-light); margin-bottom: 2.5rem; font-weight: 300; min-height: 48px; line-height: 1.8; }
+        .menu-footer { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .price-wrapper { margin-bottom: 1.5rem; }
+        .menu-price { font-family: var(--font-serif); font-size: 2.8rem; color: var(--espresso); font-weight: 300; line-height: 1; }
+        .menu-price em { font-family: var(--font-sans); font-style: normal; font-weight: 300; color: var(--rose-gold); font-size: 1.4rem; margin-right: 0.4rem; vertical-align: super; }
+        .menu-btn { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--espresso-light); text-decoration: none; position: relative; padding-bottom: 4px; border-bottom: 1px solid rgba(26, 19, 17, 0.2); transition: all 0.4s ease; cursor: pointer; }
+        .menu-btn:hover { color: var(--rose-gold); border-bottom-color: var(--rose-gold); }
+
+        .loading-state { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; color: var(--rose-gold); }
+
+        /* About Us & Enquiry Section */
+        .section-about { padding: 8rem 5%; background: var(--cream); }
+        .about-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 6rem; max-width: 1400px; margin: 0 auto; align-items: center; }
+        .about-info { padding-right: 2rem; }
+        .about-info .sect-title { text-align: left; margin-bottom: 1rem; }
+        .about-info .sect-eyebrow { text-align: left; }
+        .about-info .sect-line { margin: 0 0 3.5rem 0; }
+        .info-block { margin-bottom: 3rem; }
+        .info-block h4 { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--espresso); margin-bottom: 1rem; font-weight: 500; }
+        .info-block p { font-size: 1.05rem; color: var(--espresso-light); line-height: 2; font-weight: 300; }
+        .info-link { display: block; font-size: 1.05rem; color: var(--espresso-light); font-weight: 300; text-decoration: none; margin-bottom: 0.8rem; transition: color 0.4s; }
+        .info-link:hover { color: var(--rose-gold); }
+        .about-enquiry { background: var(--cream-light); padding: 5rem 4rem; border: 1px solid rgba(184, 138, 117, 0.15); box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; justify-content: center; }
+        .about-enquiry h3 { font-family: var(--font-serif); font-size: 3rem; font-weight: 300; color: var(--espresso); margin-bottom: 2rem; font-style: italic; }
+        .about-enquiry p { font-size: 1.05rem; color: var(--espresso-light); line-height: 1.9; font-weight: 300; margin-bottom: 3rem; }
+
+        /* Footer */
+        footer { background: var(--espresso); padding: 6rem 5% 4rem; text-align: center; color: var(--cream); }
+        footer .brand-logo { justify-content: center; margin-bottom: 3rem; }
+        footer .logo-hook { color: var(--blush); border-color: rgba(250,246,243,0.15); }
+        footer .brand-text { color: var(--cream); }
+        .footer-links { display: flex; justify-content: center; gap: 3.5rem; list-style: none; margin-bottom: 5rem; }
+        .footer-links a { color: rgba(250, 246, 243, 0.6); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: color 0.4s; }
+        .footer-links a:hover { color: var(--rose-gold); }
+        .footer-bottom { border-top: 1px solid rgba(250, 246, 243, 0.08); padding-top: 3rem; font-size: 0.75rem; color: rgba(250, 246, 243, 0.3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px) scale(0.98); } to { opacity: 1; transform: translateX(0) scale(1); } }
+        .reveal-wrap .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal-wrap.visible .reveal { opacity: 1; transform: translateY(0); }
+        
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; padding: 10rem 5% 4rem; text-align: center; gap: 4rem; }
+            .hero-left { padding-right: 0;}
+            .hero-desc { margin: 0 auto 3rem; }
+            .hero-actions { justify-content: center; }
+            .hero-right { height: 60vh; border-radius: 120px 120px 0 0; }
+            .section-homemade { grid-template-columns: 1fr; }
+            .homemade-content { padding: 5rem 5%; text-align: center; }
+            .homemade-content .sect-line { margin: 0 auto 3rem auto; }
+            .homemade-image { min-height: 50vh; }
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .about-info { padding-right: 0; text-align: center; }
+            .about-info .sect-title, .about-info .sect-eyebrow { text-align: center; }
+            .about-info .sect-line { margin: 0 auto 3.5rem auto; }
+            .about-enquiry { padding: 4rem 2rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="navbar">
+        <a href="#" class="brand-logo">
+            <div class="logo-hook">Z</div>
+            <span class="brand-text">Zia Cakes</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#homemade">The Atelier</a></li>
+            <li><a href="#collection">Our Collection</a></li>
+            <li><a href="#about-us">Connect</a></li>
+            <li><a href="#about-us" class="btn-order-nav">Order Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-left">
+            <span class="hero-subtitle">The Pinnacle of Patisserie</span>
+            <h1 class="hero-title">Elegance in Every <br><em>Exquisite Detail</em></h1>
+            <p class="hero-desc">Discover the art of patisserie where timeless tradition seamlessly intertwines with modern luxury. Every creation is handcrafted meticulously, reserved for your most cherished moments.</p>
+            <div class="hero-actions">
+                <a href="#collection" class="btn-primary">Explore Menu</a>
+                <a href="#about-us" class="btn-outline">Enquire Design</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <img src="assets/hero_cake.png" alt="Exquisite Floral Wedding Tier Cake" fetchpriority="high">
+        </div>
+    </section>
+
+    <!-- Homemade Split Layout -->
+    <section class="section-homemade" id="homemade">
+        <div class="homemade-image reveal-wrap">
+            <img src="assets/processing.png" alt="Artisan baker crafting a cake" class="reveal">
+        </div>
+        <div class="homemade-content reveal-wrap">
+            <div class="reveal">
+                <span class="sect-eyebrow">The Artisan Touch</span>
+                <h2 class="sect-title">100% <em>Homemade</em></h2>
+                <div class="sect-line"></div>
+                <p class="homemade-desc">Every layer, from the delicate chiffon sponge to the hand-whipped buttercream, is crafted entirely from scratch inside our home atelier. We refuse to compromise with commercial mixes—ensuring your celebration tastes exactly as authentic, rich, and pure as the love poured into it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection -->
+    <section class="section-editorial" id="collection">
+        <div class="reveal-wrap">
+            <div class="reveal">
+                <span class="sect-eyebrow">Signature Masterpieces</span>
+                <h2 class="sect-title">Our <em>Collection</em></h2>
+                <div class="sect-line"></div>
+            </div>
+        </div>
+        
+        <div class="menu-grid" id="cakeGrid">
+            <div class="loading-state">Syncing Atelier Collection...</div>
+        </div>
+    </section>
+
+    <!-- About & Enquiry -->
+    <section class="section-about" id="about-us">
+        <div class="about-grid reveal-wrap">
+            <div class="about-info reveal">
+                <span class="sect-eyebrow">Visit & Connect</span>
+                <h2 class="sect-title">The <em>Atelier</em></h2>
+                <div class="sect-line"></div>
+                
+                <div class="info-block">
+                    <h4>Hours of Operation</h4>
+                    <p>Monday – Saturday: 9:00 AM – 8:00 PM<br>Sunday: 10:00 AM – 4:00 PM</p>
+                </div>
+                
+                <div class="info-block">
+                    <h4>Reach Out Directly</h4>
+                    <a href="https://wa.me/919884111974" class="info-link" target="_blank">WhatsApp: +91 98841 11974</a>
+                    <a href="https://instagram.com" class="info-link" target="_blank">Instagram: @ziacakes</a>
+                </div>
+            </div>
+            
+            <div class="about-enquiry reveal" style="transition-delay: 0.2s;">
+                <h3>Why Enquire?</h3>
+                <p>Every celebration is entirely unique, and so is your boundless imagination. Send us a direct enquiry to fully customize your cake’s structural design, flavor profile, and aesthetic. Whether you desire a highly specific floral arrangement or a bespoke sculpted masterpiece, we work intimately with you to bring your dream to life.</p>
+                <a href="https://wa.me/919884111974?text=Hi%20Zia%20Cakes!%20I%20would%20love%20to%20enquire%20about%20a%20custom%20cake%20design." class="btn-primary" target="_blank">Enquire Custom Design</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#" class="brand-logo" style="text-decoration: none;">
+            <div class="logo-hook">Z</div>
+            <span class="brand-text">Zia Cakes</span>
+        </a>
+        <ul class="footer-links">
+            <li><a href="#homemade">About</a></li>
+            <li><a href="#collection">Menu</a></li>
+            <li><a href="https://wa.me/919884111974" target="_blank">WhatsApp</a></li>
+            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+        <div class="footer-bottom">
+            &copy; 2026 Zia Cakes Atelier. All Rights Reserved. Not just a bakery, an aesthetic canvas.
+        </div>
+    </footer>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // ==========================================
+        // ⚠️ PASTE YOUR FIREBASE CONFIGURATION HERE ⚠️
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5SoRJUg_oZH-tFw_1nOUQbTyVLn-oQLg",
+            authDomain: "zia-cakes-54bee.firebaseapp.com",
+            projectId: "zia-cakes-54bee",
+            storageBucket: "zia-cakes-54bee.firebasestorage.app",
+            messagingSenderId: "801347862022",
+            appId: "1:801347862022:web:8f17feac305f7f79fb0d87"
+        };
+
+        const PRE_DATA = [
+            { id: '1', name: 'Dark Chocolate Truffle', desc: 'Lustrous layers of dark chocolate ganache draped gracefully in edible 24k gold leaf and artisan mousse.', price: 1299, tag: 'Signature', image: 'assets/truffle_cake.png' },
+            { id: '2', name: 'Strawberry Chiffon', desc: 'A feather-light chiffon meticulously dressed in fresh seasonal strawberry cold-pressed purée.', price: 999, tag: 'Popular', image: 'assets/strawberry_cake.png' },
+            { id: '4', name: 'Midnight Fig Naked Tier', desc: 'Rustic semi-naked layers dripping with warm caramel, adorned with fresh organic figs and dark forest berries.', price: 2100, tag: 'Seasonal', image: 'assets/naked_cake.png' },
+            { id: '5', name: 'Minimalist Matte Blush', desc: 'Sleek geometric fondant in a soft blush tone featuring genuine gold leaf. The pinnacle of modern edible art.', price: 1850, tag: 'Bespoke', image: 'assets/geometric_cake.png' },
+            { id: '6', name: 'Vintage Lambeth Heart', desc: 'Intricate old-world overpiping on a soft buttercream heart. Perfect for intimate, highly romantic celebrations.', price: 1450, tag: 'Popular', image: 'assets/vintage_cake.png' },
+            { id: '3', name: 'Floral Wedding Tier', desc: 'An architectural three-tiered masterpiece adorned with pristine, hand-piped sugar flora.', price: 4500, tag: 'Bespoke', image: 'assets/hero_cake.png' }
+        ];
+
+        const WA_PHONE = '919884111974';
+
+        function renderGrid(data) {
+            const grid = document.getElementById('cakeGrid');
+            grid.innerHTML = data.map((c, i) => `
+                <div class="menu-card reveal-wrap" style="transition-delay: ${i * 0.15}s">
+                    <div class="reveal">
+                        <div class="menu-img-wrap">
+                            ${c.image ? `<img src="${c.image}" alt="${c.name}" loading="lazy">` : ''}
+                            ${c.tag && c.tag!=='None' ? `<div class="menu-tag">${c.tag}</div>` : ''}
+                        </div>
+                        <div class="menu-info">
+                            <h3 class="menu-name">${c.name}</h3>
+                            <p class="menu-desc">${c.desc}</p>
+                            <div class="menu-footer">
+                                <div class="price-wrapper">
+                                    <div class="menu-price"><em>₹</em><span>${c.price}</span></div>
+                                </div>
+                                <a href="https://wa.me/${WA_PHONE}?text=${encodeURIComponent(`Hello Zia Cakes,\nI would love to order the *${c.name}*\nPrice: ₹${c.price}`)}" class="menu-btn" target="_blank">Order Collection Piece</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            initObserver();
+        }
+
+        function initObserver() {
+            const els = document.querySelectorAll('.reveal-wrap');
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                });
+            }, { threshold: 0.15 });
+            els.forEach(el => obs.observe(el));
+        }
+
+        async function fetchCakes() {
+            try {
+                // If config is missing, fallback to hardcoded
+                if (!firebaseConfig.projectId) throw new Error("Missing config");
+                
+                const app = initializeApp(firebaseConfig);
+                const db = getFirestore(app);
+                const q = query(collection(db, "cakes"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+                
+                if (snap.empty) {
+                    renderGrid(PRE_DATA);
+                } else {
+                    const onlineCakes = [];
+                    snap.forEach(doc => { onlineCakes.push({ id: doc.id, ...doc.data() }) });
+                    renderGrid(onlineCakes);
+                }
+            } catch (e) {
+                console.warn("Firebase not configured or network error, falling back to static presentation data.");
+                renderGrid(PRE_DATA);
+            }
+        }
+
+        fetchCakes();
+    </script>
+</body>
+</html>

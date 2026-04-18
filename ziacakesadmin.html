@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Atelier Admin – Zia Cakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --onyx: #120d0b; --onyx-light: #1c1511; --onyx-lighter: #281d18;
+            --rose-gold: #C49A86; --rose-gold-dark: #966f5c;
+            --ivory: #FDFBF9; --ivory-dim: rgba(253, 251, 249, 0.6);
+            --font-serif: 'Cormorant Garamond', serif; --font-sans: 'Jost', sans-serif;
+            --border: rgba(196, 154, 134, 0.2); --shadow-glow: 0 0 40px rgba(196, 154, 134, 0.05);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-sans); background-color: var(--onyx); color: var(--ivory); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .hidden { display: none !important; }
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.02em; }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--onyx); } ::-webkit-scrollbar-thumb { background: var(--onyx-lighter); }
+
+        /* Premium Brand Typography Logo */
+        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 1.2rem; user-select: none; }
+        .logo-hook { font-family: var(--font-serif); font-size: 2.8rem; font-style: italic; font-weight: 300; color: var(--ivory); line-height: 1; padding-right: 1.2rem; border-right: 1px solid var(--border); }
+        .brand-text { font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--ivory-dim); font-weight: 300; }
+
+        /* Auth Gate */
+        .auth-gate { position: fixed; inset: 0; background: linear-gradient(135deg, #0a0705 0%, var(--onyx) 100%); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .auth-card { background: rgba(28, 21, 17, 0.7); backdrop-filter: blur(20px); padding: 5rem 4rem; width: 100%; max-width: 480px; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.8); border: 1px solid rgba(253, 251, 249, 0.05); }
+        .auth-card .brand-logo { justify-content: center; margin-bottom: 2rem; }
+        .auth-card p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 3.5rem; font-weight: 300; }
+        .form-group { margin-bottom: 2rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ivory-dim); font-weight: 400; }
+        .form-control { width: 100%; padding: 0.8rem 0; border: none; border-bottom: 1px solid rgba(253, 251, 249, 0.2); border-radius: 0; font-family: var(--font-sans); font-size: 1rem; background: transparent; color: var(--ivory); font-weight: 300; transition: all 0.4s ease; }
+        .form-control:focus { outline: none; border-bottom-color: var(--rose-gold); }
+        .btn { display: inline-block; width: 100%; padding: 1.2rem; margin-top: 1rem; background-color: var(--ivory); color: var(--onyx); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s ease; }
+        .btn:hover { background-color: var(--rose-gold); color: var(--ivory); transform: translateY(-2px); }
+        .btn-outline { background-color: transparent; color: var(--ivory); border: 1px solid rgba(253, 251, 249, 0.3); }
+        .btn-outline:hover { border-color: var(--ivory); background: rgba(253, 251, 249, 0.05); }
+        .btn-sm { padding: 0.8rem 1.5rem; font-size: 0.7rem; width: auto; margin-top:0; }
+        .text-link { display: inline-block; margin-top: 2.5rem; color: var(--ivory-dim); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; transition: color 0.4s; border-bottom: 1px solid transparent; }
+        .text-link:hover { color: var(--rose-gold); border-bottom-color: var(--rose-gold); }
+        .error-msg { color: #e46d6d; font-size: 0.8rem; margin-top: 0.5rem; min-height: 1.2em; font-weight: 300; }
+
+        /* Dashboard */
+        .admin-layout { display: flex; flex-direction: column; height: 100vh; }
+        .header { background-color: var(--onyx-light); color: var(--ivory); padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(253, 251, 249, 0.05); z-index: 100; }
+        .header-right { display: flex; align-items: center; gap: 3rem; }
+        .timer { font-size: 0.8rem; letter-spacing: 0.1em; color: var(--ivory-dim); font-variant-numeric: tabular-nums; }
+        .header-link { color: var(--ivory-dim); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: color 0.4s; }
+        .header-link:hover { color: var(--rose-gold); }
+        .btn-logout { background: transparent; color: var(--rose-gold); border: 1px solid var(--rose-gold-dark); padding: 0.6rem 1.8rem; cursor: pointer; font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s; }
+        .btn-logout:hover { background: var(--rose-gold); color: var(--onyx); }
+
+        .main-content { display: flex; flex: 1; overflow: hidden; background: var(--onyx); }
+
+        /* Left Panel */
+        .left-panel { width: 480px; background: var(--onyx-light); border-right: 1px solid rgba(253, 251, 249, 0.05); padding: 4rem; overflow-y: auto; flex-shrink: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.5); z-index: 50; }
+        .panel-title { font-size: 2.2rem; margin-bottom: 3.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--ivory); }
+        .badge-edit { font-family: var(--font-sans); font-size: 0.6rem; background: var(--ivory); color: var(--onyx); padding: 0.2rem 0.8rem; letter-spacing: 0.3em; font-weight: 500; }
+        select.form-control { color: var(--ivory); background: var(--onyx-light); }
+        .upload-zone { border: 1px dashed rgba(253, 251, 249, 0.2); padding: 3rem 1rem; text-align: center; cursor: pointer; position: relative; background: var(--onyx); transition: all 0.4s ease; margin-bottom: 1rem; }
+        .upload-zone:hover { border-color: var(--rose-gold); background: rgba(196, 154, 134, 0.05); }
+        .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+        .upload-zone span { font-size: 0.8rem; color: var(--ivory-dim); pointer-events: none; line-height: 1.8; letter-spacing: 0.1em; text-transform: uppercase; }
+        .preview-box { margin-top: 1rem; height: 220px; background-color: var(--onyx); border: 1px solid rgba(253, 251, 249, 0.1); background-size: cover; background-position: center; display: none; }
+        .form-actions { display: flex; gap: 1rem; margin-top: 3rem; }
+
+        /* Right Panel */
+        .right-panel { flex: 1; padding: 4rem 5rem; overflow-y: auto; background: var(--onyx); }
+        .stats-row { display: flex; gap: 2rem; margin-bottom: 4rem; }
+        .stat-card { padding: 2.5rem; flex: 1; border: 1px solid rgba(253, 251, 249, 0.08); position: relative; overflow: hidden; }
+        .stat-card::before { content:''; position:absolute; top:0; left:0; width:2px; height:100%; background: var(--rose-gold); opacity: 0.5; }
+        .stat-card h3 { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--ivory-dim); margin-bottom: 1rem; }
+        .stat-card .value { font-family: var(--font-serif); font-size: 3rem; color: var(--ivory); margin: 0; line-height: 1; font-weight: 300; }
+        
+        .table-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(253, 251, 249, 0.1); }
+        .table-header h2 { font-size: 2.6rem; color: var(--ivory); }
+        .search-bar { width: 350px; padding: 0.8rem 1.5rem; border: 1px solid rgba(253, 251, 249, 0.2); font-family: var(--font-sans); font-size: 0.85rem; background: var(--onyx-light); color: var(--ivory); }
+        .search-bar:focus { outline: none; border-color: var(--rose-gold); }
+        
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 1.5rem 1rem; border-bottom: 1px solid rgba(253, 251, 249, 0.05); }
+        th { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--rose-gold); font-weight: 400; padding-bottom: 1.5rem; }
+        .cake-photo { width: 80px; height: 100px; object-fit: cover; border: 1px solid rgba(253, 251, 249, 0.2); }
+        .cake-name { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--ivory); margin-bottom: 0.3rem; }
+        .cake-desc { font-size: 0.85rem; color: var(--ivory-dim); max-width: 320px; font-weight: 300; margin-bottom: 0.5rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .tag-badge { display: inline-block; padding: 0.2rem 0.8rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; background: rgba(253, 251, 249, 0.05); color: var(--ivory); border: 1px solid rgba(253, 251, 249, 0.1); }
+        .price-td { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--ivory); }
+        
+        .action-btn { background: none; border: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; color: var(--ivory-dim); margin-right: 1.5rem; transition: color 0.4s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+        .action-btn:hover { color: var(--ivory); border-bottom-color: var(--ivory); }
+        .btn-delete:hover { color: #e46d6d; border-bottom-color: #e46d6d; }
+        .empty-state { padding: 6rem; text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 1.8rem; color: var(--ivory-dim); }
+
+        /* Modals & Toasts */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(10, 7, 5, 0.9); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-card { background: var(--onyx-light); padding: 4rem; border: 1px solid rgba(253, 251, 249, 0.1); width: 100%; max-width: 480px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+        .modal-card h3 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--ivory); }
+        .toast-container { position: fixed; bottom: 3rem; right: 3rem; z-index: 3000; display: flex; flex-direction: column; gap: 1rem; }
+        .toast { padding: 1.2rem 2.5rem; background: var(--onyx-lighter); color: var(--ivory); font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; border: 1px solid rgba(253, 251, 249, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: translateY(100%); opacity: 0; animation: slideUp 0.6s forwards, fadeOut 0.6s 3s forwards; border-left: 2px solid var(--rose-gold); }
+        .toast.error { border-left-color: #e46d6d; }
+        .toast.info { border-left-color: #6da2e4; }
+        
+        .cloud-spinner { display:none; border: 3px solid rgba(253, 251, 249, 0.1); border-top: 3px solid var(--rose-gold); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes slideUp { to { transform: translateY(0); opacity: 1; } } @keyframes fadeOut { to { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <!-- Auth Logic Firebase -->
+    <div id="loginView" class="auth-gate">
+        <div class="auth-card">
+            <div class="brand-logo" style="cursor: default; justify-content: center; margin-bottom: 2rem;"><div class="logo-hook">Z</div><span class="brand-text">Zia Cakes</span></div>
+            <p>Atelier Administration</p>
+            <div class="form-group">
+                <label>Administrative Email</label>
+                <input type="email" id="loginEmail" class="form-control" placeholder="e.g. admin@ziacakes.com">
+            </div>
+            <div class="form-group">
+                <label>Master Passcode</label>
+                <input type="password" id="loginPassword" class="form-control" placeholder="Enter Secure Passcode">
+                <div id="loginError" class="error-msg"></div>
+            </div>
+            <button id="btnLogin" class="btn"><span id="authTxt">Authenticate</span><div class="cloud-spinner" id="authLoader" style="display:none;margin-top:0;"></div></button>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="adminView" class="admin-layout hidden">
+        <header class="header">
+            <div class="header-left">
+                <div class="brand-logo" style="cursor: default;"><div class="logo-hook" style="color:var(--ivory); border-color:rgba(253,251,249,0.1);">Z</div><span class="brand-text" style="color:var(--ivory);">Atelier Dashboard</span></div>
+            </div>
+            <div class="header-right">
+                <a href="index.html" target="_blank" class="header-link">View Showroom ↗</a>
+                <div class="timer" id="sessionTimer">SECURE SESSION — 30:00</div>
+                <button id="btnLogout" class="btn-logout">Terminate</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="left-panel">
+                <h2 class="panel-title"><span id="formTitle">Curate Item</span><span id="editBadge" class="badge-edit hidden">EDIT</span></h2>
+                <form id="cakeForm">
+                    <input type="hidden" id="cakeId">
+                    <input type="hidden" id="existingImageUrl">
+                    
+                    <div class="form-group"><label>Menu Title</label><input type="text" id="cakeName" class="form-control" required></div>
+                    <div class="form-group"><label>Details</label><textarea id="cakeDesc" class="form-control" required style="resize:vertical; min-height:60px;"></textarea></div>
+                    <div class="form-group"><label>Listed Price (₹)</label><input type="number" id="cakePrice" class="form-control" required></div>
+                    <div class="form-group"><label>Classification Badge</label>
+                        <select id="cakeTag" class="form-control">
+                            <option value="None">No Badge</option> <option value="Signature">Signature</option> <option value="Bespoke">Bespoke</option> <option value="Popular">Popular</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Visual Asset (Cloud Upload)</label>
+                        <div class="upload-zone" id="uploadWrapper">
+                            <span id="uploadText">Drop High-Res Imagery Here<br>Max 4MB (JPG/PNG)</span>
+                            <input type="file" id="cakeImage" accept=".jpg,.png,.jpeg,.webp">
+                        </div>
+                        <div id="imagePreview" class="preview-box"></div>
+                    </div>
+                    
+                    <div class="form-actions" style="flex-direction:column;">
+                        <button type="submit" id="btnSubmitForm" class="btn"><span id="submitTxt">Publish to Cloud</span><div class="cloud-spinner" id="submitLoader"></div></button>
+                        <button type="button" id="btnCancelEdit" class="btn btn-outline btn-sm hidden">Clear Frame</button>
+                    </div>
+                </form>
+            </aside>
+
+            <main class="right-panel">
+                <div class="stats-row">
+                    <div class="stat-card"><h3>Total Curations</h3><p class="value" id="statTotal">0</p></div>
+                    <div class="stat-card"><h3>Entry Price</h3><p class="value" id="statLow"><em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>0</p></div>
+                    <div class="stat-card"><h3>Pinnacle Tier</h3><p class="value" id="statHigh"><em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>0</p></div>
+                </div>
+
+                <div class="table-header">
+                    <h2>Cloud Registry</h2>
+                    <input type="text" id="searchInput" class="search-bar" placeholder="Search live datastore...">
+                </div>
+                <div id="tableLoading" style="color:var(--rose-gold); font-style:italic; margin-bottom:2rem;">Fetching from cloud...</div>
+
+                <table id="dataTable" class="hidden">
+                    <thead><tr><th>Visual</th><th>Details</th><th>Exchange</th><th>Actions</th></tr></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div id="emptyState" class="empty-state hidden">Cloud database is empty.</div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 id="deleteModalTitle">Purge Item?</h3>
+            <p>This action will permanently erase the data and image from Google servers.</p>
+            <div class="modal-actions">
+                <button id="btnConfirmDelete" class="btn btn-sm" style="background:#e46d6d;color:white;border-color:#e46d6d;"><span id="delTxt">Execute Purge</span><div class="cloud-spinner" id="delLoader"></div></button>
+                <button id="btnCancelDelete" class="btn btn-outline btn-sm">Cancel Operation</button>
+            </div>
+        </div>
+    </div>
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- FIREBASE & LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+        // ==========================================
+        // ⚠️ PASTE YOUR FIREBASE CONFIGURATION HERE ⚠️
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5SoRJUg_oZH-tFw_1nOUQbTyVLn-oQLg",
+            authDomain: "zia-cakes-54bee.firebaseapp.com",
+            projectId: "zia-cakes-54bee",
+            storageBucket: "zia-cakes-54bee.firebasestorage.app",
+            messagingSenderId: "801347862022",
+            appId: "1:801347862022:web:8f17feac305f7f79fb0d87"
+        };
+
+        let app, db, auth, dbActive = false;
+        let MasterCakes = [];
+
+        try {
+            if(firebaseConfig.projectId) {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                dbActive = true;
+            }
+        } catch(e) { console.error(e); }
+
+        const el = (id) => document.getElementById(id);
+        const views = { login: el('loginView'), admin: el('adminView') };
+        let cakeToDelete = null;
+
+        function sanitize(str) { const t=document.createElement('div'); t.textContent=str; return t.innerHTML; }
+        window.showToast = function(msg, type='success') {
+            const toast = document.createElement('div'); toast.className=`toast ${type}`; toast.textContent=msg;
+            el('toastContainer').appendChild(toast); setTimeout(()=>toast.remove(), 4000);
+        }
+
+        if(dbActive) {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    views.login.classList.add('hidden');
+                    views.admin.classList.remove('hidden');
+                    el('sessionTimer').textContent = "SECURE CLOUD SESSION — " + user.email.toUpperCase();
+                    fetchData();
+                } else {
+                    views.admin.classList.add('hidden');
+                    views.login.classList.remove('hidden');
+                    MasterCakes = [];
+                    renderTable();
+                }
+            });
+        }
+
+        el('btnLogin').addEventListener('click', async () => {
+            if(!dbActive) return showToast("Firebase missing", "error");
+            const em = el('loginEmail').value.trim();
+            const pw = el('loginPassword').value;
+            if(!em || !pw) { el('loginError').textContent="Provide email and password."; return; }
+            
+            el('authTxt').style.display='none'; el('authLoader').style.display='block'; el('btnLogin').disabled = true;
+            try {
+                await signInWithEmailAndPassword(auth, em, pw);
+                el('loginError').textContent="";
+                el('loginEmail').value=""; el('loginPassword').value="";
+            } catch(e) {
+                el('loginError').textContent="Invalid credentials.";
+            }
+            el('authTxt').style.display='block'; el('authLoader').style.display='none'; el('btnLogin').disabled = false;
+        });
+
+        el('btnLogout').addEventListener('click', () => { if(auth) signOut(auth); });
+
+        // Upload Preview Logic
+        let currentFile = null;
+        el('cakeImage').addEventListener('change', function(e) {
+            const f = this.files[0]; if(!f) return;
+            currentFile = f;
+            el('imagePreview').style.backgroundImage = `url(${URL.createObjectURL(f)})`;
+            el('imagePreview').style.display = 'block';
+            el('uploadText').style.display = 'none';
+        });
+
+        // Compression fallback for free-tier users
+        function compressImage(file, maxKB = 800) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = event => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const MAX_DIM = 1000;
+                        if(width > height && width > MAX_DIM) { height *= MAX_DIM/width; width = MAX_DIM; }
+                        else if(height > MAX_DIM) { width *= MAX_DIM/height; height = MAX_DIM; }
+                        
+                        canvas.width = width; canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = "#120d0b"; ctx.fillRect(0,0,width,height);
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        let qty = 0.8;
+                        let dataUrl = canvas.toDataURL('image/jpeg', qty);
+                        while(dataUrl.length > maxKB * 1024 && qty > 0.1) {
+                            qty -= 0.1;
+                            dataUrl = canvas.toDataURL('image/jpeg', qty);
+                        }
+                        resolve(dataUrl);
+                    };
+                    img.onerror = e => reject(e);
+                }
+            });
+        }
+
+        // Firebase Sync Logic
+        async function fetchData() {
+            if(!dbActive) {
+                el('tableLoading').textContent = "ERROR: Firebase Config is missing in ziacakesadmin.html!";
+                return;
+            }
+            el('tableLoading').classList.remove('hidden'); el('dataTable').classList.add('hidden');
+            try {
+                const snap = await getDocs(collection(db, "cakes"));
+                MasterCakes = [];
+                snap.forEach(doc => MasterCakes.push({id: doc.id, ...doc.data()}));
+                renderTable();
+            } catch(e) { showToast("Failed to fetch cloud data", "error"); console.error(e); }
+            el('tableLoading').classList.add('hidden');
+        }
+
+        el('cakeForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            if(!dbActive) return showToast("Firebase Missing", "error");
+            
+            const id = el('cakeId').value;
+            const payload = {
+                name: sanitize(el('cakeName').value.trim()),
+                desc: sanitize(el('cakeDesc').value.trim()),
+                price: parseFloat(el('cakePrice').value),
+                tag: el('cakeTag').value
+            };
+
+            if(!currentFile && !id) return showToast("An image is required", "error");
+
+            el('submitTxt').style.display='none'; el('submitLoader').style.display='block';
+            el('btnSubmitForm').disabled=true;
+            showToast("Syncing to Google servers...", "info");
+
+            try {
+                let downloadUrl = el('existingImageUrl').value;
+                if(currentFile) {
+                    downloadUrl = await compressImage(currentFile);
+                }
+                payload.image = downloadUrl;
+
+                if(id) {
+                    await updateDoc(doc(db, "cakes", id), payload);
+                    showToast("Curation Updated Successfully");
+                } else {
+                    payload.createdAt = serverTimestamp();
+                    await addDoc(collection(db, "cakes"), payload);
+                    showToast("Published to Cloud Registry");
+                }
+                resetForm(); fetchData();
+            } catch(er) {
+                showToast("Cloud Error: " + er.message, "error");
+            }
+
+            el('submitTxt').style.display='block'; el('submitLoader').style.display='none';
+            el('btnSubmitForm').disabled=false;
+        });
+
+        function resetForm() {
+            el('cakeForm').reset(); el('cakeId').value=''; el('existingImageUrl').value=''; currentFile=null;
+            el('imagePreview').style.display='none'; el('uploadText').style.display='block';
+            el('formTitle').textContent='Curate Item'; el('editBadge').classList.add('hidden');
+            el('submitTxt').textContent='Publish to Cloud'; el('btnCancelEdit').classList.add('hidden');
+        }
+        el('btnCancelEdit').addEventListener('click', resetForm);
+
+        window.editCake = function(id) {
+            const c = MasterCakes.find(x=>x.id===id); if(!c) return;
+            el('cakeId').value=c.id; el('cakeName').value=c.name; el('cakeDesc').value=c.desc;
+            el('cakePrice').value=c.price; el('cakeTag').value=c.tag; el('existingImageUrl').value=c.image;
+            el('imagePreview').style.backgroundImage = `url(${c.image})`;
+            el('imagePreview').style.display='block'; el('uploadText').style.display='none';
+            el('formTitle').textContent='Refine Curation'; el('editBadge').classList.remove('hidden');
+            el('submitTxt').textContent='Commit Adjustments'; el('btnCancelEdit').classList.remove('hidden');
+        };
+
+        window.deleteCakeConfirm = function(id) {
+            cakeToDelete = MasterCakes.find(c=>c.id===id);
+            if(!cakeToDelete) return;
+            el('deleteModal').classList.add('active');
+        };
+        
+        el('btnCancelDelete').addEventListener('click', () => el('deleteModal').classList.remove('active'));
+        el('btnConfirmDelete').addEventListener('click', async () => {
+             el('delTxt').style.display='none'; el('delLoader').style.display='block';
+             try {
+                await deleteDoc(doc(db, "cakes", cakeToDelete.id));
+                showToast("Item Purged");
+                if(el('cakeId').value === cakeToDelete.id) resetForm();
+                fetchData();
+             } catch(e) { showToast("Error purging: " + e.message, "error"); }
+             el('delTxt').style.display='block'; el('delLoader').style.display='none';
+             el('deleteModal').classList.remove('active');
+        });
+
+        el('searchInput').addEventListener('input', renderTable);
+
+        function renderTable() {
+            el('dataTable').classList.remove('hidden');
+            const q = el('searchInput').value.toLowerCase();
+            const filtered = MasterCakes.filter(c => c.name.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q));
+            
+            const tbody = el('tableBody'); tbody.innerHTML='';
+            if(filtered.length===0) el('emptyState').classList.remove('hidden');
+            else {
+                el('emptyState').classList.add('hidden');
+                filtered.forEach(c => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><img src="${c.image}" class="cake-photo"></td>
+                            <td><div class="cake-name">${c.name}</div><div class="cake-desc">${c.desc}</div>${c.tag && c.tag!=='None' ? `<span class="tag-badge">${c.tag}</span>`:''}</td>
+                            <td class="price-td"><em>₹</em>${c.price}</td>
+                            <td><button class="action-btn" onclick="editCake('${c.id}')">Modify</button><button class="action-btn btn-delete" onclick="deleteCakeConfirm('${c.id}')">Purge</button></td>
+                        </tr>`;
+                });
+            }
+            
+            el('statTotal').textContent = MasterCakes.length.toString().padStart(2,'0');
+            if(MasterCakes.length>0) {
+                const prices=MasterCakes.map(c=>c.price);
+                el('statLow').innerHTML=`<em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>${Math.min(...prices)}`;
+                el('statHigh').innerHTML=`<em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>${Math.max(...prices)}`;
+            } else { el('statLow').innerHTML=`<em>₹</em>0`; el('statHigh').innerHTML=`<em>₹</em>0`; }
+        }
+    </script>
+</body>
+</html>
