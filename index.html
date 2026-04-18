@@ -51,8 +51,7 @@
 
         /* ====== HERO: Full Display Background Image ====== */
         .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-start; padding: 12rem 5% 0; background: linear-gradient(to right, rgba(250,246,243,0.98) 0%, rgba(250,246,243,0.95) 40%, rgba(250,246,243,0) 75%), url('assets/hero_bg.png') center right/cover no-repeat; }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to bottom, rgba(26,19,17,0) 0%, rgba(26,19,17,1) 100%); z-index: 1; pointer-events: none; }
-        .hero-left { position: relative; z-index: 2; max-width: 500px; animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
+        .hero-left { position: relative; z-index: 2; max-width: 500px; animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; padding-bottom: 6rem; }
         .hero-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 2rem; display: block; font-weight: 500; }
         .hero-title { font-family: var(--font-serif); font-size: clamp(3.5rem, 6.5vw, 6rem); line-height: 1.05; color: var(--espresso); font-weight: 300; margin-bottom: 2.5rem; letter-spacing: -0.02em; }
         .hero-title em { font-style: italic; color: var(--rose-gold); font-weight: 400; }
@@ -64,9 +63,13 @@
         .btn-outline { display: inline-flex; align-items: center; justify-content: center; padding: 1.1rem 2.8rem; border: 1px solid rgba(26, 19, 17, 0.2); background: rgba(250, 246, 243, 0.6); backdrop-filter: blur(4px); color: var(--espresso); font-weight: 500; text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s ease; }
         .btn-outline:hover { border-color: var(--espresso); background: rgba(250, 246, 243, 0.9); }
 
+        /* Premium Separator */
+        .premium-divider { display: flex; align-items: center; justify-content: center; background: var(--cream); padding: 5rem 10%; position: relative; z-index: 10; }
+        .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(184,138,117,0), rgba(184,138,117,0.4), rgba(184,138,117,0)); border: none; }
+        .divider-diamond { width: 8px; height: 8px; background: var(--rose-gold); transform: rotate(45deg); margin: 0 2rem; opacity: 0.8; }
+
         /* ====== HOMEMADE: Full Display Background Image ====== */
-        .section-homemade { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: flex-end; padding: 0 5%; background: linear-gradient(to left, rgba(26,19,17,0.98) 0%, rgba(26,19,17,0.9) 40%, rgba(26,19,17,0) 75%), url('assets/homemade_artisan.png') center/cover no-repeat; color: var(--cream); }
-        .section-homemade::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, rgba(26,19,17,0) 0%, rgba(26,19,17,1) 100%); z-index: 1; pointer-events: none; }
+        .section-homemade { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: flex-end; padding: 4rem 5%; background: linear-gradient(to left, rgba(26,19,17,0.98) 0%, rgba(26,19,17,0.9) 40%, rgba(26,19,17,0) 75%), url('assets/homemade_artisan.png') center/cover no-repeat; color: var(--cream); }
         .homemade-content { position: relative; z-index: 2; max-width: 500px; padding: 4rem 3rem; }
         .homemade-content .sect-eyebrow { color: var(--rose-gold); }
         .homemade-content .sect-title { color: var(--cream); font-size: 3.5rem; margin-bottom: 2.5rem; }
@@ -251,6 +254,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Premium Separator -->
+    <div class="premium-divider">
+        <hr class="divider-line">
+        <div class="divider-diamond"></div>
+        <hr class="divider-line">
+    </div>
 
     <!-- Homemade Trust Section -->
     <section class="section-homemade" id="homemade">
