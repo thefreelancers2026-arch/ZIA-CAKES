@@ -20,13 +20,10 @@
         h1, h2, h3 { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.02em; }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--onyx); } ::-webkit-scrollbar-thumb { background: var(--onyx-lighter); }
 
-        /* Premium Brand Logo */
-        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 0.8rem; user-select: none; transition: opacity 0.4s ease; color: var(--ivory); }
-        .logo-svg { width: 45px; height: 53px; color: currentColor; transition: transform 0.4s ease; }
-        .brand-text-wrap { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1; margin-top: 5px; }
-        .brand-title { font-family: var(--font-serif); font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.25em; color: currentColor; font-weight: 500; white-space: nowrap; margin-bottom: 2px; }
-        .brand-sub { font-family: var(--font-sans); font-size: 0.45rem; text-transform: uppercase; letter-spacing: 0.45em; color: var(--rose-gold); white-space: nowrap; margin-left: 2px; }
-        .brand-logo:hover .logo-svg { transform: scale(1.05) rotate(-2deg); }
+        /* Brand Logo Image */
+        .brand-logo { display: flex; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; }
+        .brand-logo:hover { opacity: 0.85; }
+        .logo-img { height: 60px; width: auto; object-fit: contain; }
 
         /* Auth Gate */
         .auth-gate { position: fixed; inset: 0; background: linear-gradient(135deg, #0a0705 0%, var(--onyx) 100%); display: flex; align-items: center; justify-content: center; z-index: 1000; }
@@ -156,19 +153,7 @@
     <div id="loginView" class="auth-gate">
         <div class="auth-card">
             <a href="#" class="brand-logo" style="margin: 0 auto 2rem auto; justify-content: center;">
-                <svg class="logo-svg" style="width: 60px; height: 70px;" viewBox="0 0 54 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13 17 C10 14 9 11 12 10 C15 9 18 12 17 15" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                    <path d="M17 15 C22 13 30 13 36 14" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
-                    <path d="M36 14 C39 14 40 15 39 17" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                    <path d="M39 17 L16 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                    <path d="M16 44 C15 47 14 48 15 49" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                    <path d="M15 49 C20 50 30 50 37 49" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
-                    <path d="M37 49 C41 49 43 51 42 54 C41 57 38 57 37 55 C36 53 38 52 39 53" stroke="var(--rose-gold)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
-                </svg>
-                <div class="brand-text-wrap" style="align-items: flex-start;">
-                    <span class="brand-title" style="font-size: 1.8rem;">Zia Cakes</span>
-                    <span class="brand-sub">Atelier</span>
-                </div>
+                <img class="logo-img" src="assets/logo.png" alt="Zia Cakes" style="height: 80px; filter: brightness(0) invert(1);">
             </a>
             <p>Atelier Administration</p>
             <div class="form-group">
@@ -189,19 +174,7 @@
         <header class="header">
             <div class="header-left">
                 <a href="#" class="brand-logo">
-                    <svg class="logo-svg" viewBox="0 0 54 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13 17 C10 14 9 11 12 10 C15 9 18 12 17 15" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                        <path d="M17 15 C22 13 30 13 36 14" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
-                        <path d="M36 14 C39 14 40 15 39 17" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                        <path d="M39 17 L16 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                        <path d="M16 44 C15 47 14 48 15 49" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                        <path d="M15 49 C20 50 30 50 37 49" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
-                        <path d="M37 49 C41 49 43 51 42 54 C41 57 38 57 37 55 C36 53 38 52 39 53" stroke="var(--rose-gold)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
-                    </svg>
-                    <div class="brand-text-wrap">
-                        <span class="brand-title">Zia Cakes</span>
-                        <span class="brand-sub">Atelier</span>
-                    </div>
+                    <img class="logo-img" src="assets/logo.png" alt="Zia Cakes" style="filter: brightness(0) invert(1);">
                 </a>
             </div>
             <div class="header-right">
