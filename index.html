@@ -310,8 +310,12 @@
                 <span class="cat-label">Birthday</span>
             </button>
             <button class="cat-btn" data-filter="cupcakes">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_luxury_cakes.png" alt="Cupcakes"></div></div>
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_cupcakes.jpg" alt="Cupcakes"></div></div>
                 <span class="cat-label">Cupcakes</span>
+            </button>
+            <button class="cat-btn" data-filter="tea">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_tea.jpg" alt="High Tea"></div></div>
+                <span class="cat-label">High Tea</span>
             </button>
             <button class="cat-btn" data-filter="nationwide">
                 <div class="cat-bubble"><div class="bubble-img"><img src="assets/hero_cake.png" alt="Nationwide"></div></div>
@@ -321,24 +325,16 @@
                 <div class="cat-bubble"><div class="bubble-img"><img src="assets/naked_cake.png" alt="Brownies"></div></div>
                 <span class="cat-label">Brownies</span>
             </button>
-            <button class="cat-btn" data-filter="vegan">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/geometric_cake.png" alt="Vegan"></div></div>
-                <span class="cat-label">Vegan / GF</span>
-            </button>
             <button class="cat-btn" data-filter="kids">
                 <div class="cat-bubble"><div class="bubble-img"><img src="assets/vintage_cake.png" alt="Kids Party"></div></div>
                 <span class="cat-label">Kids Party</span>
             </button>
-            <button class="cat-btn" data-filter="photo">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/truffle_cake.png" alt="Photo Treats"></div></div>
-                <span class="cat-label">Photo Treats</span>
-            </button>
             <button class="cat-btn" data-filter="disney">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/vintage_cake.png" alt="Disney"></div></div>
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_kids.jpg" alt="Disney"></div></div>
                 <span class="cat-label">Disney</span>
             </button>
             <button class="cat-btn" data-filter="logo">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_luxury_cakes.png" alt="Logo Cakes"></div></div>
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_corporate.jpg" alt="Logo Cakes"></div></div>
                 <span class="cat-label">Logo Cakes</span>
             </button>
         </div>
@@ -460,14 +456,13 @@
 
         const PRE_DATA = [
             { id: '1', name: 'Signature Birthday Celebration', desc: 'A stunning bespoke cake draped in silky buttercream, perfect for unforgettable birthdays.', price: 3800, tag: 'Birthday', image: 'assets/strawberry_cake.png', category: 'birthday' },
-            { id: '2', name: 'Classic Gourmet Cupcakes', desc: 'A box of exquisite hand-piped cupcakes, featuring assorted artisanal flavors.', price: 1200, tag: 'Cupcakes', image: 'assets/cat_luxury_cakes.png', category: 'cupcakes' },
-            { id: '3', name: 'Nationwide Delivery Box', desc: 'Safe-travel architectural cakes designed precisely to reach you beautifully anywhere.', price: 1450, tag: 'Nationwide', image: 'assets/hero_cake.png', category: 'nationwide' },
-            { id: '4', name: 'Belgian Truffle Brownies', desc: 'Decadent, rich, and intensely fudgy Belgian chocolate brownies layered with gold leaf.', price: 1600, tag: 'Brownies', image: 'assets/naked_cake.png', category: 'brownies' },
-            { id: '5', name: 'Minimalist Vegan Chiffon', desc: 'A zero-compromise plant-based masterpiece tailored for dietary excellence.', price: 1850, tag: 'Vegan / GF', image: 'assets/geometric_cake.png', category: 'vegan' },
+            { id: '2', name: 'Classic Gourmet Cupcakes', desc: 'A box of exquisite hand-piped cupcakes, featuring assorted artisanal flavors.', price: 1200, tag: 'Cupcakes', image: 'assets/cat_cupcakes.jpg', category: 'cupcakes' },
+            { id: '3', name: 'Premium High Tea Service', desc: 'Luxurious three-tier high tea stand featuring perfect finger sandwiches and scones.', price: 2800, tag: 'High Tea', image: 'assets/cat_tea.jpg', category: 'tea' },
+            { id: '4', name: 'Nationwide Delivery Box', desc: 'Safe-travel architectural cakes designed precisely to reach you beautifully anywhere.', price: 1450, tag: 'Nationwide', image: 'assets/hero_cake.png', category: 'nationwide' },
+            { id: '5', name: 'Belgian Truffle Brownies', desc: 'Decadent, rich, and intensely fudgy Belgian chocolate brownies layered with gold leaf.', price: 1600, tag: 'Brownies', image: 'assets/naked_cake.png', category: 'brownies' },
             { id: '6', name: 'Whimsical Kids Party Centerpiece', desc: 'A vibrant yet elegant tiered creation to bring pure magic to the little ones.', price: 4200, tag: 'Kids Party', image: 'assets/vintage_cake.png', category: 'kids' },
-            { id: '7', name: 'Bespoke Edible Photo Treats', desc: 'Capture your favorite moment directly printed on premium culinary fondant.', price: 2100, tag: 'Photo Treats', image: 'assets/truffle_cake.png', category: 'photo' },
-            { id: '8', name: 'Enchanted Disney Collection', desc: 'A high-end designer interpretation of beloved fairytale classics.', price: 5500, tag: 'Disney', image: 'assets/vintage_cake.png', category: 'disney' },
-            { id: '9', name: 'Corporate Logo Plaques', desc: 'Custom luxury cakes and brownies featuring your exact company branding.', price: 2500, tag: 'Logo Cakes', image: 'assets/cat_luxury_cakes.png', category: 'logo' }
+            { id: '7', name: 'Enchanted Disney Collection', desc: 'A high-end designer interpretation of beloved fairytale classics.', price: 5500, tag: 'Disney', image: 'assets/cat_kids.jpg', category: 'disney' },
+            { id: '8', name: 'Corporate Logo Plaques', desc: 'Custom luxury cakes and brownies featuring your exact company branding.', price: 2500, tag: 'Logo Cakes', image: 'assets/cat_corporate.jpg', category: 'logo' }
         ];
 
         let ALL_PRODUCTS = [];
