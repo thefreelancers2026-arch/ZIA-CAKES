@@ -12,7 +12,7 @@
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&family=Playfair+Display:ital@1&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
             --cream: #FAF6F3;
@@ -42,12 +42,14 @@
         .nav-center { display: flex; align-items: center; justify-content: center; }
         .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 3.5rem; }
         
-        /* Brand Logo Image */
-        .brand-logo { display: flex; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; }
-        .brand-logo:hover { opacity: 0.85; }
-        .logo-img { height: 64px; width: auto; object-fit: contain; transition: transform 0.4s ease; }
-        .brand-logo:hover .logo-img { transform: scale(1.04); }
-        @media (max-width: 480px) { .logo-img { height: 50px; } }
+        /* Brand Logo — Calligraphic Z Mark */
+        .brand-logo { display: flex; flex-direction: column; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; gap: 0; line-height: 1; }
+        .brand-logo:hover { opacity: 0.8; }
+        .logo-z { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: var(--espresso); line-height: 0.9; display: block; transition: transform 0.4s ease; }
+        .brand-logo:hover .logo-z { transform: scale(1.05); }
+        .logo-name { font-family: var(--font-sans); font-size: 0.5rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-gold); white-space: nowrap; margin-top: 4px; }
+        /* Footer invert for dark bg */
+        footer .logo-z { color: var(--cream); }
 
         /* Vertical Divider */
         .nav-divider { width: 1px; height: 32px; background: rgba(26,19,17,0.15); margin: 0 1.2rem; flex-shrink: 0; }
@@ -342,9 +344,10 @@
     <!-- Nav -->
     <nav class="navbar">
         <div class="nav-left">
-            <!-- Official Zia Cakes Logo -->
+            <!-- Official Zia Cakes Calligraphic Logo -->
             <a href="#" class="brand-logo" aria-label="Zia Cakes Home">
-                <img class="logo-img" src="assets/logo.png" alt="Zia Cakes Logo">
+                <span class="logo-z">Z</span>
+                <span class="logo-name">Zia Cakes</span>
             </a>
             <div class="nav-divider"></div>
             <a href="https://www.instagram.com/zia_cakes_virudhachalam/" target="_blank" class="nav-social" aria-label="Instagram">
@@ -568,8 +571,9 @@
 
     <!-- Footer -->
     <footer>
-        <a href="#" class="brand-logo" style="margin: 0 auto 2.5rem auto; justify-content: center;">
-            <img class="logo-img" src="assets/logo.png" alt="Zia Cakes Logo" style="height: 120px; filter: brightness(0) invert(1);">
+        <a href="#" class="brand-logo" style="margin: 0 auto 2.5rem auto;">
+            <span class="logo-z" style="font-size: 4.5rem; color: var(--cream);">Z</span>
+            <span class="logo-name" style="color: var(--cream); opacity: 0.7;">Zia Cakes</span>
         </a>
         <div class="footer-inline-nav">
             <a href="#collection">Menu</a>

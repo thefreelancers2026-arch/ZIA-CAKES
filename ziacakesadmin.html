@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Atelier Admin – Zia Cakes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
             --onyx: #120d0b; --onyx-light: #1c1511; --onyx-lighter: #281d18;
@@ -20,10 +20,11 @@
         h1, h2, h3 { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.02em; }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--onyx); } ::-webkit-scrollbar-thumb { background: var(--onyx-lighter); }
 
-        /* Brand Logo Image */
-        .brand-logo { display: flex; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; }
-        .brand-logo:hover { opacity: 0.85; }
-        .logo-img { height: 60px; width: auto; object-fit: contain; }
+        /* Brand Logo — Calligraphic Z */
+        .brand-logo { display: flex; flex-direction: column; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; gap: 0; line-height: 1; }
+        .brand-logo:hover { opacity: 0.8; }
+        .logo-z { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--ivory); line-height: 0.9; display: block; }
+        .logo-name { font-family: var(--font-sans); font-size: 0.45rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-gold); white-space: nowrap; margin-top: 4px; }
 
         /* Auth Gate */
         .auth-gate { position: fixed; inset: 0; background: linear-gradient(135deg, #0a0705 0%, var(--onyx) 100%); display: flex; align-items: center; justify-content: center; z-index: 1000; }
@@ -152,8 +153,9 @@
     <!-- Auth Logic Firebase -->
     <div id="loginView" class="auth-gate">
         <div class="auth-card">
-            <a href="#" class="brand-logo" style="margin: 0 auto 2rem auto; justify-content: center;">
-                <img class="logo-img" src="assets/logo.png" alt="Zia Cakes" style="height: 80px; filter: brightness(0) invert(1);">
+            <a href="#" class="brand-logo" style="margin: 0 auto 2rem auto;">
+                <span class="logo-z" style="font-size: 3.5rem;">Z</span>
+                <span class="logo-name">Zia Cakes</span>
             </a>
             <p>Atelier Administration</p>
             <div class="form-group">
@@ -174,7 +176,8 @@
         <header class="header">
             <div class="header-left">
                 <a href="#" class="brand-logo">
-                    <img class="logo-img" src="assets/logo.png" alt="Zia Cakes" style="filter: brightness(0) invert(1);">
+                    <span class="logo-z">Z</span>
+                    <span class="logo-name">Zia Cakes</span>
                 </a>
             </div>
             <div class="header-right">
