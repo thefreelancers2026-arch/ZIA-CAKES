@@ -281,6 +281,12 @@
             .pm-left { min-height: 250px; flex: none; }
             .pm-right { padding: 2rem 1.5rem; }
             .pm-title { font-size: 1.8rem; }
+            
+            /* Clean Circular WA Icon for Mobile */
+            .floating-socials { bottom: 1.5rem; right: 1.5rem; }
+            .floating-wa-text { display: none; }
+            .floating-wa { padding: 1rem; width: 60px; height: 60px; justify-content: center; border-radius: 50%; padding: 0;}
+            .floating-wa-icon-wrap { width: 100%; height: 100%; }
         }
 
         @media (max-width: 480px) {
@@ -564,9 +570,11 @@
 
     <!-- Footer -->
     <footer>
-        <a href="#" class="brand-logo" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-            <div class="logo-hook" style="color: var(--rose-gold); padding: 0;">Z</div>
-            <span class="brand-text" style="color: var(--cream-light); font-size: 0.9rem;">Zia Cakes</span>
+        <a href="#" class="logo-mark" style="margin: 0 auto 3rem auto; opacity: 1;">
+            <span class="logo-mark-z" style="color: var(--cream); font-size: 4rem;">Z</span>
+            <div class="logo-mark-rule" style="justify-content: center;">
+                <span class="logo-mark-sub" style="color: var(--cream); opacity: 0.8;">Atelier</span>
+            </div>
         </a>
         <ul class="footer-links">
             <li><a href="#collection">Menu</a></li>

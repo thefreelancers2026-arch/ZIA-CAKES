@@ -21,9 +21,11 @@
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--onyx); } ::-webkit-scrollbar-thumb { background: var(--onyx-lighter); }
 
         /* Premium Brand Typography Logo */
-        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 1.2rem; user-select: none; }
-        .logo-hook { font-family: var(--font-serif); font-size: 2.8rem; font-style: italic; font-weight: 300; color: var(--ivory); line-height: 1; padding-right: 1.2rem; border-right: 1px solid var(--border); }
-        .brand-text { font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--ivory-dim); font-weight: 300; }
+        .logo-mark { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; gap: 5px; user-select: none; }
+        .logo-mark-z { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; font-style: italic; color: var(--ivory); line-height: 0.85; letter-spacing: -0.04em; display: block; }
+        .logo-mark-rule { display: flex; align-items: center; gap: 5px; width: 100%; }
+        .logo-mark-rule::before { content: ''; display: block; width: 18px; height: 0.5px; background: var(--rose-gold); }
+        .logo-mark-sub { font-family: 'Jost', sans-serif; font-size: 0.45rem; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--rose-gold); white-space: nowrap; }
 
         /* Auth Gate */
         .auth-gate { position: fixed; inset: 0; background: linear-gradient(135deg, #0a0705 0%, var(--onyx) 100%); display: flex; align-items: center; justify-content: center; z-index: 1000; }
@@ -152,7 +154,12 @@
     <!-- Auth Logic Firebase -->
     <div id="loginView" class="auth-gate">
         <div class="auth-card">
-            <div class="brand-logo" style="cursor: default; justify-content: center; margin-bottom: 2rem;"><div class="logo-hook">Z</div><span class="brand-text">Zia Cakes</span></div>
+            <a href="#" class="logo-mark" style="margin: 0 auto 2rem auto; align-items: center;">
+                <span class="logo-mark-z" style="font-size: 3.5rem;">Z</span>
+                <div class="logo-mark-rule" style="justify-content: center;">
+                    <span class="logo-mark-sub" style="color: var(--ivory-dim);">Atelier</span>
+                </div>
+            </a>
             <p>Atelier Administration</p>
             <div class="form-group">
                 <label>Administrative Email</label>
@@ -171,7 +178,12 @@
     <div id="adminView" class="admin-layout hidden">
         <header class="header">
             <div class="header-left">
-                <div class="brand-logo" style="cursor: default;"><div class="logo-hook" style="color:var(--ivory); border-color:rgba(253,251,249,0.1);">Z</div><span class="brand-text" style="color:var(--ivory);">Atelier Dashboard</span></div>
+                <a href="#" class="logo-mark">
+                    <span class="logo-mark-z" style="font-size: 2.2rem;">Z</span>
+                    <div class="logo-mark-rule">
+                        <span class="logo-mark-sub" style="color: var(--ivory-dim);">Atelier</span>
+                    </div>
+                </a>
             </div>
             <div class="header-right">
                 <a href="index.html" target="_blank" class="header-link">View Showroom ↗</a>
