@@ -318,6 +318,11 @@
             .pm-chips-wrap { margin-bottom: 2rem; }
             .pm-btn { position: relative; bottom: auto; left: auto; width: 100%; box-shadow: none; z-index: 10; margin-top: 0; margin-bottom: 0; }
             
+            .pm-scroll-hint { display: flex !important; align-items: center; justify-content: flex-start; gap: 0.5rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--rose-gold); margin-top: -0.5rem; margin-bottom: 2rem; animation: pulseFade 2s infinite; font-weight: 500; padding-left: 2px;}
+            @keyframes pulseFade { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; text-shadow: 0 0 8px rgba(196,154,134,0.4); } }
+            .pm-scroll-hint::after { content: '↓'; font-family: var(--font-sans); font-size: 0.8rem; animation: bounceDown 2s infinite; }
+            @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+            
             /* Clean Circular WA/IG Icon for Mobile */
             .floating-socials { bottom: 1.5rem; right: 1.5rem; }
             .floating-wa-text { display: none; }
@@ -582,6 +587,7 @@
                 <h2 id="pmTitle" class="pm-title">Cake Name</h2>
                 <div class="pm-rating">★ 4.9 Rating & Signature Atelier Collection</div>
                 <div class="pm-price" id="pmPriceDisplay"><em>INR</em> 0</div>
+                <div class="pm-scroll-hint" style="display: none;">SCROLL FOR OPTIONS</div>
                 
                 <div class="pm-section" id="pmWeightSection">
                     <label class="pm-label">Select Weight:</label>
