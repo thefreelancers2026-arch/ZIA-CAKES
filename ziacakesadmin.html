@@ -153,8 +153,15 @@
         input[type=number] { -moz-appearance: textfield; }
 
         .price-input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-        .price-input-wrapper span { position: absolute; left: 1rem; color: var(--rose-gold); font-family: var(--font-sans); font-size: 0.9rem; pointer-events: none; opacity: 0.8; }
         .price-input-wrapper .form-control { padding-left: 2.2rem; }
+
+        /* Atelier Upload Zone */
+        .upload-zone { border: 1px dashed rgba(253, 251, 249, 0.2); background: rgba(253, 251, 249, 0.02); padding: 2.5rem 1rem; text-align: center; cursor: pointer; position: relative; transition: all 0.4s ease; border-radius: 4px; margin-top: 1rem; }
+        .upload-zone:hover { border-color: var(--rose-gold); background: rgba(196, 154, 134, 0.05); }
+        .upload-zone.dragover { border-color: var(--rose-gold); background: rgba(196, 154, 134, 0.1); }
+        .upload-zone p { font-size: 0.7rem; color: var(--ivory-dim); text-transform: uppercase; letter-spacing: 0.2em; margin: 0; pointer-events: none; }
+        .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+        .upload-loader { display: none; margin-top: 1rem; font-size: 0.65rem; color: var(--rose-gold); letter-spacing: 0.1em; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -241,9 +248,14 @@
                         </select>
                     </div>
                     
-                    <div class="form-group">
-                        <label>Visual Asset (URL or Asset Path)</label>
-                        <input type="text" id="cakeImage" class="form-control" placeholder="e.g. assets/hero_cake.png OR https://..." required>
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label>Visual Asset Portfolio</label>
+                        <div class="upload-zone" id="uploadZone">
+                            <input type="file" id="imageInput" accept="image/*">
+                            <p id="uploadStatus">Drop Imagery or Click to Curate</p>
+                            <div class="upload-loader" id="uploadLoader">Cloud Syncing...</div>
+                        </div>
+                        <input type="hidden" id="cakeImage">
                         <div id="imagePreview" class="preview-box" style="margin-top: 1rem;"></div>
                     </div>
                     
@@ -383,15 +395,54 @@
 
         el('btnLogout').addEventListener('click', () => { if(auth) signOut(auth); });
 
-        el('cakeImage').addEventListener('input', function(e) {
-            const val = this.value.trim();
-            if(val) {
-                el('imagePreview').style.backgroundImage = `url(${sanitize(val)})`;
-                el('imagePreview').style.display = 'block';
-            } else {
-                el('imagePreview').style.display = 'none';
-            }
+        // Premium ImgBB Upload Engine
+        const imgbbApiKey = "3b2e5cc3fc2c8c4a45a6c3823f6e1f06"; // Public ImgBB API Key
+        const imageInput = el('imageInput');
+        const uploadZone = el('uploadZone');
+        const uploadStatus = el('uploadStatus');
+        const uploadLoader = el('uploadLoader');
+        const cakeImageInput = el('cakeImage');
+        const imagePreview = el('imagePreview');
+
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault(); uploadZone.classList.remove('dragover');
+            if(e.dataTransfer.files && e.dataTransfer.files[0]) handleUpload(e.dataTransfer.files[0]);
         });
+        
+        imageInput.addEventListener('change', function() {
+            if(this.files && this.files[0]) handleUpload(this.files[0]);
+        });
+
+        async function handleUpload(file) {
+            if (!file.type.startsWith('image/')) return showToast("Only imagery is permitted.", "error");
+            
+            uploadStatus.style.display = 'none';
+            uploadLoader.style.display = 'block';
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            try {
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, { method: 'POST', body: formData });
+                const data = await res.json();
+                
+                if(data.success) {
+                    const imageUrl = data.data.url;
+                    cakeImageInput.value = imageUrl;
+                    imagePreview.style.backgroundImage = `url(${sanitize(imageUrl)})`;
+                    imagePreview.style.display = 'block';
+                    showToast("Visual Asset Hosted Successfully", "success");
+                } else {
+                    throw new Error(data.error.message || "Cloud sync disrupted");
+                }
+            } catch (err) { showToast("Upload Interrupted: " + err.message, "error"); }
+            
+            uploadStatus.style.display = 'block';
+            uploadLoader.style.display = 'none';
+            imageInput.value = '';
+        }
 
         async function fetchData() {
             if(!dbActive) return;
@@ -442,8 +493,9 @@
         });
 
         function resetForm() {
-            el('cakeForm').reset(); el('cakeId').value=''; el('existingImageUrl').value='';
-            el('imagePreview').style.display='none'; 
+            el('cakeForm').reset(); el('cakeId').value=''; el('existingImageUrl').value=''; el('cakeImage').value='';
+            el('imagePreview').style.display='none'; el('imageInput').value='';
+            el('uploadStatus').style.display='block'; el('uploadLoader').style.display='none';
             el('formTitle').textContent='Curate Item'; el('editBadge').classList.add('hidden');
             el('submitTxt').textContent='Publish to Cloud'; el('btnCancelEdit').classList.add('hidden');
         }
