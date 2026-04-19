@@ -90,8 +90,8 @@
         .badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .tag-badge { display: inline-block; padding: 0.2rem 0.8rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; background: rgba(253, 251, 249, 0.05); color: var(--ivory); border: 1px solid rgba(253, 251, 249, 0.1); }
         .cat-badge { border-color: var(--rose-gold); color: var(--rose-gold); }
-        .price-td { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 300; color: var(--ivory); letter-spacing: -0.02em; line-height: 1; }
-        .price-td em { font-family: var(--font-sans); font-style: normal; font-weight: 200; color: var(--rose-gold); font-size: 0.85rem; margin-right: 0.3rem; vertical-align: super; }
+        .price-td { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 500; color: var(--ivory); letter-spacing: 0.1em; line-height: 1; }
+        .price-td em { font-family: var(--font-sans); font-style: normal; font-weight: 400; color: var(--rose-gold); font-size: 0.8rem; margin-right: 0.4rem; vertical-align: baseline; }
         
         .action-btn { background: none; border: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; color: var(--ivory-dim); margin-right: 1.5rem; transition: color 0.4s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
         .action-btn:hover { color: var(--ivory); border-bottom-color: var(--ivory); }
@@ -227,8 +227,8 @@
             <main class="right-panel">
                 <div class="stats-row">
                     <div class="stat-card"><h3>Total Curations</h3><p class="value" id="statTotal">0</p></div>
-                    <div class="stat-card"><h3>Entry Price</h3><p class="value" id="statLow"><em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>0</p></div>
-                    <div class="stat-card"><h3>Pinnacle Tier</h3><p class="value" id="statHigh"><em style="font-style:normal;font-size:1.5rem;color:var(--rose-gold);margin-right:8px;">₹</em>0</p></div>
+                    <div class="stat-card"><h3>Entry Price</h3><p class="value" id="statLow"><em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:8px;letter-spacing:0.1em;">INR</em>0</p></div>
+                    <div class="stat-card"><h3>Pinnacle Tier</h3><p class="value" id="statHigh"><em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:8px;letter-spacing:0.1em;">INR</em>0</p></div>
                 </div>
 
                 <div class="table-header">
@@ -448,7 +448,7 @@
                                     ${c.tag && c.tag!=='None' ? `<span class="tag-badge">${escapeHtml(c.tag)}</span>`:''}
                                 </div>
                             </td>
-                            <td class="price-td"><em>₹</em>${escapeHtml(c.price)}</td>
+                            <td class="price-td"><em>INR</em>${escapeHtml(Number(c.price).toLocaleString('en-IN'))}</td>
                             <td>
                                 <button class="action-btn btn-edit" data-id="${escapeHtml(c.id)}">Modify</button>
                                 <button class="action-btn btn-delete" data-id="${escapeHtml(c.id)}">Purge</button>
@@ -459,9 +459,9 @@
             el('statTotal').textContent = MasterCakes.length.toString().padStart(2,'0');
             if(MasterCakes.length>0) {
                 const prices=MasterCakes.map(c=>c.price);
-                el('statLow').innerHTML=`<em style="font-style:normal;font-size:1.1rem;font-weight:200;color:var(--rose-gold);margin-right:4px;vertical-align:super;">₹</em>${Math.min(...prices)}`;
-                el('statHigh').innerHTML=`<em style="font-style:normal;font-size:1.1rem;font-weight:200;color:var(--rose-gold);margin-right:4px;vertical-align:super;">₹</em>${Math.max(...prices)}`;
-            } else { el('statLow').innerHTML=`<em>₹</em>0`; el('statHigh').innerHTML=`<em>₹</em>0`; }
+                el('statLow').innerHTML=`<em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:6px;vertical-align:middle;letter-spacing:0.1em;">INR</em>${Number(Math.min(...prices)).toLocaleString('en-IN')}`;
+                el('statHigh').innerHTML=`<em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:6px;vertical-align:middle;letter-spacing:0.1em;">INR</em>${Number(Math.max(...prices)).toLocaleString('en-IN')}`;
+            } else { el('statLow').innerHTML=`<em>INR</em>0`; el('statHigh').innerHTML=`<em>INR</em>0`; }
         }
     </script>
 </body>
