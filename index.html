@@ -661,7 +661,7 @@
                 return `
                 <div class="menu-card reveal-wrap visible" style="transition-delay: ${i * 0.1}s">
                     <div class="reveal" style="opacity: 1; transform: translateY(0);">
-                        <div class="menu-img-wrap">
+                        <div class="menu-img-wrap" onclick="openProductModal('${c.id}')" style="cursor: pointer;">
                             ${imageEl}
                             ${c.tag && c.tag!=='None' ? `<div class="menu-tag">${safeTag}</div>` : ''}
                         </div>
