@@ -280,6 +280,10 @@
             .category-nav::-webkit-scrollbar { display: none; }
             .cat-btn { font-size: 0.65rem; letter-spacing: 0.15em; }
             
+            /* Premium Mobile Navbar */
+            .nav-divider, .nav-social { display: none; }
+            .nav-brand-name { font-size: 1.15rem; letter-spacing: 0.35em; }
+            
             /* Product Modal Mobile Fix */
             .pm-card { flex-direction: column; width: 95%; max-height: 85vh; overflow-y: auto; }
             .pm-left { min-height: 250px; flex: none; }
@@ -573,9 +577,11 @@
 
     <!-- Footer -->
     <footer>
-        <a href="#" class="brand-logo" style="margin: 0 auto 2rem auto; flex-direction: column; align-items: center;">
-            <span class="logo-z" style="font-size: 3.2rem; color: var(--cream);">Z</span>
-        </a>
+        <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 3rem;">
+            <a href="#" class="brand-logo" style="flex-direction: column; align-items: center; margin-right: 15px;">
+                <span class="logo-z" style="font-size: 3.5rem; color: var(--cream);">Z</span>
+            </a>
+        </div>
         <div class="footer-inline-nav">
             <a href="#collection">Menu</a>
             <a href="https://wa.me/919791746440" target="_blank">WhatsApp</a>
