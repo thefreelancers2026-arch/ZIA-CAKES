@@ -189,6 +189,7 @@
             padding: 0.9rem 1.4rem;
             text-decoration: none;
             backdrop-filter: blur(16px);
+            border-radius: 100px;
             box-shadow: 0 8px 32px rgba(26,19,17,0.12), 0 2px 8px rgba(26,19,17,0.06);
             transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
@@ -274,6 +275,12 @@
             .category-nav { gap: 1.2rem; margin-bottom: 3rem; overflow-x: auto; justify-content: flex-start; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
             .category-nav::-webkit-scrollbar { display: none; }
             .cat-btn { font-size: 0.65rem; letter-spacing: 0.15em; }
+            
+            /* Product Modal Mobile Fix */
+            .pm-card { flex-direction: column; width: 95%; max-height: 85vh; overflow-y: auto; }
+            .pm-left { min-height: 250px; flex: none; }
+            .pm-right { padding: 2rem 1.5rem; }
+            .pm-title { font-size: 1.8rem; }
         }
 
         @media (max-width: 480px) {
