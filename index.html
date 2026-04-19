@@ -235,6 +235,41 @@
             .brand-text { display: none; }
             .logo-hook { font-size: 2.8rem; }
         }
+
+        /* Product Modal */
+        .product-modal { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(26,19,17,0.8); z-index: 2000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition: all 0.4s ease; backdrop-filter: blur(5px); }
+        .product-modal.active { opacity:1; pointer-events:auto; }
+        .pm-card { background: var(--cream); width: 90%; max-width: 900px; display:flex; border-radius: 0; box-shadow: 0 40px 100px rgba(0,0,0,0.5); overflow:hidden; position: relative; max-height: 90vh; }
+        .pm-close { position:absolute; top: 1.5rem; right: 1.5rem; background:transparent; border:none; font-size:2rem; cursor:pointer; color: var(--espresso-light); z-index:10; font-family: var(--font-sans); }
+        .pm-left { flex: 1; background: var(--cream); position:relative; min-height: 400px; }
+        .pm-left img { width: 100%; height: 100%; object-fit: cover; position:absolute; top:0; left:0; }
+        .pm-right { flex: 1; padding: 4rem 3rem; overflow-y:auto; }
+        
+        .pm-title { font-family: var(--font-serif); font-size: 2.2rem; line-height: 1.1; color: var(--espresso); margin-bottom: 0.5rem; }
+        .pm-rating { font-size: 0.75rem; color: var(--rose-gold); text-transform:uppercase; letter-spacing:0.1em; margin-bottom: 2rem; }
+        .pm-price { font-size: 2rem; color: var(--espresso); font-weight: 400; margin-bottom: 2.5rem; display:flex; align-items:center; gap:0.5rem; font-family: var(--font-serif); }
+        .pm-label { font-size: 0.7rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--espresso-light); margin-bottom: 1rem; display:block; font-weight: 500; }
+        .pm-chips-wrap { display:flex; flex-wrap:wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+        .pm-chip { background: transparent; border: 1px solid rgba(26,19,17,0.15); padding: 0.6rem 1.2rem; font-size: 0.8rem; color: var(--espresso); cursor:pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.1em; }
+        .pm-chip.active { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+        
+        .pm-options { display:flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem; }
+        .pm-checkbox { display:flex; align-items:center; gap:0.6rem; font-size:0.85rem; color: var(--espresso); cursor:pointer; text-transform:uppercase; letter-spacing:0.1em; }
+        .pm-checkbox input { accent-color: var(--rose-gold); width:1.1rem; height:1.1rem; cursor:pointer; }
+        
+        .pm-input { width: 100%; padding: 1rem; border: 1px solid rgba(26,19,17,0.15); background: transparent; font-family: var(--font-sans); font-size: 0.9rem; margin-bottom: 2rem; transition: border 0.3s; color: var(--espresso); }
+        .pm-input:focus { outline:none; border-color: var(--rose-gold); }
+        
+        .pm-btn { width: 100%; background: var(--espresso); color: var(--cream); font-family: var(--font-sans); font-size: 0.85rem; text-transform:uppercase; letter-spacing: 0.2em; padding: 1.2rem; border:none; cursor:pointer; transition:all 0.4s; }
+        .pm-btn:hover { background: var(--rose-gold); }
+
+        @media(max-width: 850px) {
+            .pm-card { flex-direction:column; overflow-y:auto; }
+            .pm-left { min-height: 250px; }
+            .pm-right { padding: 2.5rem 1.5rem; }
+            .pm-title { font-size: 1.8rem; }
+            .pm-price { font-size: 1.6rem; margin-bottom: 2rem; }
+        }
     </style>
 </head>
 <body>
@@ -430,6 +465,39 @@
         </div>
     </section>
 
+    <!-- Product Details Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="pm-card">
+            <button class="pm-close" onclick="closeProductModal()">&times;</button>
+            <div class="pm-left">
+                <img id="pmImage" src="" alt="Cake Image">
+            </div>
+            <div class="pm-right">
+                <h2 id="pmTitle" class="pm-title">Cake Name</h2>
+                <div class="pm-rating">★ 4.9 Rating & Signature Atelier Collection</div>
+                <div class="pm-price" id="pmPriceDisplay"><em>INR</em> 0</div>
+                
+                <div class="pm-section" id="pmWeightSection">
+                    <label class="pm-label">Select Weight:</label>
+                    <div class="pm-chips-wrap" id="pmWeightChips">
+                        <!-- Chips injected by JS -->
+                    </div>
+                </div>
+
+                <div class="pm-options">
+                    <label class="pm-checkbox"><input type="checkbox" id="pmEggless"> Eggless Variant</label>
+                </div>
+                
+                <div class="pm-section">
+                    <label class="pm-label">Message on Cake (Optional)</label>
+                    <input type="text" id="pmMessage" class="pm-input" placeholder="e.g. Happy Birthday Sarah">
+                </div>
+                
+                <button id="pmSubmitBtn" class="pm-btn" onclick="submitProductOrder()">Proceed to WhatsApp Order</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <a href="#" class="brand-logo" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
@@ -528,7 +596,7 @@
                                 <div class="price-wrapper">
                                     <div class="menu-price">${priceHtml}</div>
                                 </div>
-                                <a href="https://wa.me/${WA_PHONE}?text=${encodeURIComponent(`Hello Zia Cakes,\nI would love to order the *${c.name}*\nBase/Listed Price: INR ${c.price500g || c.price || c.price1kg || 0}`)}" class="menu-btn" target="_blank">Order Collection Piece</a>
+                                <button class="menu-btn" onclick="openProductModal('${c.id}')">Order Collection Piece</button>
                             </div>
                         </div>
                     </div>
@@ -571,12 +639,105 @@
                 const filter = btn.getAttribute('data-filter');
                 if(filter === 'all') renderGrid(ALL_PRODUCTS);
                 else renderGrid(ALL_PRODUCTS.filter(p => p.category === filter));
-                // Scroll to collection top on mobile for better UX after filter
                 if(window.innerWidth < 768) {
                     document.getElementById('collection').scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
+
+        // --- Product Modal Engine ---
+        let currentCake = null;
+        let selectedWeight = null;
+        let p500 = 0, p1kg = 0;
+        let dynamicPrice = 0;
+
+        function openProductModal(cakeId) {
+            const cake = ALL_PRODUCTS.find(c => c.id === cakeId);
+            if(!cake) return;
+            currentCake = cake;
+            
+            document.getElementById('pmTitle').innerText = cake.name || '';
+            const imgEl = document.getElementById('pmImage');
+            const isValidUrl = cake.image && (cake.image.startsWith('http') || cake.image.startsWith('assets/'));
+            imgEl.style.display = isValidUrl ? 'block' : 'none';
+            if(isValidUrl) imgEl.src = cake.image;
+
+            document.getElementById('pmEggless').checked = false;
+            document.getElementById('pmMessage').value = '';
+            
+            p500 = Number(cake.price500g) || (Number(cake.price1kg)/2) || Number(cake.price) || 0;
+            p1kg = Number(cake.price1kg) || (Number(cake.price500g)*2) || Number(cake.price) || 0;
+
+            const weightSection = document.getElementById('pmWeightSection');
+            const chipsWrap = document.getElementById('pmWeightChips');
+            chipsWrap.innerHTML = '';
+
+            // Hide weights if it's a fixed-price item
+            if(!cake.price500g && !cake.price1kg && cake.price) {
+                weightSection.style.display = 'none';
+                selectedWeight = null;
+                updateModalPrice(Number(cake.price));
+            } else {
+                weightSection.style.display = 'block';
+                const weights = ['500 gm', '1 kg', '1.5 kg', '2 kg', '3 kg', '4 kg'];
+                weights.forEach((w, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'pm-chip' + (i === 0 ? ' active' : '');
+                    btn.innerText = w;
+                    btn.onclick = () => selectWeight(w, btn);
+                    chipsWrap.appendChild(btn);
+                });
+                selectWeight('500 gm', chipsWrap.firstChild);
+            }
+            
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function calculatePriceForWeight(weight) {
+            switch(weight) {
+                case '500 gm': return p500;
+                case '1 kg': return p1kg;
+                case '1.5 kg': return p1kg + p500;
+                case '2 kg': return p1kg * 2;
+                case '3 kg': return p1kg * 3;
+                case '4 kg': return p1kg * 4;
+                default: return p500;
+            }
+        }
+
+        function selectWeight(weight, btnEl) {
+            selectedWeight = weight;
+            document.querySelectorAll('.pm-chip').forEach(b => b.classList.remove('active'));
+            if(btnEl) btnEl.classList.add('active');
+            updateModalPrice(calculatePriceForWeight(weight));
+        }
+
+        function updateModalPrice(price) {
+            dynamicPrice = price;
+            document.getElementById('pmPriceDisplay').innerHTML = `<em>INR</em> &nbsp;${price.toLocaleString('en-IN')}`;
+        }
+
+        function submitProductOrder() {
+            if(!currentCake) return;
+            const isEggless = document.getElementById('pmEggless').checked;
+            const message = document.getElementById('pmMessage').value.trim();
+            
+            let txt = `Hello Zia Cakes,\n\nI would love to place a pre-order for the *${currentCake.name}*\n\n`;
+            if(selectedWeight) txt += `*Weight:* ${selectedWeight}\n`;
+            txt += `*Variant:* ${isEggless ? 'Eggless' : 'Regular (With Egg)'}\n`;
+            if(message) txt += `*Message on Cake:* "${message}"\n`;
+            txt += `*Calculated Price:* INR ${dynamicPrice.toLocaleString('en-IN')}\n\n`;
+            txt += `Please let me know if this can be confirmed for delivery/pickup!`;
+            
+            window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(txt)}`, '_blank');
+            closeProductModal();
+        }
 
         const hamburger = document.getElementById('hamburgerMenu');
         const navLinks = document.getElementById('navLinks');
