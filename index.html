@@ -484,10 +484,6 @@
                     </div>
                 </div>
 
-                <div class="pm-options">
-                    <label class="pm-checkbox"><input type="checkbox" id="pmEggless"> Eggless Variant</label>
-                </div>
-                
                 <div class="pm-section">
                     <label class="pm-label">Message on Cake (Optional)</label>
                     <input type="text" id="pmMessage" class="pm-input" placeholder="e.g. Happy Birthday Sarah">
@@ -662,7 +658,6 @@
             imgEl.style.display = isValidUrl ? 'block' : 'none';
             if(isValidUrl) imgEl.src = cake.image;
 
-            document.getElementById('pmEggless').checked = false;
             document.getElementById('pmMessage').value = '';
             
             p500 = Number(cake.price500g) || (Number(cake.price1kg)/2) || Number(cake.price) || 0;
@@ -693,11 +688,13 @@
             document.getElementById('productModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
+        window.openProductModal = openProductModal;
 
         function closeProductModal() {
             document.getElementById('productModal').classList.remove('active');
             document.body.style.overflow = '';
         }
+        window.closeProductModal = closeProductModal;
 
         function calculatePriceForWeight(weight) {
             switch(weight) {
@@ -725,12 +722,10 @@
 
         function submitProductOrder() {
             if(!currentCake) return;
-            const isEggless = document.getElementById('pmEggless').checked;
             const message = document.getElementById('pmMessage').value.trim();
             
             let txt = `Hello Zia Cakes,\n\nI would love to place a pre-order for the *${currentCake.name}*\n\n`;
             if(selectedWeight) txt += `*Weight:* ${selectedWeight}\n`;
-            txt += `*Variant:* ${isEggless ? 'Eggless' : 'Regular (With Egg)'}\n`;
             if(message) txt += `*Message on Cake:* "${message}"\n`;
             txt += `*Calculated Price:* INR ${dynamicPrice.toLocaleString('en-IN')}\n\n`;
             txt += `Please let me know if this can be confirmed for delivery/pickup!`;
@@ -738,6 +733,7 @@
             window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(txt)}`, '_blank');
             closeProductModal();
         }
+        window.submitProductOrder = submitProductOrder;
 
         const hamburger = document.getElementById('hamburgerMenu');
         const navLinks = document.getElementById('navLinks');
