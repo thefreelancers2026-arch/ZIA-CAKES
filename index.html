@@ -180,10 +180,47 @@
         .footer-links a:hover { color: var(--rose-gold); }
         .footer-bottom { border-top: 1px solid rgba(250, 246, 243, 0.08); padding-top: 3rem; font-size: 0.75rem; color: rgba(250, 246, 243, 0.3); letter-spacing: 0.1em; text-transform: uppercase; }
 
-        /* Floating Social Stack */
-        .floating-socials { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.8rem; z-index: 1000; }
-        .floating-icon { background: var(--espresso); color: var(--cream-light); border: 1px solid var(--espresso-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(26,19,17, 0.2); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .floating-icon:hover { transform: translateY(-5px) scale(1.05); background: var(--rose-gold); color: var(--espresso); border-color: var(--rose-gold); box-shadow: 0 15px 40px rgba(184,138,117, 0.3); }
+        /* Floating WhatsApp — Premium Pill */
+        .floating-socials { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1000; }
+        .floating-wa {
+            display: flex; align-items: center; gap: 0.8rem;
+            background: rgba(250, 246, 243, 0.96);
+            border: 1px solid rgba(26,19,17,0.12);
+            padding: 0.9rem 1.4rem;
+            text-decoration: none;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(26,19,17,0.12), 0 2px 8px rgba(26,19,17,0.06);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .floating-wa::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: var(--espresso);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 0;
+        }
+        .floating-wa:hover::before { transform: translateY(0); }
+        .floating-wa:hover { border-color: var(--espresso); box-shadow: 0 16px 48px rgba(26,19,17,0.2); transform: translateY(-3px); }
+        .floating-wa-icon { position: relative; z-index: 1; flex-shrink: 0; width: 20px; height: 20px; fill: var(--espresso); transition: fill 0.5s; }
+        .floating-wa:hover .floating-wa-icon { fill: var(--cream); }
+        .floating-wa-text {
+            position: relative; z-index: 1;
+            font-family: var(--font-sans); font-size: 0.65rem; font-weight: 400;
+            text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--espresso); transition: color 0.5s; white-space: nowrap;
+        }
+        .floating-wa:hover .floating-wa-text { color: var(--cream); }
+        /* Pulse ring on icon */
+        .floating-wa-icon-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
+        .floating-wa-icon-wrap::after {
+            content: ''; position: absolute; width: 32px; height: 32px;
+            border-radius: 50%; border: 1px solid rgba(184,138,117,0.4);
+            animation: wa-pulse 2.5s ease-out infinite;
+        }
+        @keyframes wa-pulse { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.8); opacity: 0; } }
 
         /* Animations */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
@@ -534,14 +571,21 @@
         </div>
     </footer>
 
-    <!-- Floating Social Stack - WhatsApp Only -->
+    <!-- Floating WhatsApp — Premium -->
     <div class="floating-socials">
-        <a href="https://wa.me/919884111974?text=Hello%20Zia%20Cakes,%20I'd%20like%20to%20discuss%20a%20custom%20order." class="floating-icon" target="_blank" aria-label="Chat on WhatsApp">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.183-.573c.978.582 1.894.869 3.145.871 3.181 0 5.768-2.585 5.768-5.766 0-3.181-2.587-5.767-5.768-5.767"></path><path d="M14.946 11.727c-.151-.076-.893-.441-1.033-.49-.139-.05-.24-.076-.341.076-.101.151-.392.49-.481.59-.09.1-.18.113-.331.038-.151-.075-.637-.235-1.214-.75-.448-.4-.75-.892-.84-1.043-.09-.151-.01-.232.066-.307.068-.068.151-.176.226-.264.075-.088.101-.151.151-.252.05-.101.025-.188-.013-.264-.038-.076-.341-.823-.467-1.127-.124-.298-.249-.257-.341-.262-.09-.004-.19-.005-.291-.005-.101 0-.263.038-.401.189-.138.151-.527.516-.527 1.258s.54 1.46.616 1.561c.075.101 1.064 1.625 2.576 2.276.36.155.64.247.859.316.361.115.69.099.948.06.29-.043.893-.365 1.019-.718.125-.353.125-.656.088-.719-.038-.063-.139-.088-.291-.164z"></path></svg>
+        <a href="https://wa.me/919884111974?text=Hello%20Zia%20Cakes,%20I'd%20like%20to%20discuss%20a%20custom%20order." class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
+            <div class="floating-wa-icon-wrap">
+                <!-- Clean minimal WhatsApp mark -->
+                <svg class="floating-wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.19-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 22c-1.85 0-3.66-.5-5.23-1.43l-.37-.22-3.87 1 1.01-3.77-.24-.39A9.94 9.94 0 0 1 2 12C2 6.49 6.49 2 12 2c2.67 0 5.17 1.04 7.07 2.93A9.93 9.93 0 0 1 22 12c0 5.51-4.49 10-10 10zm5.44-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.41-1.49-.89-.8-1.49-1.78-1.66-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51H7.5c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.62.72.23 1.37.2 1.88.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/>
+                </svg>
+            </div>
+            <span class="floating-wa-text">Order via WhatsApp</span>
         </a>
     </div>
 
     <!-- Logic & Data -->
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
