@@ -42,15 +42,16 @@
         .nav-center { display: flex; align-items: center; justify-content: center; }
         .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 3.5rem; }
         
-        /* Brand Logo — Calligraphic Z Mark */
-        .brand-logo { display: flex; flex-direction: column; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; gap: 0; line-height: 1; }
+        /* Brand Logo — Calligraphic Z Mark (left) */
+        .brand-logo { display: flex; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; }
         .brand-logo:hover { opacity: 0.8; }
-        .logo-z { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--espresso); line-height: 0.85; display: block; transition: transform 0.4s ease; }
-        .brand-logo:hover .logo-z { transform: scale(1.04); }
-        .logo-name { font-family: var(--font-sans); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.55em; text-transform: uppercase; color: var(--espresso); white-space: nowrap; margin-top: 6px; opacity: 0.75; }
-        /* Footer invert for dark bg */
+        .logo-z { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--espresso); line-height: 1; display: block; transition: transform 0.4s ease; }
+        .brand-logo:hover .logo-z { transform: scale(1.06); }
+        /* Nav Center Brand Name */
+        .nav-brand-name { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 500; letter-spacing: 0.45em; text-transform: uppercase; color: var(--espresso); text-decoration: none; white-space: nowrap; transition: opacity 0.4s; }
+        .nav-brand-name:hover { opacity: 0.7; }
+        /* Footer */
         footer .logo-z { color: var(--cream); }
-        footer .logo-name { color: var(--cream); }
 
         /* Vertical Divider */
         .nav-divider { width: 1px; height: 32px; background: rgba(26,19,17,0.15); margin: 0 1.2rem; flex-shrink: 0; }
@@ -345,18 +346,19 @@
     <!-- Nav -->
     <nav class="navbar">
         <div class="nav-left">
-            <div class="nav-divider" style="display:none"></div>
+            <!-- Z mark only on left -->
+            <a href="#" class="brand-logo" aria-label="Zia Cakes Home">
+                <span class="logo-z">Z</span>
+            </a>
+            <div class="nav-divider"></div>
             <a href="https://www.instagram.com/zia_cakes_virudhachalam/" target="_blank" class="nav-social" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
         </div>
         
         <div class="nav-center">
-            <!-- Official Zia Cakes Calligraphic Logo — Centered Premium Hook -->
-            <a href="#" class="brand-logo" aria-label="Zia Cakes Home">
-                <span class="logo-z">Z</span>
-                <span class="logo-name">Zia Cakes</span>
-            </a>
+            <!-- ZIA CAKES premium center brand name -->
+            <a href="#" class="nav-brand-name" aria-label="Zia Cakes">Zia Cakes</a>
         </div>
         
         <div class="nav-right">
