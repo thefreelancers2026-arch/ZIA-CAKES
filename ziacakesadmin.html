@@ -153,11 +153,10 @@
     <!-- Auth Logic Firebase -->
     <div id="loginView" class="auth-gate">
         <div class="auth-card">
-            <a href="#" class="brand-logo" style="margin: 0 auto 2rem auto;">
-                <span class="logo-z" style="font-size: 3.5rem;">Z</span>
-                <span class="logo-name">Zia Cakes</span>
+            <a href="#" class="brand-logo" style="margin: 0 auto 1.5rem auto;">
+                <span class="logo-z" style="font-size: 5rem;">Z</span>
             </a>
-            <p>Atelier Administration</p>
+            <p style="letter-spacing: 0.3em; margin-bottom: 2rem; color: var(--rose-gold); font-size: 0.7rem; text-transform: uppercase;">Atelier Administration</p>
             <div class="form-group">
                 <label>Administrative Email</label>
                 <input type="email" id="loginEmail" class="form-control" placeholder="e.g. admin@ziacakes.com">
@@ -176,8 +175,7 @@
         <header class="header">
             <div class="header-left">
                 <a href="#" class="brand-logo">
-                    <span class="logo-z">Z</span>
-                    <span class="logo-name">Zia Cakes</span>
+                    <span class="logo-z" style="font-size: 2.5rem;">Z</span>
                 </a>
             </div>
             <div class="header-right">
@@ -237,9 +235,27 @@
 
             <main class="right-panel">
                 <div class="stats-row">
-                    <div class="stat-card"><h3>Total Curations</h3><p class="value" id="statTotal">0</p></div>
-                    <div class="stat-card"><h3>Entry Price</h3><p class="value" id="statLow"><em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:8px;letter-spacing:0.1em;">INR</em>0</p></div>
-                    <div class="stat-card"><h3>Pinnacle Tier</h3><p class="value" id="statHigh"><em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:8px;letter-spacing:0.1em;">INR</em>0</p></div>
+                    <div style="width:100%; margin-bottom:1.5rem; text-align:right;">
+                        <span style="font-size:0.55rem; color:var(--rose-gold); letter-spacing:0.1em; opacity:0.8; text-transform:uppercase;">
+                            Atelier Metrics: <b>Entry</b> is your floor price, <b>Pinnacle</b> is your luxury ceiling.
+                        </span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Curations</h3>
+                        <p class="value" id="statTotal">0</p>
+                    </div>
+                    <div class="stat-card" title="Entry Price: The starting floor price of your collection.">
+                        <h3>Entry Price <span style="font-size:0.55rem; opacity:0.6; text-transform:none; letter-spacing:0.05em; vertical-align:middle;">(Floor)</span></h3>
+                        <p class="value" id="statLow" style="display:flex; align-items:baseline;">
+                            <span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0
+                        </p>
+                    </div>
+                    <div class="stat-card" title="Pinnacle Tier: The highest price masterpiece in your atelier.">
+                        <h3>Pinnacle Tier <span style="font-size:0.55rem; opacity:0.6; text-transform:none; letter-spacing:0.05em; vertical-align:middle;">(Ceiling)</span></h3>
+                        <p class="value" id="statHigh" style="display:flex; align-items:baseline;">
+                            <span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0
+                        </p>
+                    </div>
                 </div>
 
                 <div class="table-header">
@@ -468,9 +484,9 @@
                                 </div>
                             </td>
                             <td class="price-td">
-                                ${c.price500g ? `<div style="margin-bottom:4px;"><em>INR</em>${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))} <span style="font-family:var(--font-sans);font-size:0.6em;letter-spacing:0.1em;opacity:0.6;">(500g)</span></div>` : ''}
-                                ${c.price1kg ? `<div><em>INR</em>${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))} <span style="font-family:var(--font-sans);font-size:0.6em;letter-spacing:0.1em;opacity:0.6;">(1kg)</span></div>` : ''}
-                                ${(!c.price500g && !c.price1kg) ? `<div><em>INR</em>${escapeHtml(Number(c.price||0).toLocaleString('en-IN'))}</div>` : ''}
+                                ${c.price500g ? `<div style="margin-bottom:4px;"><span style="color:var(--rose-gold);margin-right:2px;">₹</span>${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))} <span style="font-family:var(--font-sans);font-size:0.6em;letter-spacing:0.1em;opacity:0.6;">(500g)</span></div>` : ''}
+                                ${c.price1kg ? `<div><span style="color:var(--rose-gold);margin-right:2px;">₹</span>${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))} <span style="font-family:var(--font-sans);font-size:0.6em;letter-spacing:0.1em;opacity:0.6;">(1kg)</span></div>` : ''}
+                                ${(!c.price500g && !c.price1kg) ? `<div><span style="color:var(--rose-gold);margin-right:2px;">₹</span>${escapeHtml(Number(c.price||0).toLocaleString('en-IN'))}</div>` : ''}
                             </td>
                             <td>
                                 <button class="action-btn btn-edit" data-id="${escapeHtml(c.id)}">Modify</button>
@@ -480,11 +496,16 @@
                 });
             }
             el('statTotal').textContent = MasterCakes.length.toString().padStart(2,'0');
-            if(MasterCakes.length>0) {
-                const prices=MasterCakes.map(c=>c.price);
-                el('statLow').innerHTML=`<em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:6px;vertical-align:middle;letter-spacing:0.1em;">INR</em>${Number(Math.min(...prices)).toLocaleString('en-IN')}`;
-                el('statHigh').innerHTML=`<em style="font-family:var(--font-sans);font-style:normal;font-size:0.8rem;font-weight:400;color:var(--rose-gold);margin-right:6px;vertical-align:middle;letter-spacing:0.1em;">INR</em>${Number(Math.max(...prices)).toLocaleString('en-IN')}`;
-            } else { el('statLow').innerHTML=`<em>INR</em>0`; el('statHigh').innerHTML=`<em>INR</em>0`; }
+            const prices = MasterCakes.map(c => Number(c.price500g || c.price || 0)).filter(p => p > 0);
+            if(prices.length > 0) {
+                const low = Math.min(...prices);
+                const high = Math.max(...MasterCakes.map(c => Math.max(Number(c.price500g||0), Number(c.price1kg||0), Number(c.price||0))));
+                el('statLow').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>${low.toLocaleString('en-IN')}`;
+                el('statHigh').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>${high.toLocaleString('en-IN')}`;
+            } else { 
+                el('statLow').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0`; 
+                el('statHigh').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0`; 
+            }
         }
     </script>
 </body>
