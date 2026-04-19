@@ -234,26 +234,31 @@
             </aside>
 
             <main class="right-panel">
+                <!-- Premium Metrics Header -->
+                <div style="margin-bottom: 2.5rem; text-align: center; border-bottom: 1px solid rgba(253, 251, 249, 0.05); padding-bottom: 1.5rem;">
+                    <span style="font-size: 0.65rem; color: var(--rose-gold); letter-spacing: 0.4em; text-transform: uppercase; font-weight: 500;">
+                        Atelier Performance Metrics
+                    </span>
+                    <p style="font-size: 0.6rem; color: var(--ivory-dim); opacity: 0.6; margin-top: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                        <b>Entry</b>: Collection Floor Price &nbsp; • &nbsp; <b>Pinnacle</b>: Luxury Design Ceiling
+                    </p>
+                </div>
+
                 <div class="stats-row">
-                    <div style="width:100%; margin-bottom:1.5rem; text-align:right;">
-                        <span style="font-size:0.55rem; color:var(--rose-gold); letter-spacing:0.1em; opacity:0.8; text-transform:uppercase;">
-                            Atelier Metrics: <b>Entry</b> is your floor price, <b>Pinnacle</b> is your luxury ceiling.
-                        </span>
-                    </div>
                     <div class="stat-card">
                         <h3>Total Curations</h3>
-                        <p class="value" id="statTotal">0</p>
+                        <p class="value" id="statTotal">00</p>
                     </div>
-                    <div class="stat-card" title="Entry Price: The starting floor price of your collection.">
-                        <h3>Entry Price <span style="font-size:0.55rem; opacity:0.6; text-transform:none; letter-spacing:0.05em; vertical-align:middle;">(Floor)</span></h3>
+                    <div class="stat-card">
+                        <h3>Entry Price <small style="font-size:0.5rem; opacity:0.5; font-weight:400;">(Floor)</small></h3>
                         <p class="value" id="statLow" style="display:flex; align-items:baseline;">
-                            <span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0
+                            <span style="font-family:var(--font-sans); font-size:1.1rem; color:var(--rose-gold); margin-right:6px; font-weight:400;">₹</span>0
                         </p>
                     </div>
-                    <div class="stat-card" title="Pinnacle Tier: The highest price masterpiece in your atelier.">
-                        <h3>Pinnacle Tier <span style="font-size:0.55rem; opacity:0.6; text-transform:none; letter-spacing:0.05em; vertical-align:middle;">(Ceiling)</span></h3>
+                    <div class="stat-card">
+                        <h3>Pinnacle Tier <small style="font-size:0.5rem; opacity:0.5; font-weight:400;">(Ceiling)</small></h3>
                         <p class="value" id="statHigh" style="display:flex; align-items:baseline;">
-                            <span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0
+                            <span style="font-family:var(--font-sans); font-size:1.1rem; color:var(--rose-gold); margin-right:6px; font-weight:400;">₹</span>0
                         </p>
                     </div>
                 </div>
@@ -500,11 +505,11 @@
             if(prices.length > 0) {
                 const low = Math.min(...prices);
                 const high = Math.max(...MasterCakes.map(c => Math.max(Number(c.price500g||0), Number(c.price1kg||0), Number(c.price||0))));
-                el('statLow').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>${low.toLocaleString('en-IN')}`;
-                el('statHigh').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>${high.toLocaleString('en-IN')}`;
+                el('statLow').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.1rem; color:var(--rose-gold); margin-right:6px; font-weight:400;">₹</span>${low.toLocaleString('en-IN')}`;
+                el('statHigh').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.1rem; color:var(--rose-gold); margin-right:6px; font-weight:400;">₹</span>${high.toLocaleString('en-IN')}`;
             } else { 
-                el('statLow').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0`; 
-                el('statHigh').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.2rem; color:var(--rose-gold); margin-right:4px;">₹</span>0`; 
+                el('statLow').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.1rem; color:var(--rose-gold); margin-right:6px; font-weight:400;">₹</span>0`; 
+                el('statHigh').innerHTML = `<span style="font-family:var(--font-sans); font-size:1.1rem; color:var(--rose-gold); margin-right:6px; font-weight:400;">₹</span>0`; 
             }
         }
     </script>
