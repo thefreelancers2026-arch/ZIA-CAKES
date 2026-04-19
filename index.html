@@ -791,7 +791,7 @@
 
         function updateModalPrice(price) {
             dynamicPrice = price;
-            document.getElementById('pmPriceDisplay').innerHTML = `<em>INR</em> &nbsp;${price.toLocaleString('en-IN')}`;
+            document.getElementById('pmPriceDisplay').innerHTML = `<span style="color:var(--rose-gold);font-family:var(--font-sans);font-size:0.7em;margin-right:10px;">₹</span>${price.toLocaleString('en-IN')}`;
         }
 
         function submitProductOrder() {

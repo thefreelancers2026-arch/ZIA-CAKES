@@ -146,6 +146,15 @@
             .modal-card { padding: 2rem 1.5rem; }
             .btn-sm { width: 100%; margin-top: 10px; }
         }
+
+        /* Premium Input Polish */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+
+        .price-input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
+        .price-input-wrapper span { position: absolute; left: 1rem; color: var(--rose-gold); font-family: var(--font-sans); font-size: 0.9rem; pointer-events: none; opacity: 0.8; }
+        .price-input-wrapper .form-control { padding-left: 2.2rem; }
     </style>
 </head>
 <body>
@@ -194,9 +203,21 @@
                     
                     <div class="form-group"><label>Menu Title</label><input type="text" id="cakeName" class="form-control" required></div>
                     <div class="form-group"><label>Details</label><textarea id="cakeDesc" class="form-control" required style="resize:vertical; min-height:60px;"></textarea></div>
-                    <div style="display:flex; gap:1rem;">
-                        <div class="form-group" style="flex:1;"><label>Price (500g / Base)</label><input type="number" id="cakePrice500g" class="form-control" required></div>
-                        <div class="form-group" style="flex:1;"><label>Price (1kg)</label><input type="number" id="cakePrice1kg" class="form-control"></div>
+                    <div style="display:flex; gap:1.5rem; margin-bottom: 0.5rem;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Half KG Price (500g)</label>
+                            <div class="price-input-wrapper">
+                                <span>₹</span>
+                                <input type="number" id="cakePrice500g" class="form-control" placeholder="0" required>
+                            </div>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Full KG Price (1kg)</label>
+                            <div class="price-input-wrapper">
+                                <span>₹</span>
+                                <input type="number" id="cakePrice1kg" class="form-control" placeholder="Auto-calc if empty">
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- NEW: CATEGORY SELECTION -->
@@ -397,7 +418,7 @@
                 desc: sanitize(el('cakeDesc').value.trim()),
                 price500g: price500gVal,
                 price1kg: price1kgVal,
-                price: price500gVal, // Fallback for stat metrics
+                price: price500gVal || (price1kgVal ? price1kgVal / 2 : 0), // Smarter fallback for stats
                 category: el('cakeCategory').value,
                 tag: el('cakeTag').value
             };
