@@ -42,13 +42,14 @@
         .nav-center { display: flex; align-items: center; justify-content: center; }
         .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 3.5rem; }
         
-        /* Premium Logo Mark — Typography-based */
-        .logo-mark { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; gap: 5px; transition: opacity 0.4s ease; }
-        .logo-mark:hover { opacity: 0.65; }
-        .logo-mark-z { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; font-style: italic; color: var(--espresso); line-height: 0.85; letter-spacing: -0.04em; display: block; }
-        .logo-mark-rule { display: flex; align-items: center; gap: 5px; width: 100%; }
-        .logo-mark-rule::before { content: ''; display: block; width: 18px; height: 0.5px; background: var(--rose-gold); }
-        .logo-mark-sub { font-family: 'Jost', sans-serif; font-size: 0.45rem; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--rose-gold); white-space: nowrap; }
+        /* Premium Brand Logo */
+        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 0.8rem; user-select: none; transition: opacity 0.4s ease; color: var(--espresso); }
+        .brand-logo:hover { opacity: 0.8; }
+        .logo-svg { width: 65px; height: 75px; color: currentColor; transition: transform 0.4s ease; }
+        .brand-text-wrap { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1; margin-top: 5px; }
+        .brand-title { font-family: var(--font-serif); font-size: 1.8rem; text-transform: uppercase; letter-spacing: 0.25em; color: currentColor; font-weight: 500; white-space: nowrap; margin-bottom: 3px; }
+        .brand-sub { font-family: var(--font-sans); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.45em; color: var(--rose-gold); white-space: nowrap; margin-left: 2px; }
+        .brand-logo:hover .logo-svg { transform: scale(1.05) rotate(-2deg); }
 
         /* Vertical Divider */
         .nav-divider { width: 1px; height: 32px; background: rgba(26,19,17,0.15); margin: 0 1.2rem; flex-shrink: 0; }
@@ -56,7 +57,6 @@
         .nav-social { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid rgba(26,19,17,0.18); border-radius: 50%; color: var(--espresso); text-decoration: none; flex-shrink: 0; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .nav-social svg { stroke: currentColor; fill: none; width: 15px; height: 15px; transition: all 0.4s; }
         .nav-social:hover { border-color: var(--rose-gold); color: var(--rose-gold); transform: translateY(-2px); }
-        .brand-text { font-family: var(--font-serif); font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.45em; color: var(--espresso); font-weight: 600; text-decoration: none; white-space: nowrap; margin-left: 0.25em; }
 
         .nav-links { display: flex; gap: 3.5rem; list-style: none; align-items: center; margin: 0; padding: 0; }
         .nav-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: var(--espresso-light); font-weight: 400; transition: color 0.4s ease; }
@@ -295,8 +295,9 @@
             .menu-card { flex: 0 0 90%; scroll-snap-align: center; }
             .cat-bubble { width: 75px; height: 75px; }
             .info-block { gap: 2rem; }
-            .brand-text { display: none; }
-            .logo-hook { font-size: 2.8rem; }
+            .logo-svg { width: 50px; height: 58px; }
+            .brand-title { font-size: 1.3rem; letter-spacing: 0.2em; }
+            .brand-sub { font-size: 0.45rem; letter-spacing: 0.4em; }
         }
 
         /* Product Modal */
@@ -341,11 +342,20 @@
     <!-- Nav -->
     <nav class="navbar">
         <div class="nav-left">
-            <!-- Elegant Typography Logo Mark -->
-            <a href="#" class="logo-mark" aria-label="Home">
-                <span class="logo-mark-z">Z</span>
-                <div class="logo-mark-rule">
-                    <span class="logo-mark-sub">Atelier</span>
+            <!-- Elegant Curve SVG Logo -->
+            <a href="#" class="brand-logo" aria-label="Home">
+                <svg class="logo-svg" viewBox="0 0 54 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 17 C10 14 9 11 12 10 C15 9 18 12 17 15" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                    <path d="M17 15 C22 13 30 13 36 14" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
+                    <path d="M36 14 C39 14 40 15 39 17" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                    <path d="M39 17 L16 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                    <path d="M16 44 C15 47 14 48 15 49" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                    <path d="M15 49 C20 50 30 50 37 49" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
+                    <path d="M37 49 C41 49 43 51 42 54 C41 57 38 57 37 55 C36 53 38 52 39 53" stroke="var(--rose-gold)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
+                </svg>
+                <div class="brand-text-wrap">
+                    <span class="brand-title">Zia Cakes</span>
+                    <span class="brand-sub">Atelier</span>
                 </div>
             </a>
             <div class="nav-divider"></div>
@@ -355,7 +365,7 @@
         </div>
         
         <div class="nav-center">
-            <a href="#" class="brand-text">Zia Cakes</a>
+            <!-- Emptied nav-center since text is now bundled in brand-logo -->
         </div>
         
         <div class="nav-right">
@@ -570,10 +580,19 @@
 
     <!-- Footer -->
     <footer>
-        <a href="#" class="logo-mark" style="margin: 0 auto 3rem auto; opacity: 1; align-items: center; width: max-content;">
-            <span class="logo-mark-z" style="color: var(--cream); font-size: 4rem; margin-bottom: -5px;">Z</span>
-            <div class="logo-mark-rule" style="justify-content: center; width: max-content;">
-                <span class="logo-mark-sub" style="color: var(--cream); opacity: 0.8;">Atelier</span>
+        <a href="#" class="brand-logo" style="margin: 0 auto 3rem auto; color: var(--cream); flex-direction: column; gap: 1rem;">
+            <svg class="logo-svg" viewBox="0 0 54 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 17 C10 14 9 11 12 10 C15 9 18 12 17 15" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                <path d="M17 15 C22 13 30 13 36 14" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
+                <path d="M36 14 C39 14 40 15 39 17" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                <path d="M39 17 L16 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <path d="M16 44 C15 47 14 48 15 49" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                <path d="M15 49 C20 50 30 50 37 49" stroke="currentColor" stroke-width="0.85" stroke-linecap="round" fill="none"/>
+                <path d="M37 49 C41 49 43 51 42 54 C41 57 38 57 37 55 C36 53 38 52 39 53" stroke="var(--rose-gold)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div class="brand-text-wrap" style="align-items: center; margin-top: 0;">
+                <span class="brand-title">Zia Cakes</span>
+                <span class="brand-sub" style="margin-left:0;">Atelier</span>
             </div>
         </a>
         <ul class="footer-links">
