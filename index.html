@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zia Cakes – Artisan Patisserie</title>
     <meta name="description" content="Zia Cakes – Premium custom cakes designed with elegance and passion.">
-    <!-- FIX 4: SEO -->
     <meta name="keywords" content="custom cakes virudhachalam, birthday cakes, wedding cakes, designer cakes tamil nadu, zia cakes, cake delivery virudhachalam">
     <meta property="og:title" content="Zia Cakes – Artisan Patisserie, Virudhachalam">
     <meta property="og:description" content="Premium handcrafted custom cakes for birthdays, weddings & celebrations. Order via WhatsApp.">
@@ -39,8 +38,8 @@
 
         /* Nav */
         .navbar { position: fixed; top: 0; left: 0; right: 0; padding: 1.8rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(250, 246, 243, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(26, 19, 17, 0.08); transition: all 0.4s ease; }
-        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 1rem; }
-        .logo-hook { font-family: var(--font-serif); font-size: 2.8rem; font-style: italic; font-weight: 300; color: var(--espresso); line-height: 1; padding-right: 1.2rem; border-right: 1px solid rgba(184, 138, 117, 0.3); }
+        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 0.5rem; }
+        .logo-hook { font-family: var(--font-serif); font-size: 2.8rem; font-style: italic; font-weight: 300; color: var(--espresso); line-height: 1; padding-right: 0.5rem; }
         .brand-text { font-family: var(--font-sans); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--espresso); font-weight: 400; margin-top: 5px; }
 
         .nav-links { display: flex; gap: 3.5rem; list-style: none; }
@@ -49,13 +48,13 @@
         .btn-order-nav { padding: 0.7rem 2rem; background: var(--espresso); color: var(--cream-light) !important; border-radius: 0; transition: all 0.4s ease; }
         .btn-order-nav:hover { background: var(--rose-gold); }
 
-        /* ====== HERO: Full Display Background Image ====== */
-        .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-start; padding: clamp(6rem, 18vh, 10rem) 5% 0; background: linear-gradient(to right, rgba(250,246,243,0.98) 0%, rgba(250,246,243,0.95) 43%, rgba(250,246,243,0) 80%), url('assets/hero_bg.png') center right/cover no-repeat; }
+        /* ====== HERO ====== */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-start; padding: clamp(6rem, 18vh, 10rem) 5% 0; background: linear-gradient(to right, rgba(250,246,243,1) 0%, rgba(250,246,243,0.9) 50%, rgba(250,246,243,0) 100%), url('assets/hero_bg.png') center right/cover no-repeat; }
         .hero-left { position: relative; z-index: 2; max-width: 550px; animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; padding-bottom: 4rem; }
         .hero-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 1.2rem; display: block; font-weight: 500; }
         .hero-title { font-family: var(--font-serif); font-size: clamp(3rem, 5.5vw, 5.5rem); line-height: 1.05; color: var(--espresso); font-weight: 300; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
         .hero-title em { font-style: italic; color: var(--rose-gold); font-weight: 400; }
-        .hero-desc { font-size: 1rem; color: var(--espresso-light); font-weight: 400; max-width: 95%; margin-bottom: 4.5rem; line-height: 1.8; }
+        .hero-desc { font-size: 1rem; color: var(--espresso-light); font-weight: 400; max-width: 95%; margin-bottom: 3.5rem; line-height: 1.8; }
         .hero-actions { display: flex; gap: 1.5rem; position: relative; z-index: 3; }
 
         .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 1.2rem 3rem; background: var(--espresso); color: var(--cream-light); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.25em; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); position: relative; overflow: hidden; border: 1px solid var(--espresso); cursor: pointer; }
@@ -63,26 +62,35 @@
         .btn-outline { display: inline-flex; align-items: center; justify-content: center; padding: 1.2rem 3rem; border: 1px solid rgba(26, 19, 17, 0.2); background: rgba(250, 246, 243, 0.6); backdrop-filter: blur(4px); color: var(--espresso); font-weight: 500; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.25em; transition: all 0.4s ease; }
         .btn-outline:hover { border-color: var(--espresso); background: rgba(250, 246, 243, 0.9); }
 
+        .hero-trust { margin-top: 2.5rem; display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--espresso-light); animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+        .hero-trust .stars { color: var(--rose-gold); letter-spacing: 0.1em; font-size: 1rem; }
+
         /* Premium Separator */
         .premium-divider { display: flex; align-items: center; justify-content: center; background: var(--cream); padding: 1.2rem 10%; position: relative; z-index: 10; }
         .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(184,138,117,0), rgba(184,138,117,0.4), rgba(184,138,117,0)); border: none; }
         .divider-diamond { width: 8px; height: 8px; background: var(--rose-gold); transform: rotate(45deg); margin: 0 2rem; opacity: 0.8; }
 
-        /* ====== HOMEMADE: Full Display Background Image ====== */
+        /* ====== HOMEMADE ====== */
         .section-homemade { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: flex-end; padding: 4rem 5%; background: linear-gradient(to left, rgba(26,19,17,0.98) 0%, rgba(26,19,17,0.9) 40%, rgba(26,19,17,0) 75%), url('assets/homemade_artisan.png') center/cover no-repeat; color: var(--cream); }
         .homemade-content { position: relative; z-index: 2; max-width: 500px; padding: 4rem 3rem; }
         .homemade-content .sect-eyebrow { color: var(--rose-gold); }
         .homemade-content .sect-title { color: var(--cream); font-size: 3.5rem; margin-bottom: 2.5rem; }
         .homemade-content .sect-title em { color: var(--rose-gold); }
         .homemade-content .sect-line { background: rgba(250,246,243,0.2); margin: 0 0 3rem 0; width: 60px; }
-        .homemade-desc { font-size: 1.1rem; line-height: 2; font-weight: 300; color: rgba(250,246,243,0.75); font-family: var(--font-serif); font-style: italic; }
+        .homemade-desc { font-size: 1.1rem; line-height: 2; font-weight: 300; color: rgba(250,246,243,0.95); font-family: var(--font-serif); font-style: italic; }
 
         /* Generic Section Specs */
         .section-editorial { padding: 8rem 5%; background: var(--cream-light); text-align: center; }
         .sect-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--rose-gold); margin-bottom: 1.2rem; display: block; font-weight: 500; }
         .sect-title { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 300; color: var(--espresso); line-height: 1.1; margin-bottom: 1.5rem; }
         .sect-title em { color: var(--rose-gold); font-style: italic; }
-        .sect-line { width: 60px; height: 1px; background: var(--rose-gold); margin: 0 auto 5rem; }
+        .sect-line { width: 60px; height: 1px; background: var(--rose-gold); margin: 0 auto 3rem; }
+
+        /* Category Navigation - Comprehensive Lola Style */
+        .category-nav { display: flex; justify-content: center; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; padding: 0 5%; }
+        .cat-btn { background: transparent; border: none; font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--espresso-light); cursor: pointer; padding-bottom: 6px; border-bottom: 2px solid transparent; transition: all 0.4s ease; font-weight: 500; white-space: nowrap; }
+        .cat-btn.active { color: var(--rose-gold); border-bottom-color: var(--rose-gold); }
+        .cat-btn:hover { color: var(--rose-gold); }
 
         /* Menu Grid */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; max-width: 1400px; margin: 0 auto; position: relative; min-height: 300px; }
@@ -105,7 +113,14 @@
 
         .loading-state { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; color: var(--rose-gold); }
 
-        /* About Us & Enquiry Section */
+        /* Form UX Redesign - Chips */
+        .chips-container { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.5rem; }
+        .chip input { display: none; }
+        .chip span { padding: 0.6rem 1.4rem; border: 1px solid rgba(250,246,243,0.3); border-radius: 30px; font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(250,246,243,0.8); cursor: pointer; transition: all 0.3s ease; display: inline-block; }
+        .chip input:checked + span { background: var(--rose-gold); border-color: var(--rose-gold); color: var(--espresso); font-weight: 500; }
+        .chip:hover span { border-color: var(--rose-gold); color: var(--cream-light); }
+
+        /* About & Enquiry */
         .section-about { padding: 8rem 5%; background: var(--cream); }
         .about-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 6rem; max-width: 1400px; margin: 0 auto; align-items: center; }
         .about-info { padding-right: 2rem; }
@@ -117,44 +132,7 @@
         .info-block p { font-size: 1.05rem; color: var(--espresso-light); line-height: 2; font-weight: 300; }
         .info-link { display: block; font-size: 1.05rem; color: var(--espresso-light); font-weight: 300; text-decoration: none; margin-bottom: 0.8rem; transition: color 0.4s; }
         .info-link:hover { color: var(--rose-gold); }
-        .about-enquiry { background: var(--cream-light); padding: 5rem 4rem; border: 1px solid rgba(184, 138, 117, 0.15); box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; justify-content: center; }
-        .about-enquiry h3 { font-family: var(--font-serif); font-size: 3rem; font-weight: 300; color: var(--espresso); margin-bottom: 2rem; font-style: italic; }
-        .about-enquiry p { font-size: 1.05rem; color: var(--espresso-light); line-height: 1.9; font-weight: 300; margin-bottom: 3rem; }
-
-        /* Footer */
-        footer { background: var(--espresso); padding: 6rem 5% 4rem; text-align: center; color: var(--cream); }
-        footer .brand-logo { justify-content: center; margin-bottom: 3rem; }
-        footer .logo-hook { color: var(--blush); border-color: rgba(250,246,243,0.15); }
-        footer .brand-text { color: var(--cream); }
-        .footer-links { display: flex; justify-content: center; gap: 3.5rem; list-style: none; margin-bottom: 5rem; }
-        .footer-links a { color: rgba(250, 246, 243, 0.6); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: color 0.4s; }
-        .footer-links a:hover { color: var(--rose-gold); }
-        .footer-bottom { border-top: 1px solid rgba(250, 246, 243, 0.08); padding-top: 3rem; font-size: 0.75rem; color: rgba(250, 246, 243, 0.3); letter-spacing: 0.1em; text-transform: uppercase; }
-
-        /* Animations */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px) scale(0.98); } to { opacity: 1; transform: translateX(0) scale(1); } }
-        .reveal-wrap .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal-wrap.visible .reveal { opacity: 1; transform: translateY(0); }
-
-        /* FIX 3: MOBILE NAV CSS */
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
-        .hamburger span { display: block; width: 24px; height: 2px; background-color: var(--espresso); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         
-        .nav-links.mobile-active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250, 246, 243, 0.98); backdrop-filter: blur(20px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 0; border-top: 1px solid rgba(26,19,17,0.05); animation: slideDown 0.4s ease forwards; transform-origin: top; }
-        @keyframes slideDown { from { opacity: 0; transform: scaleY(0.9); } to { opacity: 1; transform: scaleY(1); } }
-        .nav-links.mobile-active li { width: 100%; border-bottom: 1px solid rgba(26,19,17,0.05); }
-        .nav-links.mobile-active a { display: block; padding: 1.5rem 5%; }
-        
-        /* FIX 1: IMAGE PLACEHOLDER CSS */
-        .image-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, #E8D3C8 0%, #FAF6F3 100%); }
-        .image-placeholder svg { width: 48px; height: 48px; stroke: var(--rose-gold); margin-bottom: 0.8rem; }
-        .image-placeholder span { font-family: var(--font-serif); font-style: italic; color: var(--espresso); font-size: 1.2rem; margin-top: 1rem; }
-
-        /* FIX 2: ENQUIRY FORM CSS */
         .section-enquiry { padding: 10rem 5%; background: var(--espresso); color: var(--cream-light); position: relative; }
         .enquiry-container { max-width: 850px; margin: 0 auto; text-align: center; }
         .enquiry-container .sect-eyebrow { color: rgba(250,246,243,0.5); font-weight: 400; }
@@ -173,61 +151,76 @@
         .btn-submit-enquiry:hover { border-color: var(--rose-gold); background: var(--rose-gold); color: var(--espresso); transform: translateY(-2px); }
         .btn-submit-enquiry svg { width: 18px; height: 18px; fill: currentColor; transition: transform 0.4s; }
         .btn-submit-enquiry:hover svg { transform: translateX(5px); }
-        .enq-input option { background: var(--espresso); color: var(--cream-light); font-family: var(--font-sans); font-size: 0.9rem; }
 
+        /* Footer */
+        footer { background: var(--espresso); padding: 6rem 5% 4rem; text-align: center; color: var(--cream); border-top: 1px solid rgba(250,246,243,0.05); }
+        footer .brand-logo { justify-content: center; margin-bottom: 3rem; gap: 0.5rem; }
+        footer .logo-hook { color: var(--blush); border-color: rgba(250,246,243,0.15); }
+        footer .brand-text { color: var(--cream); }
+        .footer-links { display: flex; justify-content: center; gap: 3.5rem; list-style: none; margin-bottom: 5rem; }
+        .footer-links a { color: rgba(250, 246, 243, 0.6); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; transition: color 0.4s; }
+        .footer-links a:hover { color: var(--rose-gold); }
+        .footer-bottom { border-top: 1px solid rgba(250, 246, 243, 0.08); padding-top: 3rem; font-size: 0.75rem; color: rgba(250, 246, 243, 0.3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+        /* Floating WhatsApp */
+        .floating-wa { position: fixed; bottom: 2rem; right: 2rem; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); z-index: 1000; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; }
+        .floating-wa:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4); color: white; }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal-wrap .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal-wrap.visible .reveal { opacity: 1; transform: translateY(0); }
+
+        /* Mobile Nav */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { display: block; width: 24px; height: 2px; background-color: var(--espresso); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         
-        /* === TABLET: 1024px === */
+        .nav-links.mobile-active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250, 246, 243, 0.98); backdrop-filter: blur(20px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 0; border-top: 1px solid rgba(26,19,17,0.05); animation: slideDown 0.4s ease forwards; transform-origin: top; }
+        @keyframes slideDown { from { opacity: 0; transform: scaleY(0.9); } to { opacity: 1; transform: scaleY(1); } }
+        .nav-links.mobile-active li { width: 100%; border-bottom: 1px solid rgba(26,19,17,0.05); }
+        .nav-links.mobile-active a { display: block; padding: 1.5rem 5%; }
+        
+        /* Placeholders */
+        .image-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, #E8D3C8 0%, #FAF6F3 100%); }
+        .image-placeholder svg { width: 48px; height: 48px; stroke: var(--rose-gold); margin-bottom: 0.8rem; }
+        .image-placeholder span { font-family: var(--font-serif); font-style: italic; color: var(--espresso); font-size: 1.2rem; margin-top: 1rem; }
+
+        /* RESPONSIVE TWEAKS */
         @media (max-width: 1024px) {
             .hamburger { display: flex; }
             .nav-links { display: none; gap: 0; }
             .hero { justify-content: center; text-align: center; background-position: right center; padding-top: 5rem; }
             .hero-left { max-width: 700px; }
-            .hero-desc { margin: 0 auto 3rem; }
             .hero-actions { justify-content: center; }
+            .hero-trust { justify-content: center; }
             .section-homemade { justify-content: center; text-align: center; }
             .homemade-content { padding: 5rem 1rem; }
-            .homemade-content .sect-line { margin: 0 auto 3rem auto; }
             .about-grid { grid-template-columns: 1fr; gap: 4rem; }
             .about-info { padding-right: 0; text-align: center; }
-            .about-info .sect-title, .about-info .sect-eyebrow { text-align: center; }
             .about-info .sect-line { margin: 0 auto 3.5rem auto; }
-            .about-enquiry { display: none; }
+            .category-nav { gap: 1.5rem; }
         }
 
-        /* === MOBILE: 768px — Elegantly integrated background layouts === */
         @media (max-width: 768px) {
-            /* HERO: Full screen layout with a subtle text readability overlay on mobile */
-            .hero { align-items: flex-start; padding: 8rem 6% 6rem; background: linear-gradient(to bottom, rgba(250,246,243,0.95) 0%, rgba(250,246,243,0.85) 45%, rgba(250,246,243,0) 85%), url('assets/hero_bg.png') center/cover no-repeat; margin-bottom: 0px; min-height: 100svh; }
-            .hero-left { width: 100%; margin: 0; padding: 0; }
-            .hero-title { font-size: clamp(2.6rem, 10vw, 3.4rem); margin-bottom: 1.2rem; }
-            .hero-desc { max-width: 100%; margin: 0 auto 2.5rem; font-size: 1rem; color: var(--espresso); font-weight: 400; }
+            .hero { align-items: flex-start; padding: 8rem 6% 6rem; background: linear-gradient(to bottom, rgba(250,246,243,1) 0%, rgba(250,246,243,0.9) 45%, rgba(250,246,243,0.3) 100%), url('assets/hero_bg.png') center/cover no-repeat; min-height: 100svh; }
             .hero-actions { flex-direction: column; gap: 1rem; width: 100%; }
             .hero-actions a { width: 100%; text-align: center; }
-            .hero-actions .btn-outline { background: rgba(250, 246, 243, 0.85); backdrop-filter: blur(5px); border-color: rgba(26, 19, 17, 0.15); font-weight: 500; }
-
-            /* Premium Separator Mobile Tweaks */
-            .premium-divider { padding: 1.2rem 6%; }
-
-            /* HOMEMADE: Stacked layout with background */
-            .section-homemade { background: linear-gradient(rgba(26,19,17,0.75), rgba(26,19,17,0.95)), url('assets/homemade_artisan.png') center/cover no-repeat; margin-bottom: 0; }
-            .homemade-content { padding: 5rem 6%; margin: 0; width: 100%; }
-            .homemade-content .sect-title { font-size: clamp(2.4rem, 9vw, 3rem); margin-bottom: 2rem; }
-            .homemade-content .sect-line { margin: 0 auto 2.5rem; }
-
-            /* COLLECTION / SECTIONS */
+            .section-homemade { background: linear-gradient(rgba(26,19,17,0.75), rgba(26,19,17,0.95)), url('assets/homemade_artisan.png') center/cover no-repeat; }
+            .homemade-content { padding: 5rem 6%; }
             .section-editorial, .section-about, .section-enquiry { padding: 5rem 5%; }
             .form-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .sect-title { font-size: clamp(2.2rem, 8vw, 3rem); }
             .swipe-hint { display: block !important; text-align: right; color: var(--espresso-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; animation: pulse 2s infinite; }
             @keyframes pulse { 0%{opacity:0.4;} 50%{opacity:0.9;} 100%{opacity:0.4;} }
-            .menu-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.5rem; padding-bottom: 2rem; -webkit-overflow-scrolling: touch; scroll-padding: 5%; scrollbar-width: none; }
+            .menu-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.5rem; padding-bottom: 2rem; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
             .menu-grid::-webkit-scrollbar { display: none; }
-            .menu-card { flex: 0 0 85%; scroll-snap-align: center; }
-            .menu-name { font-size: 1.8rem; }
-            .menu-price { font-size: 2.5rem; }
-
-            footer { padding: 4rem 5% 2rem; }
+            .menu-card { flex: 0 0 80%; scroll-snap-align: center; }
             .footer-links { flex-direction: column; gap: 1.5rem; }
+            .category-nav { gap: 1.2rem; margin-bottom: 3rem; overflow-x: auto; justify-content: flex-start; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .category-nav::-webkit-scrollbar { display: none; }
+            .cat-btn { font-size: 0.65rem; letter-spacing: 0.15em; }
         }
     </style>
 </head>
@@ -239,7 +232,6 @@
             <div class="logo-hook">Z</div>
             <span class="brand-text">Zia Cakes</span>
         </a>
-        <!-- FIX 3: MOBILE NAV MENU -->
         <div class="hamburger" id="hamburgerMenu">
             <span></span><span></span><span></span>
         </div>
@@ -251,14 +243,19 @@
         </ul>
     </nav>
 
+    <!-- Optimized Hero -->
     <section class="hero">
         <div class="hero-left">
             <span class="hero-subtitle">The Pinnacle of Patisserie</span>
             <h1 class="hero-title">Elegance in Every <br><em>Exquisite Detail</em></h1>
             <p class="hero-desc">Discover the art of patisserie where timeless tradition seamlessly intertwines with modern luxury. Every creation is handcrafted meticulously, reserved for your most cherished moments.</p>
             <div class="hero-actions">
-                <a href="#collection" class="btn-primary">Explore Menu</a>
-                <a href="#enquiry" class="btn-outline">Custom Enquiry &darr;</a>
+                <a href="#enquiry" class="btn-primary">Custom Enquiry &darr;</a>
+                <a href="#collection" class="btn-outline">Explore Menu</a>
+            </div>
+            <div class="hero-trust">
+                <div class="stars">★★★★★</div>
+                <span>Loved by 500+ clients in Virudhachalam</span>
             </div>
         </div>
     </section>
@@ -292,13 +289,26 @@
                 <div class="swipe-hint" style="display: none;">Swipe to explore &rarr;</div>
             </div>
         </div>
+
+        <!-- Full Lola Category Navigation -->
+        <div class="category-nav" id="categoryNav">
+            <button class="cat-btn active" data-filter="all">All Creations</button>
+            <button class="cat-btn" data-filter="cakes">Cakes</button>
+            <button class="cat-btn" data-filter="cupcakes">Cupcakes</button>
+            <button class="cat-btn" data-filter="brownies">Brownies</button>
+            <button class="cat-btn" data-filter="kids">Kids & Disney</button>
+            <button class="cat-btn" data-filter="afternoon-tea">Afternoon Tea</button>
+            <button class="cat-btn" data-filter="logo">Logo & Corporate</button>
+            <button class="cat-btn" data-filter="nationwide">Nationwide</button>
+            <button class="cat-btn" data-filter="dietary">Special Diets</button>
+        </div>
         
         <div class="menu-grid" id="cakeGrid">
             <div class="loading-state">Syncing Atelier Collection...</div>
         </div>
     </section>
 
-    <!-- FIX 2: ADD ENQUIRY FORM SECTION -->
+    <!-- High Conversion Enquiry Form -->
     <section class="section-enquiry" id="enquiry">
         <div class="enquiry-container reveal-wrap">
             <div class="reveal">
@@ -316,18 +326,15 @@
                         <input type="tel" id="enqPhone" class="enq-input" pattern="[0-9]{10}" required>
                         <div class="error-message">Please provide a valid 10-digit phone number</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label>Occasion</label>
-                        <select id="enqOccasion" class="enq-input" required>
-                            <option value="">Select Occasion</option>
-                            <option value="Birthday">Birthday</option>
-                            <option value="Wedding">Wedding</option>
-                            <option value="Anniversary">Anniversary</option>
-                            <option value="Baby Shower">Baby Shower</option>
-                            <option value="Corporate Event">Corporate Event</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <div class="error-message">Please select an occasion</div>
+                        <div class="chips-container">
+                            <label class="chip"><input type="radio" name="occasion" value="Birthday" checked><span>Birthday</span></label>
+                            <label class="chip"><input type="radio" name="occasion" value="Wedding"><span>Wedding</span></label>
+                            <label class="chip"><input type="radio" name="occasion" value="Anniversary"><span>Anniversary</span></label>
+                            <label class="chip"><input type="radio" name="occasion" value="Baby Shower"><span>Baby Shower</span></label>
+                            <label class="chip"><input type="radio" name="occasion" value="Other"><span>Other</span></label>
+                        </div>
                     </div>
                     <div class="form-group full-width">
                         <label>Cake Type / Design Idea</label>
@@ -367,8 +374,8 @@
                     </div>
                     <div>
                         <h4>Reach Out Directly</h4>
-                        <a href="https://wa.me/919884111974" class="info-link" target="_blank" style="display: block; margin-bottom: 0.5rem;">WhatsApp: +91 98841 11974</a>
-                        <a href="https://instagram.com" class="info-link" target="_blank" style="display: block;">Instagram: @ziacakes</a>
+                        <a href="https://wa.me/919884111974" class="info-link" target="_blank">WhatsApp: +91 98841 11974</a>
+                        <a href="https://instagram.com" class="info-link" target="_blank">Instagram: @ziacakes</a>
                     </div>
                 </div>
             </div>
@@ -392,14 +399,16 @@
         </div>
     </footer>
 
-    <!-- Firebase Integration -->
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/919884111974?text=Hello%20Zia%20Cakes,%20I'd%20like%20to%20discuss%20a%20custom%20order." class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.183-.573c.978.582 1.894.869 3.145.871 3.181 0 5.768-2.585 5.768-5.766 0-3.181-2.587-5.767-5.768-5.767"></path><path d="M14.946 11.727c-.151-.076-.893-.441-1.033-.49-.139-.05-.24-.076-.341.076-.101.151-.392.49-.481.59-.09.1-.18.113-.331.038-.151-.075-.637-.235-1.214-.75-.448-.4-.75-.892-.84-1.043-.09-.151-.01-.232.066-.307.068-.068.151-.176.226-.264.075-.088.101-.151.151-.252.05-.101.025-.188-.013-.264-.038-.076-.341-.823-.467-1.127-.124-.298-.249-.257-.341-.262-.09-.004-.19-.005-.291-.005-.101 0-.263.038-.401.189-.138.151-.527.516-.527 1.258s.54 1.46.616 1.561c.075.101 1.064 1.625 2.576 2.276.36.155.64.247.859.316.361.115.69.099.948.06.29-.043.893-.365 1.019-.718.125-.353.125-.656.088-.719-.038-.063-.139-.088-.291-.164z"></path></svg>
+    </a>
+
+    <!-- Logic & Data -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-        // ==========================================
-        // ⚠️ PASTE YOUR FIREBASE CONFIGURATION HERE ⚠️
-        // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyB5SoRJUg_oZH-tFw_1nOUQbTyVLn-oQLg",
             authDomain: "zia-cakes-54bee.firebaseapp.com",
@@ -410,23 +419,24 @@
         };
 
         const PRE_DATA = [
-            { id: '1', name: 'Dark Chocolate Truffle', desc: 'Lustrous layers of dark chocolate ganache draped gracefully in edible 24k gold leaf and artisan mousse.', price: 1299, tag: 'Signature', image: 'assets/truffle_cake.png' },
-            { id: '2', name: 'Strawberry Chiffon', desc: 'A feather-light chiffon meticulously dressed in fresh seasonal strawberry cold-pressed purée.', price: 999, tag: 'Popular', image: 'assets/strawberry_cake.png' },
-            { id: '4', name: 'Midnight Fig Naked Tier', desc: 'Rustic semi-naked layers dripping with warm caramel, adorned with fresh organic figs and dark forest berries.', price: 2100, tag: 'Seasonal', image: 'assets/naked_cake.png' },
-            { id: '5', name: 'Minimalist Matte Blush', desc: 'Sleek geometric fondant in a soft blush tone featuring genuine gold leaf. The pinnacle of modern edible art.', price: 1850, tag: 'Bespoke', image: 'assets/geometric_cake.png' },
-            { id: '6', name: 'Vintage Lambeth Heart', desc: 'Intricate old-world overpiping on a soft buttercream heart. Perfect for intimate, highly romantic celebrations.', price: 1450, tag: 'Popular', image: 'assets/vintage_cake.png' },
-            { id: '3', name: 'Floral Wedding Tier', desc: 'An architectural three-tiered masterpiece adorned with pristine, hand-piped sugar flora.', price: 4500, tag: 'Bespoke', image: 'assets/hero_cake.png' }
+            { id: '1', name: 'Minimalist Two-Tiered Celebration Cake', desc: 'Hand-piped delicate floral textures and a thin strip of rose-gold leaf around the base.', price: 4200, tag: 'Luxury Cakes', image: 'assets/cat_luxury_cakes.png', category: 'cakes' },
+            { id: '2', name: 'Luxurious Box of 6 Gourmet Cupcakes', desc: 'Silk-textured espresso-tinted buttercream swirls and tiny rose-gold pearls.', price: 1200, tag: 'Cupcakes', image: '', category: 'cupcakes' },
+            { id: '3', name: 'High-End Designer Cinderella Cake', desc: 'Subtle abstract carriage shapes in rose-gold, avoiding cartoonish looks, focusing on elegance and magic.', price: 5500, tag: 'Kids & Disney', image: '', category: 'kids' },
+            { id: '4', name: 'Premium Three-Tier High Tea Stand', desc: 'Perfectly square finger sandwiches, miniature rose-gold glazed eclairs, and fluffy scones.', price: 2800, tag: 'Afternoon Tea', image: '', category: 'afternoon-tea' },
+            { id: '5', name: 'Elegant White Chocolate Ganache Brownies', desc: 'Featuring a precise edible gold-ink company logo on a thin chocolate plaque.', price: 1800, tag: 'Logos/Corporate', image: '', category: 'corporate' }
         ];
 
+        let ALL_PRODUCTS = [];
         const WA_PHONE = '919884111974';
 
-
-        // FIX 5: ZERO-TRUST XSS SANITIZATION
         function escapeHtml(str) { const d = document.createElement('div'); d.textContent = String(str); return d.innerHTML; }
 
-        // FIX 1: IMAGE PLACEHOLDER
         function renderGrid(data) {
             const grid = document.getElementById('cakeGrid');
+            if(!data.length) {
+                grid.innerHTML = '<div class="loading-state" style="position:static; padding: 4rem 0;">No items in this category...</div>';
+                return;
+            }
             grid.innerHTML = data.map((c, i) => {
                 const isValidUrl = c.image && (c.image.startsWith('http') || c.image.startsWith('assets/'));
                 const safeName = escapeHtml(c.name || '');
@@ -434,14 +444,13 @@
                 const safePrice = escapeHtml(c.price || 0);
                 const safeTag = escapeHtml(c.tag || '');
                 const safeImage = isValidUrl ? escapeHtml(c.image) : '';
-
                 const imageEl = isValidUrl 
                     ? `<img src="${safeImage}" alt="${safeName}" loading="lazy">` 
                     : `<div class="image-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#B88A75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h10"/><path d="M12 4v4"/></svg><span>${safeName}</span></div>`;
 
                 return `
-                <div class="menu-card reveal-wrap" style="transition-delay: ${i * 0.15}s">
-                    <div class="reveal">
+                <div class="menu-card reveal-wrap visible" style="transition-delay: ${i * 0.1}s">
+                    <div class="reveal" style="opacity: 1; transform: translateY(0);">
                         <div class="menu-img-wrap">
                             ${imageEl}
                             ${c.tag && c.tag!=='None' ? `<div class="menu-tag">${safeTag}</div>` : ''}
@@ -459,10 +468,8 @@
                     </div>
                 </div>
             `}).join('');
-            
             initObserver();
         }
-
 
         function initObserver() {
             const els = document.querySelectorAll('.reveal-wrap');
@@ -470,35 +477,41 @@
                 entries.forEach(e => {
                     if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
                 });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.1 });
             els.forEach(el => obs.observe(el));
         }
 
-        async function fetchCakes() {
+        async function fetchProducts() {
             try {
-                // If config is missing, fallback to hardcoded
-                if (!firebaseConfig.projectId) throw new Error("Missing config");
-                
+                if (!firebaseConfig.projectId) throw new Error();
                 const app = initializeApp(firebaseConfig);
                 const db = getFirestore(app);
                 const q = query(collection(db, "cakes"), orderBy("createdAt", "desc"));
                 const snap = await getDocs(q);
-                
-                if (snap.empty) {
-                    renderGrid(PRE_DATA);
-                } else {
-                    const onlineCakes = [];
-                    snap.forEach(doc => { onlineCakes.push({ id: doc.id, ...doc.data() }) });
-                    renderGrid(onlineCakes);
-                }
+                if (snap.empty) ALL_PRODUCTS = PRE_DATA;
+                else snap.forEach(doc => { ALL_PRODUCTS.push({ id: doc.id, ...doc.data() }) });
+                renderGrid(ALL_PRODUCTS);
             } catch (e) {
-                console.warn("Firebase not configured or network error, falling back to static presentation data.");
-                renderGrid(PRE_DATA);
+                ALL_PRODUCTS = PRE_DATA;
+                renderGrid(ALL_PRODUCTS);
             }
         }
 
+        // Filter Controls
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                if(filter === 'all') renderGrid(ALL_PRODUCTS);
+                else renderGrid(ALL_PRODUCTS.filter(p => p.category === filter));
+                // Scroll to collection top on mobile for better UX after filter
+                if(window.innerWidth < 768) {
+                    document.getElementById('collection').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
-        // FIX 3: MOBILE NAV LOGIC
         const hamburger = document.getElementById('hamburgerMenu');
         const navLinks = document.getElementById('navLinks');
         if(hamburger && navLinks) {
@@ -514,40 +527,31 @@
             });
         }
 
-        // FIX 2: ENQUIRY DATE INIT & VALIDATION
-        const dateInput = document.getElementById('enqDate');
-
         const enquiryForm = document.getElementById('enquiryForm');
         if(enquiryForm) {
             enquiryForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 let isValid = true;
-                
                 const n = document.getElementById('enqName');
                 if(!n.value.trim()) { n.nextElementSibling.style.display='block'; isValid=false; } else n.nextElementSibling.style.display='none';
-                
                 const p = document.getElementById('enqPhone');
                 if(!/^[0-9]{10}$/.test(p.value.trim())) { p.nextElementSibling.style.display='block'; isValid=false; } else p.nextElementSibling.style.display='none';
-                
-                const o = document.getElementById('enqOccasion');
-                if(!o.value) { o.nextElementSibling.style.display='block'; isValid=false; } else o.nextElementSibling.style.display='none';
-                
                 const d = document.getElementById('enqDesign');
                 if(!d.value.trim()) { d.nextElementSibling.style.display='block'; isValid=false; } else d.nextElementSibling.style.display='none';
-                
                 const dt = document.getElementById('enqDate');
                 if(!dt.value.trim()) { dt.nextElementSibling.style.display='block'; isValid=false; } else dt.nextElementSibling.style.display='none';
-
                 if(isValid) {
                     const msg = document.getElementById('enqMessage').value.trim();
-                    const waText = `Hello Zia Cakes,\nI would love to enquire about a custom cake.\n\nName: ${n.value.trim()}\nPhone: ${p.value.trim()}\nOccasion: ${o.value}\nCake Type: ${d.value.trim()}\nPreferred Date: ${dt.value.trim()}\nMessage: ${msg ? msg : 'None'}\n\nLooking forward to hearing from you!`;
+                    const occasionNode = document.querySelector('input[name="occasion"]:checked');
+                    const occasionVal = occasionNode ? occasionNode.value : 'Not specified';
+                    const waText = `Hello Zia Cakes,\nI would love to enquire about a custom cake.\n\nName: ${n.value.trim()}\nPhone: ${p.value.trim()}\nOccasion: ${occasionVal}\nCake Type: ${d.value.trim()}\nPreferred Date: ${dt.value.trim()}\nMessage: ${msg ? msg : 'None'}`;
                     window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(waText)}`, '_blank');
                     this.reset();
                 }
             });
         }
 
-        fetchCakes();
+        fetchProducts();
     </script>
 </body>
 </html>

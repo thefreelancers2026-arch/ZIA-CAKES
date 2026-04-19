@@ -59,7 +59,8 @@
         .left-panel { width: 480px; background: var(--onyx-light); border-right: 1px solid rgba(253, 251, 249, 0.05); padding: 4rem; overflow-y: auto; flex-shrink: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.5); z-index: 50; }
         .panel-title { font-size: 2.2rem; margin-bottom: 3.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--ivory); }
         .badge-edit { font-family: var(--font-sans); font-size: 0.6rem; background: var(--ivory); color: var(--onyx); padding: 0.2rem 0.8rem; letter-spacing: 0.3em; font-weight: 500; }
-        select.form-control { color: var(--ivory); background: var(--onyx-light); }
+        select.form-control { color: var(--ivory); background: var(--onyx-light); cursor: pointer; }
+        select.form-control option { background: var(--onyx-light); }
         .upload-zone { border: 1px dashed rgba(253, 251, 249, 0.2); padding: 3rem 1rem; text-align: center; cursor: pointer; position: relative; background: var(--onyx); transition: all 0.4s ease; margin-bottom: 1rem; }
         .upload-zone:hover { border-color: var(--rose-gold); background: rgba(196, 154, 134, 0.05); }
         .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
@@ -86,7 +87,9 @@
         .cake-photo { width: 80px; height: 100px; object-fit: cover; border: 1px solid rgba(253, 251, 249, 0.2); }
         .cake-name { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--ivory); margin-bottom: 0.3rem; }
         .cake-desc { font-size: 0.85rem; color: var(--ivory-dim); max-width: 320px; font-weight: 300; margin-bottom: 0.5rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .tag-badge { display: inline-block; padding: 0.2rem 0.8rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; background: rgba(253, 251, 249, 0.05); color: var(--ivory); border: 1px solid rgba(253, 251, 249, 0.1); }
+        .cat-badge { border-color: var(--rose-gold); color: var(--rose-gold); }
         .price-td { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 300; color: var(--ivory); letter-spacing: -0.02em; line-height: 1; }
         .price-td em { font-family: var(--font-sans); font-style: normal; font-weight: 200; color: var(--rose-gold); font-size: 0.85rem; margin-right: 0.3rem; vertical-align: super; }
         
@@ -153,9 +156,25 @@
                     <div class="form-group"><label>Menu Title</label><input type="text" id="cakeName" class="form-control" required></div>
                     <div class="form-group"><label>Details</label><textarea id="cakeDesc" class="form-control" required style="resize:vertical; min-height:60px;"></textarea></div>
                     <div class="form-group"><label>Listed Price (₹)</label><input type="number" id="cakePrice" class="form-control" required></div>
+                    
+                    <!-- NEW: CATEGORY SELECTION -->
+                    <div class="form-group"><label>Store Category</label>
+                        <select id="cakeCategory" class="form-control" required>
+                            <option value="cakes">Cakes</option>
+                            <option value="cupcakes">Cupcakes</option>
+                            <option value="brownies">Brownies</option>
+                            <option value="kids">Kids & Disney</option>
+                            <option value="afternoon-tea">Afternoon Tea</option>
+                            <option value="logo">Logo & Corporate</option>
+                            <option value="nationwide">Nationwide Delivery</option>
+                            <option value="dietary">Special Diets (Vegan/GF)</option>
+                        </select>
+                    </div>
+
                     <div class="form-group"><label>Classification Badge</label>
                         <select id="cakeTag" class="form-control">
                             <option value="None">No Badge</option> <option value="Signature">Signature</option> <option value="Bespoke">Bespoke</option> <option value="Popular">Popular</option>
+                            <option value="Seasonal">Seasonal</option> <option value="New">New Arrival</option>
                         </select>
                     </div>
                     
@@ -212,43 +231,11 @@
 
     <!-- FIREBASE & LOGIC -->
     <script type="module">
-        // FIX 4: FIRESTORE SECURITY RULES REMINDER
-        /*
-          ==========================================
-          FIRESTORE SECURITY RULES — SET IN FIREBASE CONSOLE
-          ==========================================
-          rules_version = '2';
-          service cloud.firestore {
-            match /databases/{database}/documents {
-              match /cakes/{cakeId} {
-                allow read: if true;
-                allow write: if request.auth != null;
-              }
-            }
-          }
-          ==========================================
-          FIREBASE STORAGE RULES — SET IN FIREBASE CONSOLE
-          ==========================================
-          rules_version = '2';
-          service firebase.storage {
-            match /b/{bucket}/o {
-              match /cakes/{allPaths=**} {
-                allow read: if true;
-                allow write: if request.auth != null;
-              }
-            }
-          }
-          ==========================================
-        */
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-        // FIX 2: FIREBASE STORAGE 
         import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
 
-        // ==========================================
-        // ⚠️ PASTE YOUR FIREBASE CONFIGURATION HERE ⚠️
-        // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyB5SoRJUg_oZH-tFw_1nOUQbTyVLn-oQLg",
             authDomain: "zia-cakes-54bee.firebaseapp.com",
@@ -271,9 +258,7 @@
             }
         } catch(e) { console.error(e); }
         
-        // FIX 1: XSS SECURITY HELPER
         function escapeHtml(str) { const d = document.createElement('div'); d.textContent = String(str); return d.innerHTML; }
-
         const el = (id) => document.getElementById(id);
         const views = { login: el('loginView'), admin: el('adminView') };
         let cakeToDelete = null;
@@ -305,21 +290,17 @@
             const em = el('loginEmail').value.trim();
             const pw = el('loginPassword').value;
             if(!em || !pw) { el('loginError').textContent="Provide email and password."; return; }
-            
             el('authTxt').style.display='none'; el('authLoader').style.display='block'; el('btnLogin').disabled = true;
             try {
                 await signInWithEmailAndPassword(auth, em, pw);
                 el('loginError').textContent="";
                 el('loginEmail').value=""; el('loginPassword').value="";
-            } catch(e) {
-                el('loginError').textContent="Invalid credentials.";
-            }
+            } catch(e) { el('loginError').textContent="Invalid credentials."; }
             el('authTxt').style.display='block'; el('authLoader').style.display='none'; el('btnLogin').disabled = false;
         });
 
         el('btnLogout').addEventListener('click', () => { if(auth) signOut(auth); });
 
-        // Upload Preview Logic
         let currentFile = null;
         el('cakeImage').addEventListener('change', function(e) {
             const f = this.files[0]; if(!f) return;
@@ -329,17 +310,12 @@
             el('uploadText').style.display = 'none';
         });
 
-
-
-        // Firebase Sync Logic
         async function fetchData() {
-            if(!dbActive) {
-                el('tableLoading').textContent = "ERROR: Firebase Config is missing in ziacakesadmin.html!";
-                return;
-            }
+            if(!dbActive) return;
             el('tableLoading').classList.remove('hidden'); el('dataTable').classList.add('hidden');
             try {
-                const snap = await getDocs(collection(db, "cakes"));
+                const q = query(collection(db, "cakes"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
                 MasterCakes = [];
                 snap.forEach(doc => MasterCakes.push({id: doc.id, ...doc.data()}));
                 renderTable();
@@ -350,34 +326,25 @@
         el('cakeForm').addEventListener('submit', async e => {
             e.preventDefault();
             if(!dbActive) return showToast("Firebase Missing", "error");
-            
             const id = el('cakeId').value;
-            
-            // FIX 5: FORM INPUT SANITIZATION
             const payload = {
-                name: sanitize(el('cakeName').value.trim()).substring(0, 80),
-                desc: sanitize(el('cakeDesc').value.trim()).substring(0, 200),
+                name: sanitize(el('cakeName').value.trim()),
+                desc: sanitize(el('cakeDesc').value.trim()),
                 price: Math.abs(parseFloat(el('cakePrice').value)) || 0,
-                tag: ['None','Signature','Bespoke','Popular','Seasonal','New','Custom'].includes(el('cakeTag').value) ? el('cakeTag').value : 'None'
+                category: el('cakeCategory').value,
+                tag: el('cakeTag').value
             };
-
             if(!currentFile && !id) return showToast("An image is required", "error");
-
-            el('submitTxt').style.display='none'; el('submitLoader').style.display='block';
-            el('btnSubmitForm').disabled=true;
-
+            el('submitTxt').style.display='none'; el('submitLoader').style.display='block'; el('btnSubmitForm').disabled=true;
             try {
                 let downloadUrl = el('existingImageUrl').value;
                 if(currentFile) {
                     showToast("Uploading visual asset...", "info");
-                    // FIX 2: FIREBASE STORAGE UPLOAD
                     const storageRef = ref(storage, 'cakes/' + Date.now() + '_' + currentFile.name);
                     await uploadBytes(storageRef, currentFile);
                     downloadUrl = await getDownloadURL(storageRef);
                 }
                 payload.image = downloadUrl;
-                showToast("Syncing to Google servers...", "info");
-
                 if(id) {
                     await updateDoc(doc(db, "cakes", id), payload);
                     showToast("Curation Updated Successfully");
@@ -387,12 +354,8 @@
                     showToast("Published to Cloud Registry");
                 }
                 resetForm(); fetchData();
-            } catch(er) {
-                showToast("Cloud Error: " + er.message, "error");
-            }
-
-            el('submitTxt').style.display='block'; el('submitLoader').style.display='none';
-            el('btnSubmitForm').disabled=false;
+            } catch(er) { showToast("Cloud Error: " + er.message, "error"); }
+            el('submitTxt').style.display='block'; el('submitLoader').style.display='none'; el('btnSubmitForm').disabled=false;
         });
 
         function resetForm() {
@@ -403,7 +366,6 @@
         }
         el('btnCancelEdit').addEventListener('click', resetForm);
 
-        // FIX 1: EVENT DELEGATION FOR BUTTONS
         el('tableBody').addEventListener('click', function(e) {
             const btn = e.target.closest('[data-id]');
             if(!btn) return;
@@ -415,7 +377,8 @@
         const editCake = function(id) {
             const c = MasterCakes.find(x=>x.id===id); if(!c) return;
             el('cakeId').value=c.id; el('cakeName').value=c.name; el('cakeDesc').value=c.desc;
-            el('cakePrice').value=c.price; el('cakeTag').value=c.tag; el('existingImageUrl').value=c.image;
+            el('cakePrice').value=c.price; el('cakeCategory').value=c.category || 'cakes';
+            el('cakeTag').value=c.tag || 'None'; el('existingImageUrl').value=c.image;
             el('imagePreview').style.backgroundImage = `url(${c.image})`;
             el('imagePreview').style.display='block'; el('uploadText').style.display='none';
             el('formTitle').textContent='Refine Curation'; el('editBadge').classList.remove('hidden');
@@ -427,30 +390,23 @@
             if(!cakeToDelete) return;
             el('deleteModal').classList.add('active');
         };
-        
         el('btnCancelDelete').addEventListener('click', () => el('deleteModal').classList.remove('active'));
         el('btnConfirmDelete').addEventListener('click', async () => {
              el('delTxt').style.display='none'; el('delLoader').style.display='block';
              try {
-                // FIX 2: DELETE IMAGE FROM FIREBASE STORAGE
                 if (cakeToDelete.image && cakeToDelete.image.includes('firebasestorage')) {
                     try {
                         const imageUrl = new URL(cakeToDelete.image);
                         const storagePath = decodeURIComponent(imageUrl.pathname.split('/o/')[1].split('?')[0]);
-                        const fileRef = ref(storage, storagePath);
-                        await deleteObject(fileRef);
-                    } catch(err) {
-                        console.warn("Image delete from storage failed:", err);
-                    }
+                        await deleteObject(ref(storage, storagePath));
+                    } catch(err) {}
                 }
-
                 await deleteDoc(doc(db, "cakes", cakeToDelete.id));
                 showToast("Item Purged");
                 if(el('cakeId').value === cakeToDelete.id) resetForm();
                 fetchData();
              } catch(e) { showToast("Error purging: " + e.message, "error"); }
-             el('delTxt').style.display='block'; el('delLoader').style.display='none';
-             el('deleteModal').classList.remove('active');
+             el('delTxt').style.display='block'; el('delLoader').style.display='none'; el('deleteModal').classList.remove('active');
         });
 
         el('searchInput').addEventListener('input', renderTable);
@@ -458,18 +414,23 @@
         function renderTable() {
             el('dataTable').classList.remove('hidden');
             const q = el('searchInput').value.toLowerCase();
-            const filtered = MasterCakes.filter(c => c.name.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q));
-            
+            const filtered = MasterCakes.filter(c => c.name.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || (c.category && c.category.toLowerCase().includes(q)));
             const tbody = el('tableBody'); tbody.innerHTML='';
             if(filtered.length===0) el('emptyState').classList.remove('hidden');
             else {
                 el('emptyState').classList.add('hidden');
                 filtered.forEach(c => {
-                    // FIX 1 & 3: XSS SANITIZE & ONERROR
                     tbody.innerHTML += `
                         <tr>
                             <td><img src="${escapeHtml(c.image)}" class="cake-photo" alt="${escapeHtml(c.name)}" onerror="this.style.display='none'"></td>
-                            <td><div class="cake-name">${escapeHtml(c.name)}</div><div class="cake-desc">${escapeHtml(c.desc)}</div>${c.tag && c.tag!=='None' ? `<span class="tag-badge">${escapeHtml(c.tag)}</span>`:''}</td>
+                            <td>
+                                <div class="cake-name">${escapeHtml(c.name)}</div>
+                                <div class="cake-desc">${escapeHtml(c.desc)}</div>
+                                <div class="badge-row">
+                                    <span class="tag-badge cat-badge">${escapeHtml(c.category || 'cakes')}</span>
+                                    ${c.tag && c.tag!=='None' ? `<span class="tag-badge">${escapeHtml(c.tag)}</span>`:''}
+                                </div>
+                            </td>
                             <td class="price-td"><em>₹</em>${escapeHtml(c.price)}</td>
                             <td>
                                 <button class="action-btn btn-edit" data-id="${escapeHtml(c.id)}">Modify</button>
@@ -478,7 +439,6 @@
                         </tr>`;
                 });
             }
-            
             el('statTotal').textContent = MasterCakes.length.toString().padStart(2,'0');
             if(MasterCakes.length>0) {
                 const prices=MasterCakes.map(c=>c.price);
