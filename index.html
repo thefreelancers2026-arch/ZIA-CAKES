@@ -289,7 +289,7 @@
             
             /* Product Modal Mobile Fix */
             .pm-card { flex-direction: column; width: 95%; max-height: 85vh; overflow-y: auto; }
-            .pm-left { min-height: 250px; flex: none; }
+            .pm-left { width: 100%; aspect-ratio: 1 / 1; min-height: auto; flex: none; }
             .pm-right { padding: 2rem 1.5rem; }
             .pm-title { font-size: 1.8rem; }
             
@@ -342,7 +342,7 @@
 
         @media(max-width: 850px) {
             .pm-card { flex-direction:column; overflow-y:auto; }
-            .pm-left { min-height: 250px; }
+            .pm-left { width: 100%; aspect-ratio: 1 / 1; min-height: auto; }
             .pm-right { padding: 2.5rem 1.5rem; }
             .pm-title { font-size: 1.8rem; }
             .pm-price { font-size: 1.6rem; margin-bottom: 2rem; }
