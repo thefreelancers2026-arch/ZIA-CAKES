@@ -212,12 +212,9 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Visual Asset (Cloud Upload)</label>
-                        <div class="upload-zone" id="uploadWrapper">
-                            <span id="uploadText">Drop High-Res Imagery Here<br>Max 4MB (JPG/PNG)</span>
-                            <input type="file" id="cakeImage" accept=".jpg,.png,.jpeg,.webp">
-                        </div>
-                        <div id="imagePreview" class="preview-box"></div>
+                        <label>Visual Asset (URL or Asset Path)</label>
+                        <input type="text" id="cakeImage" class="form-control" placeholder="e.g. assets/hero_cake.png OR https://..." required>
+                        <div id="imagePreview" class="preview-box" style="margin-top: 1rem;"></div>
                     </div>
                     
                     <div class="form-actions" style="flex-direction:column;">
@@ -267,7 +264,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB5SoRJUg_oZH-tFw_1nOUQbTyVLn-oQLg",
@@ -278,7 +274,7 @@
             appId: "1:801347862022:web:8f17feac305f7f79fb0d87"
         };
 
-        let app, db, auth, storage, dbActive = false;
+        let app, db, auth, dbActive = false;
         let MasterCakes = [];
 
         try {
@@ -286,7 +282,6 @@
                 app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
-                storage = getStorage(app);
                 dbActive = true;
             }
         } catch(e) { console.error(e); }
@@ -334,13 +329,14 @@
 
         el('btnLogout').addEventListener('click', () => { if(auth) signOut(auth); });
 
-        let currentFile = null;
-        el('cakeImage').addEventListener('change', function(e) {
-            const f = this.files[0]; if(!f) return;
-            currentFile = f;
-            el('imagePreview').style.backgroundImage = `url(${URL.createObjectURL(f)})`;
-            el('imagePreview').style.display = 'block';
-            el('uploadText').style.display = 'none';
+        el('cakeImage').addEventListener('input', function(e) {
+            const val = this.value.trim();
+            if(val) {
+                el('imagePreview').style.backgroundImage = `url(${sanitize(val)})`;
+                el('imagePreview').style.display = 'block';
+            } else {
+                el('imagePreview').style.display = 'none';
+            }
         });
 
         async function fetchData() {
@@ -367,17 +363,12 @@
                 category: el('cakeCategory').value,
                 tag: el('cakeTag').value
             };
-            if(!currentFile && !id) return showToast("An image is required", "error");
+            const imgVal = sanitize(el('cakeImage').value.trim());
+            if(!imgVal) return showToast("An image path is required", "error");
+            payload.image = imgVal;
+
             el('submitTxt').style.display='none'; el('submitLoader').style.display='block'; el('btnSubmitForm').disabled=true;
             try {
-                let downloadUrl = el('existingImageUrl').value;
-                if(currentFile) {
-                    showToast("Uploading visual asset...", "info");
-                    const storageRef = ref(storage, 'cakes/' + Date.now() + '_' + currentFile.name);
-                    await uploadBytes(storageRef, currentFile);
-                    downloadUrl = await getDownloadURL(storageRef);
-                }
-                payload.image = downloadUrl;
                 if(id) {
                     await updateDoc(doc(db, "cakes", id), payload);
                     showToast("Curation Updated Successfully");
@@ -392,8 +383,8 @@
         });
 
         function resetForm() {
-            el('cakeForm').reset(); el('cakeId').value=''; el('existingImageUrl').value=''; currentFile=null;
-            el('imagePreview').style.display='none'; el('uploadText').style.display='block';
+            el('cakeForm').reset(); el('cakeId').value=''; el('existingImageUrl').value='';
+            el('imagePreview').style.display='none'; 
             el('formTitle').textContent='Curate Item'; el('editBadge').classList.add('hidden');
             el('submitTxt').textContent='Publish to Cloud'; el('btnCancelEdit').classList.add('hidden');
         }
@@ -411,9 +402,9 @@
             const c = MasterCakes.find(x=>x.id===id); if(!c) return;
             el('cakeId').value=c.id; el('cakeName').value=c.name; el('cakeDesc').value=c.desc;
             el('cakePrice').value=c.price; el('cakeCategory').value=c.category || 'cakes';
-            el('cakeTag').value=c.tag || 'None'; el('existingImageUrl').value=c.image;
-            el('imagePreview').style.backgroundImage = `url(${c.image})`;
-            el('imagePreview').style.display='block'; el('uploadText').style.display='none';
+            el('cakeTag').value=c.tag || 'None'; el('cakeImage').value=c.image; el('existingImageUrl').value=c.image;
+            el('imagePreview').style.backgroundImage = `url(${sanitize(c.image)})`;
+            el('imagePreview').style.display='block'; 
             el('formTitle').textContent='Refine Curation'; el('editBadge').classList.remove('hidden');
             el('submitTxt').textContent='Commit Adjustments'; el('btnCancelEdit').classList.remove('hidden');
         };
@@ -427,13 +418,6 @@
         el('btnConfirmDelete').addEventListener('click', async () => {
              el('delTxt').style.display='none'; el('delLoader').style.display='block';
              try {
-                if (cakeToDelete.image && cakeToDelete.image.includes('firebasestorage')) {
-                    try {
-                        const imageUrl = new URL(cakeToDelete.image);
-                        const storagePath = decodeURIComponent(imageUrl.pathname.split('/o/')[1].split('?')[0]);
-                        await deleteObject(ref(storage, storagePath));
-                    } catch(err) {}
-                }
                 await deleteDoc(doc(db, "cakes", cakeToDelete.id));
                 showToast("Item Purged");
                 if(el('cakeId').value === cakeToDelete.id) resetForm();
