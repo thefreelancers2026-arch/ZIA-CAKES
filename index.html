@@ -45,11 +45,12 @@
         /* Brand Logo — Calligraphic Z Mark */
         .brand-logo { display: flex; flex-direction: column; align-items: center; text-decoration: none; user-select: none; transition: opacity 0.4s ease; gap: 0; line-height: 1; }
         .brand-logo:hover { opacity: 0.8; }
-        .logo-z { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: var(--espresso); line-height: 0.9; display: block; transition: transform 0.4s ease; }
-        .brand-logo:hover .logo-z { transform: scale(1.05); }
-        .logo-name { font-family: var(--font-sans); font-size: 0.5rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-gold); white-space: nowrap; margin-top: 4px; }
+        .logo-z { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--espresso); line-height: 0.85; display: block; transition: transform 0.4s ease; }
+        .brand-logo:hover .logo-z { transform: scale(1.04); }
+        .logo-name { font-family: var(--font-sans); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.55em; text-transform: uppercase; color: var(--espresso); white-space: nowrap; margin-top: 6px; opacity: 0.75; }
         /* Footer invert for dark bg */
         footer .logo-z { color: var(--cream); }
+        footer .logo-name { color: var(--cream); }
 
         /* Vertical Divider */
         .nav-divider { width: 1px; height: 32px; background: rgba(26,19,17,0.15); margin: 0 1.2rem; flex-shrink: 0; }
@@ -344,19 +345,18 @@
     <!-- Nav -->
     <nav class="navbar">
         <div class="nav-left">
-            <!-- Official Zia Cakes Calligraphic Logo -->
-            <a href="#" class="brand-logo" aria-label="Zia Cakes Home">
-                <span class="logo-z">Z</span>
-                <span class="logo-name">Zia Cakes</span>
-            </a>
-            <div class="nav-divider"></div>
+            <div class="nav-divider" style="display:none"></div>
             <a href="https://www.instagram.com/zia_cakes_virudhachalam/" target="_blank" class="nav-social" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
         </div>
         
         <div class="nav-center">
-            <!-- Emptied nav-center since text is now bundled in brand-logo -->
+            <!-- Official Zia Cakes Calligraphic Logo — Centered Premium Hook -->
+            <a href="#" class="brand-logo" aria-label="Zia Cakes Home">
+                <span class="logo-z">Z</span>
+                <span class="logo-name">Zia Cakes</span>
+            </a>
         </div>
         
         <div class="nav-right">
