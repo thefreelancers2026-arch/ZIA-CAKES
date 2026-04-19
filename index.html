@@ -86,11 +86,20 @@
         .sect-title em { color: var(--rose-gold); font-style: italic; }
         .sect-line { width: 60px; height: 1px; background: var(--rose-gold); margin: 0 auto 3rem; }
 
-        /* Category Navigation - Comprehensive Lola Style */
-        .category-nav { display: flex; justify-content: center; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; padding: 0 5%; }
-        .cat-btn { background: transparent; border: none; font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--espresso-light); cursor: pointer; padding-bottom: 6px; border-bottom: 2px solid transparent; transition: all 0.4s ease; font-weight: 500; white-space: nowrap; }
-        .cat-btn.active { color: var(--rose-gold); border-bottom-color: var(--rose-gold); }
-        .cat-btn:hover { color: var(--rose-gold); }
+        /* Category Navigation Bubbles - Lola Style */
+        .category-nav { display: flex; gap: 1.5rem; margin-bottom: 5rem; overflow-x: auto; padding: 1rem 5% 2rem; scrollbar-width: none; -ms-overflow-style: none; scroll-snap-type: x mandatory; justify-content: flex-start; }
+        @media(min-width: 768px) { .category-nav { justify-content: center; } }
+        .category-nav::-webkit-scrollbar { display: none; }
+        .cat-btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; flex-shrink: 0; scroll-snap-align: start; outline: none; }
+        .cat-bubble { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; padding: 3px; transition: all 0.4s ease; display: flex; justify-content: center; align-items: center; }
+        .bubble-img { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--blush); display: flex; align-items: center; justify-content: center; }
+        .bubble-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .cat-btn.active .cat-bubble { border-color: var(--rose-gold); }
+        .cat-btn:hover .bubble-img img { transform: scale(1.1); }
+        .cat-btn.active .bubble-img img { transform: scale(1.05); }
+        .cat-label { font-family: var(--font-sans); font-size: 0.70rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--espresso-light); transition: all 0.4s ease; font-weight: 500; white-space: nowrap; }
+        .cat-btn.active .cat-label { color: var(--rose-gold); font-weight: 600; }
+        .cat-btn:hover .cat-label { color: var(--rose-gold); }
 
         /* Menu Grid */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; max-width: 1400px; margin: 0 auto; position: relative; min-height: 300px; }
@@ -290,17 +299,32 @@
             </div>
         </div>
 
-        <!-- Full Lola Category Navigation -->
+        <!-- Full Lola Category Navigation Bubbles -->
         <div class="category-nav" id="categoryNav">
-            <button class="cat-btn active" data-filter="all">All Creations</button>
-            <button class="cat-btn" data-filter="cakes">Cakes</button>
-            <button class="cat-btn" data-filter="cupcakes">Cupcakes</button>
-            <button class="cat-btn" data-filter="brownies">Brownies</button>
-            <button class="cat-btn" data-filter="kids">Kids & Disney</button>
-            <button class="cat-btn" data-filter="afternoon-tea">Afternoon Tea</button>
-            <button class="cat-btn" data-filter="logo">Logo & Corporate</button>
-            <button class="cat-btn" data-filter="nationwide">Nationwide</button>
-            <button class="cat-btn" data-filter="dietary">Special Diets</button>
+            <button class="cat-btn active" data-filter="all">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/truffle_cake.png" alt="All"></div></div>
+                <span class="cat-label">All Creations</span>
+            </button>
+            <button class="cat-btn" data-filter="cakes">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_luxury_cakes.png" alt="Cakes"></div></div>
+                <span class="cat-label">Luxury Cakes</span>
+            </button>
+            <button class="cat-btn" data-filter="cupcakes">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/strawberry_cake.png" alt="Cupcakes"></div></div>
+                <span class="cat-label">Cupcakes</span>
+            </button>
+            <button class="cat-btn" data-filter="kids">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/vintage_cake.png" alt="Kids"></div></div>
+                <span class="cat-label">Kids & Disney</span>
+            </button>
+            <button class="cat-btn" data-filter="afternoon-tea">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/naked_cake.png" alt="Tea"></div></div>
+                <span class="cat-label">Afternoon Tea</span>
+            </button>
+            <button class="cat-btn" data-filter="corporate">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/truffle_cake.png" alt="Corporate"></div></div>
+                <span class="cat-label">Corporate</span>
+            </button>
         </div>
         
         <div class="menu-grid" id="cakeGrid">
