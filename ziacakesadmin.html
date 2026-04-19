@@ -188,7 +188,10 @@
                     
                     <div class="form-group"><label>Menu Title</label><input type="text" id="cakeName" class="form-control" required></div>
                     <div class="form-group"><label>Details</label><textarea id="cakeDesc" class="form-control" required style="resize:vertical; min-height:60px;"></textarea></div>
-                    <div class="form-group"><label>Listed Price (₹)</label><input type="number" id="cakePrice" class="form-control" required></div>
+                    <div style="display:flex; gap:1rem;">
+                        <div class="form-group" style="flex:1;"><label>Price (500g / Base)</label><input type="number" id="cakePrice500g" class="form-control" required></div>
+                        <div class="form-group" style="flex:1;"><label>Price (1kg)</label><input type="number" id="cakePrice1kg" class="form-control"></div>
+                    </div>
                     
                     <!-- NEW: CATEGORY SELECTION -->
                     <div class="form-group"><label>Store Category</label>
@@ -356,10 +359,15 @@
             e.preventDefault();
             if(!dbActive) return showToast("Firebase Missing", "error");
             const id = el('cakeId').value;
+            const price500gVal = Math.abs(parseFloat(el('cakePrice500g').value)) || 0;
+            const price1kgVal = Math.abs(parseFloat(el('cakePrice1kg').value)) || null;
+
             const payload = {
                 name: sanitize(el('cakeName').value.trim()),
                 desc: sanitize(el('cakeDesc').value.trim()),
-                price: Math.abs(parseFloat(el('cakePrice').value)) || 0,
+                price500g: price500gVal,
+                price1kg: price1kgVal,
+                price: price500gVal, // Fallback for stat metrics
                 category: el('cakeCategory').value,
                 tag: el('cakeTag').value
             };
@@ -401,7 +409,9 @@
         const editCake = function(id) {
             const c = MasterCakes.find(x=>x.id===id); if(!c) return;
             el('cakeId').value=c.id; el('cakeName').value=c.name; el('cakeDesc').value=c.desc;
-            el('cakePrice').value=c.price; el('cakeCategory').value=c.category || 'cakes';
+            el('cakePrice500g').value=c.price500g || c.price || ''; 
+            el('cakePrice1kg').value=c.price1kg || '';
+            el('cakeCategory').value=c.category || 'cakes';
             el('cakeTag').value=c.tag || 'None'; el('cakeImage').value=c.image; el('existingImageUrl').value=c.image;
             el('imagePreview').style.backgroundImage = `url(${sanitize(c.image)})`;
             el('imagePreview').style.display='block'; 
@@ -448,7 +458,11 @@
                                     ${c.tag && c.tag!=='None' ? `<span class="tag-badge">${escapeHtml(c.tag)}</span>`:''}
                                 </div>
                             </td>
-                            <td class="price-td"><em>INR</em>${escapeHtml(Number(c.price).toLocaleString('en-IN'))}</td>
+                            <td class="price-td">
+                                ${c.price500g ? `<div style="margin-bottom:4px;"><em>INR</em>${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))} <span style="font-family:var(--font-sans);font-size:0.6em;letter-spacing:0.1em;opacity:0.6;">(500g)</span></div>` : ''}
+                                ${c.price1kg ? `<div><em>INR</em>${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))} <span style="font-family:var(--font-sans);font-size:0.6em;letter-spacing:0.1em;opacity:0.6;">(1kg)</span></div>` : ''}
+                                ${(!c.price500g && !c.price1kg) ? `<div><em>INR</em>${escapeHtml(Number(c.price||0).toLocaleString('en-IN'))}</div>` : ''}
+                            </td>
                             <td>
                                 <button class="action-btn btn-edit" data-id="${escapeHtml(c.id)}">Modify</button>
                                 <button class="action-btn btn-delete" data-id="${escapeHtml(c.id)}">Purge</button>
