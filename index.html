@@ -448,40 +448,44 @@
         <!-- Full Lola Category Navigation Bubbles -->
         <div class="category-nav" id="categoryNav">
             <button class="cat-btn active" data-filter="all">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/truffle_cake.png" alt="All Cakes"></div></div>
-                <span class="cat-label">All Cakes</span>
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/signature_cakes.png" alt="All"></div></div>
+                <span class="cat-label">All</span>
             </button>
-            <button class="cat-btn" data-filter="birthday">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/strawberry_cake.png" alt="Birthday"></div></div>
-                <span class="cat-label">Birthday</span>
+            <button class="cat-btn" data-filter="cakes">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/signature_cakes.png" alt="Cakes"></div></div>
+                <span class="cat-label">Cakes</span>
+            </button>
+            <button class="cat-btn" data-filter="customised">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/customised_cakes.png" alt="Customised"></div></div>
+                <span class="cat-label">Customised</span>
             </button>
             <button class="cat-btn" data-filter="cupcakes">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_cupcakes.jpg" alt="Cupcakes"></div></div>
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/gourmet_cupcakes.png" alt="Cupcakes"></div></div>
                 <span class="cat-label">Cupcakes</span>
             </button>
-            <button class="cat-btn" data-filter="tea">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_tea.jpg" alt="High Tea"></div></div>
-                <span class="cat-label">High Tea</span>
-            </button>
-            <button class="cat-btn" data-filter="nationwide">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/hero_cake.png" alt="Nationwide"></div></div>
-                <span class="cat-label">Nationwide</span>
+            <button class="cat-btn" data-filter="bento">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/bento_cakes.png" alt="Bento"></div></div>
+                <span class="cat-label">Bento Cakes</span>
             </button>
             <button class="cat-btn" data-filter="brownies">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/naked_cake.png" alt="Brownies"></div></div>
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/truffle_brownies.png" alt="Brownies"></div></div>
                 <span class="cat-label">Brownies</span>
             </button>
-            <button class="cat-btn" data-filter="kids">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/vintage_cake.png" alt="Kids Party"></div></div>
-                <span class="cat-label">Kids Party</span>
+            <button class="cat-btn" data-filter="cookies">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/artisan_cookies.png" alt="Cookies"></div></div>
+                <span class="cat-label">Cookies</span>
             </button>
-            <button class="cat-btn" data-filter="disney">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_kids.jpg" alt="Disney"></div></div>
-                <span class="cat-label">Disney</span>
+            <button class="cat-btn" data-filter="tea">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/tea_cakes.png" alt="Tea Cakes"></div></div>
+                <span class="cat-label">Tea Cakes</span>
             </button>
-            <button class="cat-btn" data-filter="logo">
-                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cat_corporate.jpg" alt="Logo Cakes"></div></div>
-                <span class="cat-label">Logo Cakes</span>
+            <button class="cat-btn" data-filter="cheesebun">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/cheese_bun.png" alt="Cheese Bun"></div></div>
+                <span class="cat-label">Cheese Bun</span>
+            </button>
+            <button class="cat-btn" data-filter="donuts">
+                <div class="cat-bubble"><div class="bubble-img"><img src="assets/gourmet_donuts.png" alt="Donuts"></div></div>
+                <span class="cat-label">Donuts</span>
             </button>
         </div>
         
@@ -663,14 +667,15 @@
         };
 
         const PRE_DATA = [
-            { id: '1', name: 'Signature Birthday Celebration', desc: 'A stunning bespoke cake draped in silky buttercream, perfect for unforgettable birthdays.', price: 3800, tag: 'Birthday', image: 'assets/birthday_cake_product.png', category: 'birthday' },
-            { id: '2', name: 'Classic Gourmet Cupcakes', desc: 'A box of exquisite hand-piped cupcakes, featuring assorted artisanal flavors.', price: 1200, tag: 'Cupcakes', image: 'assets/cupcakes_product.png', category: 'cupcakes' },
-            { id: '3', name: 'Premium High Tea Service', desc: 'Luxurious three-tier high tea stand featuring perfect finger sandwiches and scones.', price: 2800, tag: 'High Tea', image: 'assets/high_tea_product.png', category: 'tea' },
-            { id: '4', name: 'Nationwide Delivery Box', desc: 'Safe-travel architectural cakes designed precisely to reach you beautifully anywhere.', price: 1450, tag: 'Nationwide', image: 'assets/nationwide_delivery_product.png', category: 'nationwide' },
-            { id: '5', name: 'Belgian Truffle Brownies', desc: 'Decadent, rich, and intensely fudgy Belgian chocolate brownies layered with gold leaf.', price: 1600, tag: 'Brownies', image: 'assets/brownies_product.png', category: 'brownies' },
-            { id: '6', name: 'Whimsical Kids Party Centerpiece', desc: 'A vibrant yet elegant tiered creation to bring pure magic to the little ones.', price: 4200, tag: 'Kids Party', image: 'assets/kids_party_product.png', category: 'kids' },
-            { id: '7', name: 'Enchanted Disney Collection', desc: 'A high-end designer interpretation of beloved fairytale classics.', price: 5500, tag: 'Disney', image: 'assets/disney_cake_product.png', category: 'disney' },
-            { id: '8', name: 'Corporate Logo Plaques', desc: 'Custom luxury cakes and brownies featuring your exact company branding.', price: 2500, tag: 'Logo Cakes', image: 'assets/corporate_logo_product.png', category: 'logo' }
+            { id: '1', name: 'Signature Cakes', desc: 'Beautifully crafted signature buttercream cakes for every celebration — birthdays, weddings & anniversaries.', price500g: 600, price1kg: 1100, tag: 'Signature', image: 'assets/signature_cakes.png', category: 'cakes' },
+            { id: '2', name: 'Customised Cakes', desc: 'Fully bespoke, made-to-order designer cakes crafted exactly to your vision, theme, and occasion.', price500g: 800, price1kg: 1500, tag: 'Bespoke', image: 'assets/customised_cakes.png', category: 'customised' },
+            { id: '3', name: 'Cupcakes', desc: 'A decadent box of hand-piped artisan cupcakes in assorted gourmet flavors — perfect for gifting.', price500g: 499, tag: 'Popular', image: 'assets/gourmet_cupcakes.png', category: 'cupcakes' },
+            { id: '4', name: 'Bento Cakes', desc: 'Minimalist, single-serving bento cakes presented in pristine clamshell boxes — luxury in every bite.', price500g: 350, tag: 'New', image: 'assets/bento_cakes.png', category: 'bento' },
+            { id: '5', name: 'Brownies', desc: 'Intensely fudgy, rich Belgian chocolate brownies — dense, indulgent, and irresistible.', price500g: 450, tag: 'Popular', image: 'assets/truffle_brownies.png', category: 'brownies' },
+            { id: '6', name: 'Cookies', desc: 'Thick, golden artisan cookies loaded with premium chocolate and crafted with love from scratch.', price500g: 299, tag: 'Signature', image: 'assets/artisan_cookies.png', category: 'cookies' },
+            { id: '7', name: 'Tea Cakes', desc: 'Elegant, lightly spiced loaf cakes — the perfect companion for an afternoon cup of tea.', price500g: 550, price1kg: 1000, tag: 'Signature', image: 'assets/tea_cakes.png', category: 'tea' },
+            { id: '8', name: 'Cheese Bun', desc: 'Soft, pillowy, golden cheese buns with a glossy finish — warm and irresistible straight from the oven.', price500g: 199, tag: 'New', image: 'assets/cheese_bun.png', category: 'cheesebun' },
+            { id: '9', name: 'Donuts', desc: 'Premium glazed donuts with a flawless blush and ivory finish — a truly indulgent treat for every mood.', price500g: 249, tag: 'New', image: 'assets/gourmet_donuts.png', category: 'donuts' }
         ];
 
         let ALL_PRODUCTS = [];
