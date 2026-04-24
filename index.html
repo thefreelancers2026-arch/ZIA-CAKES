@@ -794,23 +794,34 @@
 
             document.getElementById('pmMessage').value = '';
             
-            p500 = Number(cake.price500g) || (Number(cake.price1kg)/2) || Number(cake.price) || 0;
-            p1kg = Number(cake.price1kg) || (Number(cake.price500g)*2) || Number(cake.price)*2 || 0;
+            p500 = Number(cake.price500g) || Number(cake.price) || 0;
+            p1kg = Number(cake.price1kg) || (Number(cake.price500g)*2) || 0;
 
             const weightSection = document.getElementById('pmWeightSection');
             const chipsWrap = document.getElementById('pmWeightChips');
             chipsWrap.innerHTML = '';
 
-            weightSection.style.display = 'block';
-            const weights = ['500 gm', '1 kg', '1.5 kg', '2 kg', '3 kg', '4 kg'];
-            weights.forEach((w, i) => {
-                const btn = document.createElement('button');
-                btn.className = 'pm-chip' + (i === 0 ? ' active' : '');
-                btn.innerText = w;
-                btn.onclick = () => selectWeight(w, btn);
-                chipsWrap.appendChild(btn);
-            });
-            selectWeight('500 gm', chipsWrap.firstChild);
+            // Weight selector only for: Cakes, Customised Cakes, Brownies
+            const hasWeightSelection = ['cakes', 'customised', 'brownies'].includes(cake.category);
+
+            if (hasWeightSelection) {
+                weightSection.style.display = 'block';
+                const weights = ['500 gm', '1 kg', '1.5 kg', '2 kg', '3 kg', '4 kg'];
+                weights.forEach((w, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'pm-chip' + (i === 0 ? ' active' : '');
+                    btn.innerText = w;
+                    btn.onclick = () => selectWeight(w, btn);
+                    chipsWrap.appendChild(btn);
+                });
+                selectWeight('500 gm', chipsWrap.firstChild);
+            } else {
+                // Fixed price — direct order, no weight picker
+                weightSection.style.display = 'none';
+                selectedWeight = null;
+                dynamicPrice = p500;
+                updateModalPrice(p500);
+            }
             
             document.getElementById('productModal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -854,7 +865,7 @@
             let txt = `Hello Zia Cakes,\n\nI would love to place a pre-order for the *${currentCake.name}*\n\n`;
             if(selectedWeight) txt += `*Weight:* ${selectedWeight}\n`;
             if(message) txt += `*Message on Cake:* "${message}"\n`;
-            txt += `*Calculated Price:* INR ${dynamicPrice.toLocaleString('en-IN')}\n\n`;
+            txt += `*Price:* ₹${dynamicPrice.toLocaleString('en-IN')}\n\n`;
             txt += `Please let me know if this can be confirmed for delivery/pickup!`;
             
             window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(txt)}`, '_blank');
