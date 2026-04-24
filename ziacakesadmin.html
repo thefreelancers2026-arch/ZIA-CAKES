@@ -217,14 +217,14 @@
                     <div class="form-group"><label>Menu Title</label><input type="text" id="cakeName" class="form-control" required></div>
                     <div class="form-group"><label>Details</label><textarea id="cakeDesc" class="form-control" required style="resize:vertical; min-height:60px;"></textarea></div>
                     <div style="display:flex; gap:1.5rem; margin-bottom: 0.5rem;">
-                        <div class="form-group" style="flex:1;">
-                            <label>Half KG Price (500g)</label>
+                        <div class="form-group" style="flex:1;" id="price500gGroup">
+                            <label id="price500gLabel">Half KG Price (500g)</label>
                             <div class="price-input-wrapper">
                                 <span>₹</span>
                                 <input type="number" id="cakePrice500g" class="form-control" placeholder="0" required>
                             </div>
                         </div>
-                        <div class="form-group" style="flex:1;">
+                        <div class="form-group" style="flex:1;" id="price1kgGroup">
                             <label>Full KG Price (1kg)</label>
                             <div class="price-input-wrapper">
                                 <span>₹</span>
@@ -401,6 +401,18 @@
         });
 
         el('btnLogout').addEventListener('click', () => { if(auth) signOut(auth); });
+
+        // Toggle price fields based on category
+        const WEIGHT_CATS = ['cakes', 'brownies'];
+        function updatePriceFields() {
+            const cat = el('cakeCategory').value;
+            const isWeight = WEIGHT_CATS.includes(cat);
+            el('price500gLabel').textContent = isWeight ? 'Half KG Price (500g)' : 'Price';
+            el('price1kgGroup').style.display = isWeight ? '' : 'none';
+            if (!isWeight) el('cakePrice1kg').value = '';
+        }
+        el('cakeCategory').addEventListener('change', updatePriceFields);
+        updatePriceFields(); // run on load
 
         // Premium ImgBB Upload Engine
         const imgbbApiKey = "51ea4d937848baf5b31880005349ca09"; // Private ImgBB Private Key
