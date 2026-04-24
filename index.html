@@ -801,8 +801,8 @@
             const chipsWrap = document.getElementById('pmWeightChips');
             chipsWrap.innerHTML = '';
 
-            // Weight selector only for: Cakes, Customised Cakes, Brownies
-            const hasWeightSelection = ['cakes', 'customised', 'brownies'].includes(cake.category);
+            // Weight selector only for: Cakes and Brownies
+            const hasWeightSelection = ['cakes', 'brownies'].includes(cake.category);
 
             if (hasWeightSelection) {
                 weightSection.style.display = 'block';
