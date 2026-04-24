@@ -794,27 +794,40 @@
 
             document.getElementById('pmMessage').value = '';
             
-            p500 = Number(cake.price500g) || Number(cake.price) || 0;
-            p1kg = Number(cake.price1kg) || (Number(cake.price500g)*2) || 0;
-
             const weightSection = document.getElementById('pmWeightSection');
             const chipsWrap = document.getElementById('pmWeightChips');
             chipsWrap.innerHTML = '';
 
-            // Weight selector STRICTLY only for: Cakes and Brownies categories
-            const hasWeightSelection = ['cakes', 'brownies'].includes(cake.category);
+            // Data-driven: show weight chips ONLY if both 500g and 1kg prices are set
+            const p500val = Number(cake.price500g) || Number(cake.price) || 0;
+            const p1kgval = Number(cake.price1kg) || 0;
+            p500 = p500val;
+            p1kg = p1kgval;
+
+            const hasWeightSelection = p500val > 0 && p1kgval > 0;
 
             if (hasWeightSelection) {
                 weightSection.style.display = 'block';
-                const weights = ['500 gm', '1 kg', '1.5 kg', '2 kg', '3 kg', '4 kg'];
+                // Only offer the two weights the client provides
+                const weights = [
+                    { label: '500g', price: p500val },
+                    { label: '1 kg', price: p1kgval }
+                ];
                 weights.forEach((w, i) => {
                     const btn = document.createElement('button');
                     btn.className = 'pm-chip' + (i === 0 ? ' active' : '');
-                    btn.innerText = w;
-                    btn.onclick = () => selectWeight(w, btn);
+                    btn.innerText = w.label;
+                    btn.onclick = () => {
+                        document.querySelectorAll('.pm-chip').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedWeight = w.label;
+                        updateModalPrice(w.price);
+                    };
                     chipsWrap.appendChild(btn);
                 });
-                selectWeight('500 gm', chipsWrap.firstChild);
+                // Default: 500g selected
+                selectedWeight = '500g';
+                updateModalPrice(p500val);
             } else {
                 // Fixed price — direct order, no weight picker
                 weightSection.style.display = 'none';
