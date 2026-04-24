@@ -402,8 +402,8 @@
 
         el('btnLogout').addEventListener('click', () => { if(auth) signOut(auth); });
 
-        // Toggle price fields based on category
-        const WEIGHT_CATS = ['cakes', 'brownies'];
+        // Toggle price fields based on category — weight pricing only for Cakes
+        const WEIGHT_CATS = ['cakes'];
         function updatePriceFields() {
             const cat = el('cakeCategory').value;
             const isWeight = WEIGHT_CATS.includes(cat);
