@@ -801,8 +801,9 @@
             const chipsWrap = document.getElementById('pmWeightChips');
             chipsWrap.innerHTML = '';
 
-            // Weight selector for: Cakes and Brownies only
-            const hasWeightSelection = ['cakes', 'brownies'].includes(cake.category);
+            // Show weight selector for cakes/brownies OR if product has both prices set in Firebase
+            const hasBothPrices = Number(cake.price500g) > 0 && Number(cake.price1kg) > 0;
+            const hasWeightSelection = ['cakes', 'brownies'].includes(cake.category) || hasBothPrices;
 
             if (hasWeightSelection) {
                 weightSection.style.display = 'block';
