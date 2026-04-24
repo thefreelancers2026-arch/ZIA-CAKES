@@ -148,6 +148,9 @@
         .menu-price { font-family: var(--font-sans); font-size: 0.95rem; color: var(--espresso); font-weight: 500; line-height: 1; letter-spacing: 0.12em; display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.3rem; }
         .menu-price em { font-family: var(--font-sans); font-style: normal; font-weight: 400; color: var(--rose-gold); font-size: 0.8rem; margin-right: 0.3rem; }
         .menu-price span { display: inline-block; }
+        .price-sym { font-family: var(--font-sans); font-style: normal; font-weight: 400; color: var(--rose-gold); font-size: 0.85rem; margin-right: 2px; }
+        .price-val { font-size: 1em; font-weight: 500; margin-right: 2px; }
+        .price-unit { font-size: 0.65em; letter-spacing: 0.08em; opacity: 0.55; margin-right: 10px; font-weight: 300; }
         .menu-btn { background: transparent; border: none; font-family: var(--font-sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--espresso-light); text-decoration: none; position: relative; padding: 0 0 4px 0; border-bottom: 1px solid rgba(26, 19, 17, 0.2); transition: all 0.4s ease; cursor: pointer; }
         .menu-btn:hover { color: var(--rose-gold); border-bottom-color: var(--rose-gold); }
 
@@ -601,7 +604,7 @@
             <div class="pm-right">
                 <h2 id="pmTitle" class="pm-title">Cake Name</h2>
                 <div class="pm-rating">★ 4.9 Rating & Signature Atelier Collection</div>
-                <div class="pm-price" id="pmPriceDisplay"><em>INR</em> 0</div>
+                <div class="pm-price" id="pmPriceDisplay"><span style="color:var(--rose-gold);font-family:var(--font-sans);font-size:0.7em;margin-right:8px;">₹</span>0</div>
                 <div class="pm-scroll-hint" style="display: none;">SCROLL FOR OPTIONS</div>
                 
                 <div class="pm-section" id="pmWeightSection">
@@ -707,13 +710,13 @@
                 
                 let priceHtml = '';
                 if(c.price500g && c.price1kg) {
-                    priceHtml = `<em>INR</em><span style="font-size:0.8em; margin-right:4px;">${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))}</span><span style="font-size:0.4em; letter-spacing:0.1em; opacity:0.6; margin-right:10px;">(500g)</span> <em>INR</em><span style="font-size:0.8em; margin-right:4px;">${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))}</span><span style="font-size:0.4em; letter-spacing:0.1em; opacity:0.6;">(1kg)</span>`;
+                    priceHtml = `<span class="price-sym">₹</span><span class="price-val">${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))}</span><span class="price-unit">(500g)</span> <span class="price-sym">₹</span><span class="price-val">${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))}</span><span class="price-unit">(1kg)</span>`;
                 } else if(c.price500g) {
-                    priceHtml = `<em>INR</em><span>${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))}</span>`;
+                    priceHtml = `<span class="price-sym">₹</span><span class="price-val">${escapeHtml(Number(c.price500g).toLocaleString('en-IN'))}</span>`;
                 } else if(c.price1kg) {
-                    priceHtml = `<em>INR</em><span>${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))}</span>`;
+                    priceHtml = `<span class="price-sym">₹</span><span class="price-val">${escapeHtml(Number(c.price1kg).toLocaleString('en-IN'))}</span>`;
                 } else {
-                    priceHtml = `<em>INR</em><span>${escapeHtml(Number(c.price || 0).toLocaleString('en-IN'))}</span>`;
+                    priceHtml = `<span class="price-sym">₹</span><span class="price-val">${escapeHtml(Number(c.price || 0).toLocaleString('en-IN'))}</span>`;
                 }
                 
                 const safeImage = isValidUrl ? escapeHtml(c.image) : '';
@@ -735,7 +738,7 @@
                                 <div class="price-wrapper">
                                     <div class="menu-price">${priceHtml}</div>
                                 </div>
-                                <button class="menu-btn" onclick="openProductModal('${c.id}')">Order Collection Piece</button>
+                                <button class="menu-btn" onclick="openProductModal('${c.id}')">Order Now &rarr;</button>
                             </div>
                         </div>
                     </div>
