@@ -669,12 +669,12 @@
 
         const PRE_DATA = [
             { id: '1', name: 'Signature Cakes', desc: 'Beautifully crafted signature buttercream cakes for every celebration — birthdays, weddings & anniversaries.', price500g: 600, price1kg: 1100, tag: 'Signature', image: 'assets/signature_cakes.png', category: 'cakes' },
-            { id: '2', name: 'Customised Cakes', desc: 'Fully bespoke, made-to-order designer cakes crafted exactly to your vision, theme, and occasion.', price500g: 800, price1kg: 1500, tag: 'Bespoke', image: 'assets/geometric_cake.png', category: 'customised' },
+            { id: '2', name: 'Customised Cakes', desc: 'Fully bespoke, made-to-order designer cakes crafted exactly to your vision, theme, and occasion.', price500g: 800, tag: 'Bespoke', image: 'assets/geometric_cake.png', category: 'customised' },
             { id: '3', name: 'Cupcakes', desc: 'A decadent box of hand-piped artisan cupcakes in assorted gourmet flavors — perfect for gifting.', price500g: 499, tag: 'Popular', image: 'assets/gourmet_cupcakes.png', category: 'cupcakes' },
             { id: '4', name: 'Bento Cakes', desc: 'Minimalist, single-serving bento cakes presented in pristine clamshell boxes — luxury in every bite.', price500g: 350, tag: 'New', image: 'assets/bento_cakes.png', category: 'bento' },
-            { id: '5', name: 'Brownies', desc: 'Intensely fudgy, rich Belgian chocolate brownies — dense, indulgent, and irresistible.', price500g: 450, tag: 'Popular', image: 'assets/truffle_brownies.png', category: 'brownies' },
+            { id: '5', name: 'Brownies', desc: 'Intensely fudgy, rich Belgian chocolate brownies — dense, indulgent, and irresistible.', price500g: 450, price1kg: 800, tag: 'Popular', image: 'assets/truffle_brownies.png', category: 'brownies' },
             { id: '6', name: 'Cookies', desc: 'Thick, golden artisan cookies loaded with premium chocolate and crafted with love from scratch.', price500g: 299, tag: 'Signature', image: 'assets/artisan_cookies.png', category: 'cookies' },
-            { id: '7', name: 'Tea Cakes', desc: 'Elegant, lightly spiced loaf cakes — the perfect companion for an afternoon cup of tea.', price500g: 550, price1kg: 1000, tag: 'Signature', image: 'assets/tea_cakes.png', category: 'tea' },
+            { id: '7', name: 'Tea Cakes', desc: 'Elegant, lightly spiced loaf cakes — the perfect companion for an afternoon cup of tea.', price500g: 550, tag: 'Signature', image: 'assets/tea_cakes.png', category: 'tea' },
             { id: '8', name: 'Cheese Bun', desc: 'Soft, pillowy, golden cheese buns with a glossy finish — warm and irresistible straight from the oven.', price500g: 199, tag: 'New', image: 'assets/cheese_bun.png', category: 'cheesebun' },
             { id: '9', name: 'Donuts', desc: 'Premium glazed donuts with a flawless blush and ivory finish — a truly indulgent treat for every mood.', price500g: 249, tag: 'New', image: 'assets/gourmet_donuts.png', category: 'donuts' }
         ];
@@ -801,9 +801,8 @@
             const chipsWrap = document.getElementById('pmWeightChips');
             chipsWrap.innerHTML = '';
 
-            // Show weight selector for cakes/brownies OR if product has both prices set in Firebase
-            const hasBothPrices = Number(cake.price500g) > 0 && Number(cake.price1kg) > 0;
-            const hasWeightSelection = ['cakes', 'brownies'].includes(cake.category) || hasBothPrices;
+            // Weight selector STRICTLY only for: Cakes and Brownies categories
+            const hasWeightSelection = ['cakes', 'brownies'].includes(cake.category);
 
             if (hasWeightSelection) {
                 weightSection.style.display = 'block';
